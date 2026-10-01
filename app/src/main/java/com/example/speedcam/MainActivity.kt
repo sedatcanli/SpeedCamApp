@@ -63,7 +63,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
         binding.btnExit.setOnClickListener {
-            finishAffinity()
+            // Kamerayı bırak, görevlerden kaldır, işlemi sonlandır
+            try {
+                ProcessCameraProvider.getInstance(this).get().unbindAll()
+            } catch (_: Exception) { }
+            try { detector?.close() } catch (_: Exception) { }
+            try { coco.close() } catch (_: Exception) { }
+            finishAndRemoveTask()
+            android.os.Process.killProcess(android.os.Process.myPid())
         }
 
         // Zoom kaydırıcısı (dijital zoom: telefoto yerine geçer, değer korunur)
@@ -275,17 +282,28 @@ class MainActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
-    /** Yatayda tam ekran (durum/gezinme çubuklarını gizle), dikeyde normal. */
+    /** Her yönde gerçek tam ekran; çubuklar kaydırınca geçici görünür. */
     private fun applyFullscreen() {
         try {
             WindowCompat.setDecorFitsSystemWindows(window, false)
             val ctrl = WindowInsetsControllerCompat(window, window.decorView)
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                ctrl.hide(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
-                ctrl.systemBarsBehavior =
-                    WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            } else {
-                ctrl.show(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
+            ctrl.hide(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
+            ctrl.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            val density = resources.displayMetrics.density
+            androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+                val bars = insets.getInsets(
+                    WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars()
+                )
+                binding.tvStatus.setPadding(
+                    (8 * density).toInt(), bars.top + (8 * density).toInt(),
+                    (8 * density).toInt(), (8 * density).toInt()
+                )
+                binding.bottomBar.setPadding(
+                    (6 * density).toInt(), (6 * density).toInt(),
+                    (6 * density).toInt(), bars.bottom + (6 * density).toInt()
+                )
+                insets
             }
         } catch (_: Exception) { }
     }
