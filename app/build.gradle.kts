@@ -11,8 +11,21 @@ android {
         applicationId = "com.example.speedcam"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        // CI'da her derleme yeni sürüm olsun ki üstüne kurulum sorunsuz yapılsın
+        versionCode = (System.getenv("GITHUB_RUN_NUMBER")?.toIntOrNull() ?: 1)
+        versionName = "1.0.${System.getenv("GITHUB_RUN_NUMBER") ?: "0"}"
+    }
+
+    // Sabit debug anahtarı: tüm derlemeler aynı imzayla çıkar,
+    // yeni APK eskisinin üstüne sorunsuz kurulur (kaldırmaya gerek yok).
+    // NOT: Bu sadece debug anahtarıdır; release anahtarı repoya konmaz.
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
     }
 
     buildTypes {

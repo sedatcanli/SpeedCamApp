@@ -39,6 +39,7 @@ class OverlayView @JvmOverloads constructor(
         super.onDraw(canvas)
         for (t in tracks) {
             val speed = SpeedUnit.toDisplay(t.speedMs, speedUnit)
+            val max = SpeedUnit.toDisplay(t.maxSpeedMs, speedUnit)
             // Hıza göre renk: yavaş yeşil -> hızlı kırmızı
             boxPaint.color = when {
                 t.speedMs < 2f -> Color.GREEN
@@ -47,7 +48,7 @@ class OverlayView @JvmOverloads constructor(
             }
             canvas.drawRect(t.box, boxPaint)
             val label = if (showLabels && t.label != null) "${t.label} " else ""
-            val text = "$label#${t.id} %.1f %s".format(speed, speedUnit)
+            val text = "$label#${t.id} %.1f / %.1f %s".format(speed, max, speedUnit)
             val tw = textPaint.measureText(text)
             val x = t.box.left.coerceAtLeast(0f)
             val y = (t.box.top - 12f).coerceAtLeast(50f)

@@ -15,7 +15,8 @@ data class TrackedObject(
     var box: RectF,
     var label: String?,
     val trail: ArrayDeque<Pair<PointF, Long>> = ArrayDeque(),
-    var speedMs: Float = 0f
+    var speedMs: Float = 0f,
+    var maxSpeedMs: Float = 0f
 ) {
     fun center(): PointF = PointF(box.centerX(), box.centerY())
 }
@@ -57,6 +58,7 @@ class ObjectTracker(
                 best.trail.addLast(Pair(c, nowMs))
                 while (best.trail.size > smoothingWindow) best.trail.removeFirst()
                 best.speedMs = computeSpeed(best)
+                if (best.speedMs > best.maxSpeedMs) best.maxSpeedMs = best.speedMs
             } else {
                 val t = TrackedObject(nextId++, RectF(det.box), det.label)
                 t.trail.addLast(Pair(c, nowMs))
