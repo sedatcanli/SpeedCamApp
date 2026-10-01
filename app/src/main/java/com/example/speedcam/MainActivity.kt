@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Ölçüm sırasında ekran uyumasın
+        window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         calib = CalibrationManager(this)
@@ -50,6 +52,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
+        }
+        binding.btnExit.setOnClickListener {
+            finishAffinity()
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
