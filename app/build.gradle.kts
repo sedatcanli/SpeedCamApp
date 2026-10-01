@@ -60,6 +60,8 @@ dependencies {
 
     // ML Kit Object Detection + Tracking
     implementation("com.google.mlkit:object-detection:17.0.1")
+    // COCO modelli özel dedektör (araba, insan, bisiklet...)
+    implementation("com.google.mlkit:object-detection-custom:17.0.1")
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")

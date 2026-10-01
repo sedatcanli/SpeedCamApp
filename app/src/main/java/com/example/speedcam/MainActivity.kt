@@ -101,13 +101,45 @@ class MainActivity : AppCompatActivity() {
         boundCameraKey = null
     }
 
+    private var detectorThreshold = -1f
+
+    /**
+     * Önce COCO modelli (araba, insan...) özel dedektörü dener,
+     * model yoksa/bozuksa dahili genel dedektöre düşer.
+     */
     private fun ensureDetector() {
-        if (detector == null) {
-            val options = ObjectDetectorOptions.Builder()
+        val want = calib.detectionConfidence
+        if (detector != null && detectorThreshold == want) return
+        try { detector?.close() } catch (_: Exception) { }
+        detector = null
+        detector = try {
+            // Model assets'te yoksa burada patlar -> fallback çalışır
+            assets.openFd("mobilenet_ssd.tflite").close()
+            val localModel =
+                com.google.mlkit.common.model.LocalModel.Builder()
+                    .setAssetFilePath("mobilenet_ssd.tflite")
+                    .build()
+            val options =
+                com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions.Builder(
+                    localModel
+                )
+                    .setDetectorMode(
+                        com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions.STREAM_MODE
+                    )
+                    .enableMultipleObjects()
+                    .enableClassification()
+                    .setClassificationConfidenceThreshold(want)
+                    .setMaxPerObjectLabelCount(1)
+                    .build()
+            detectorThreshold = want
+            ObjectDetection.getClient(options)
+        } catch (_: Exception) {
+            val fallback = ObjectDetectorOptions.Builder()
                 .setDetectorMode(ObjectDetectorOptions.STREAM_MODE)
                 .enableClassification()
                 .build()
-            detector = ObjectDetection.getClient(options)
+            detectorThreshold = want
+            ObjectDetection.getClient(fallback)
         }
     }
 
@@ -197,7 +229,7 @@ class MainActivity : AppCompatActivity() {
                                                 b.left * scaleX, b.top * scaleY,
                                                 b.right * scaleX, b.bottom * scaleY
                                             )
-                                            val label = obj.labels.firstOrNull()?.text
+                                            val label = TurkishLabels.of(obj.labels.firstOrNull()?.text)
                                             val conf = obj.labels.firstOrNull()?.confidence ?: 0f
                                             if (obj.labels.isNotEmpty() && conf < calib.detectionConfidence) null
                                             else DetectedBox(mapped, label, conf)

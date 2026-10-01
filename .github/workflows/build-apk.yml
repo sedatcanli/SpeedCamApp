@@ -26,6 +26,14 @@ jobs:
       - name: Accept licenses
         run: yes | sdkmanager --licenses || true
 
+      - name: Ensure COCO model asset
+        run: |
+          mkdir -p app/src/main/assets
+          if [ ! -f app/src/main/assets/mobilenet_ssd.tflite ]; then
+            curl -L -o app/src/main/assets/mobilenet_ssd.tflite "https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite"
+          fi
+          ls -la app/src/main/assets/
+
       - name: Build debug APK
         run: gradle assembleDebug --stacktrace
 
