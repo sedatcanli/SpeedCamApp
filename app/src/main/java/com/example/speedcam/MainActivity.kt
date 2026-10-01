@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.RectF
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Size
 import android.widget.Toast
@@ -15,6 +16,9 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.example.speedcam.databinding.ActivityMainBinding
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.objects.ObjectDetection
@@ -49,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         calib = CalibrationManager(this)
         ensureDetector()
+        applyFullscreen()
 
         binding.btnCalib.setOnClickListener {
             startActivity(Intent(this, CalibrationActivity::class.java))
@@ -60,10 +65,13 @@ class MainActivity : AppCompatActivity() {
             finishAffinity()
         }
 
-        // Zoom kaydırıcısı (dijital zoom: telefoto yerine geçer)
+        // Zoom kaydırıcısı (dijital zoom: telefoto yerine geçer, değer korunur)
         binding.sliderZoom.addOnChangeListener { _, value, fromUser ->
-            if (fromUser) setZoom(value)
-            binding.tvZoom.text = "%.1fx".format(binding.sliderZoom.value)
+            if (fromUser) {
+                setZoom(value)
+                calib.zoomRatio = value
+            }
+            binding.tvZoom.text = "%.1fx".format(value)
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
@@ -242,6 +250,21 @@ class MainActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
+    /** Yatayda tam ekran (durum/gezinme çubuklarını gizle), dikeyde normal. */
+    private fun applyFullscreen() {
+        try {
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            val ctrl = WindowInsetsControllerCompat(window, window.decorView)
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                ctrl.hide(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
+                ctrl.systemBarsBehavior =
+                    WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            } else {
+                ctrl.show(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
+            }
+        } catch (_: Exception) { }
+    }
+
     private fun setupZoomSlider() {
         try {
             val cam = camera ?: return
@@ -250,9 +273,11 @@ class MainActivity : AppCompatActivity() {
             val min = state?.minZoomRatio?.coerceIn(0.5f, 1f) ?: 1f
             binding.sliderZoom.valueFrom = min
             binding.sliderZoom.valueTo = max
-            binding.sliderZoom.value =
-                cam.cameraInfo.zoomState.value?.zoomRatio?.coerceIn(min, max) ?: 1f
-            binding.tvZoom.text = "%.1fx".format(binding.sliderZoom.value)
+            // Kayıtlı zoom'u geri yükle (döndürmede 1x'e dönmesin)
+            val saved = calib.zoomRatio.coerceIn(min, max)
+            binding.sliderZoom.value = saved
+            binding.tvZoom.text = "%.1fx".format(saved)
+            setZoom(saved)
         } catch (_: Exception) { }
     }
 

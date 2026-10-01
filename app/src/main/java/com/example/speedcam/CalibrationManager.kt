@@ -50,6 +50,11 @@ class CalibrationManager(context: Context) {
         get() = prefs.getBoolean("labels", true)
         set(v) = prefs.edit().putBoolean("labels", v).apply()
 
+    /** Zoom kalıcı olsun (döndürmede sıfırlanmasın) */
+    var zoomRatio: Float
+        get() = prefs.getFloat("zoom", 1f).coerceIn(0.5f, 20f)
+        set(v) = prefs.edit().putFloat("zoom", v).apply()
+
     /** Bilinen mesafe (metre) + piksel uzunluktan ppm hesapla */
     fun calibrateFromReference(pixelLength: Float, knownMeters: Float): Float {
         if (knownMeters <= 0f || pixelLength <= 0f) return pixelsPerMeter
