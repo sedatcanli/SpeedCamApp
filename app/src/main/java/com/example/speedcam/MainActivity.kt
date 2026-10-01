@@ -72,7 +72,6 @@ class MainActivity : AppCompatActivity() {
         val options = ObjectDetectorOptions.Builder()
             .setDetectorMode(ObjectDetectorOptions.STREAM_MODE)
             .enableClassification()
-            .setClassificationConfidenceThreshold(calib.detectionConfidence)
             .build()
         val detector = ObjectDetection.getClient(options)
 
@@ -112,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                             val scaleX = if (imgW > 0) viewW / imgW else 1f
                             val scaleY = if (imgH > 0) viewH / imgH else 1f
 
-                            val dets = objects.map { obj ->
+                            val dets = objects.mapNotNull { obj ->
                                 val b = obj.boundingBox
                                 val mapped = RectF(
                                     b.left * scaleX, b.top * scaleY,
@@ -120,7 +119,9 @@ class MainActivity : AppCompatActivity() {
                                 )
                                 val label = obj.labels.firstOrNull()?.text
                                 val conf = obj.labels.firstOrNull()?.confidence ?: 0f
-                                DetectedBox(mapped, label, conf)
+                                // Etiketsiz kutuları tut, etiketlilerde eşik uygula
+                                if (obj.labels.isNotEmpty() && conf < calib.detectionConfidence) null
+                                else DetectedBox(mapped, label, conf)
                             }
                             val now = System.currentTimeMillis()
                             val tracked = tracker.update(dets, now)
