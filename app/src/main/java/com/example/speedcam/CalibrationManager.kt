@@ -33,6 +33,11 @@ class CalibrationManager(context: Context) {
         get() = prefs.getInt("facing", CameraSelector.LENS_FACING_BACK)
         set(v) = prefs.edit().putInt("facing", v).apply()
 
+    /** Belirli kamera ID'si (geniş açı vb.), boş = varsayılan */
+    var cameraId: String?
+        get() = prefs.getString("camId", null)
+        set(v) = prefs.edit().putString("camId", v).apply()
+
     var detectionConfidence: Float
         get() = prefs.getFloat("conf", 0.5f)
         set(v) = prefs.edit().putFloat("conf", v).apply()
@@ -53,9 +58,9 @@ class CalibrationManager(context: Context) {
         return ppm
     }
 
-    fun summary(): String =
-        "%.1f px/m • %s • %s".format(
-            pixelsPerMeter, speedUnit,
-            if (cameraFacing == CameraSelector.LENS_FACING_BACK) "Arka" else "Ön"
-        )
+    fun summary(): String {
+        val cam = if (!cameraId.isNullOrEmpty()) "ID $cameraId"
+        else if (cameraFacing == CameraSelector.LENS_FACING_BACK) "Arka" else "Ön"
+        return "%.1f px/m • %s • %s".format(pixelsPerMeter, speedUnit, cam)
+    }
 }
