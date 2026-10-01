@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         calib = CalibrationManager(this)
         ensureDetector()
+        coco = CocoDetector(this)
         applyFullscreen()
 
         binding.btnCalib.setOnClickListener {
@@ -102,45 +103,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var detectorThreshold = -1f
+    private lateinit var coco: CocoDetector
+    private var reportedEngine: String? = null
 
     /**
-     * Önce COCO modelli (araba, insan...) özel dedektörü dener,
-     * model yoksa/bozuksa dahili genel dedektöre düşer.
+     * Dahili genel dedektör (yedek). Birincil motor COCO'dur.
      */
     private fun ensureDetector() {
-        val want = calib.detectionConfidence
-        if (detector != null && detectorThreshold == want) return
+        if (detector != null) return
         try { detector?.close() } catch (_: Exception) { }
         detector = null
-        detector = try {
-            // Model assets'te yoksa burada patlar -> fallback çalışır
-            assets.openFd("mobilenet_ssd.tflite").close()
-            val localModel =
-                com.google.mlkit.common.model.LocalModel.Builder()
-                    .setAssetFilePath("mobilenet_ssd.tflite")
-                    .build()
-            val options =
-                com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions.Builder(
-                    localModel
-                )
-                    .setDetectorMode(
-                        com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions.STREAM_MODE
-                    )
-                    .enableMultipleObjects()
-                    .enableClassification()
-                    .setClassificationConfidenceThreshold(want)
-                    .setMaxPerObjectLabelCount(1)
-                    .build()
-            detectorThreshold = want
-            ObjectDetection.getClient(options)
-        } catch (_: Exception) {
-            val fallback = ObjectDetectorOptions.Builder()
-                .setDetectorMode(ObjectDetectorOptions.STREAM_MODE)
-                .enableClassification()
-                .build()
-            detectorThreshold = want
-            ObjectDetection.getClient(fallback)
-        }
+        val fallback = ObjectDetectorOptions.Builder()
+            .setDetectorMode(ObjectDetectorOptions.STREAM_MODE)
+            .enableClassification()
+            .build()
+        detector = ObjectDetection.getClient(fallback)
+        detectorThreshold = calib.detectionConfidence
     }
 
     private fun startCamera(force: Boolean) {
@@ -197,6 +175,37 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     try {
+                        // 1) Birincil: COCO motoru (araba, insan... Türkçe etiket)
+                        if (coco.ensure(calib.detectionConfidence)) {
+                            try {
+                                val bmp = imageProxy.toUprightBitmap()
+                                closeOnce()
+                                if (bmp == null) return@setAnalyzer
+                                val viewW = binding.previewView.width.toFloat()
+                                val viewH = binding.previewView.height.toFloat()
+                                val imgW = bmp.width.toFloat()
+                                val imgH = bmp.height.toFloat()
+                                if (viewW <= 0 || viewH <= 0 || imgW <= 0 || imgH <= 0) {
+                                    try { bmp.recycle() } catch (_: Exception) { }
+                                    return@setAnalyzer
+                                }
+                                val scaleX = viewW / imgW
+                                val scaleY = viewH / imgH
+                                val raw = coco.detect(bmp)
+                                try { bmp.recycle() } catch (_: Exception) { }
+                                val dets = raw.mapNotNull { d ->
+                                    try {
+                                        RectF(
+                                            d.box.left * scaleX, d.box.top * scaleY,
+                                            d.box.right * scaleX, d.box.bottom * scaleY
+                                        ).let { DetectedBox(it, d.label, d.confidence) }
+                                    } catch (_: Exception) { null }
+                                }
+                                postDetections(dets, "COCO")
+                            } catch (_: Exception) { closeOnce() }
+                            return@setAnalyzer
+                        }
+                        // 2) Yedek: dahili genel dedektör
                         val mediaImage = imageProxy.image ?: run { closeOnce(); return@setAnalyzer }
                         val rotation = imageProxy.imageInfo.rotationDegrees
                         val image = try {
@@ -235,23 +244,7 @@ class MainActivity : AppCompatActivity() {
                                             else DetectedBox(mapped, label, conf)
                                         } catch (_: Exception) { null }
                                     }
-                                    val now = System.currentTimeMillis()
-                                    val tracked = try {
-                                        tracker.update(dets, now)
-                                    } catch (_: Exception) { emptyList() }
-                                    // UI thread ile yarış olmasın: kopya gönder
-                                    val snapshot = tracked.map {
-                                        it.copy(box = RectF(it.box))
-                                    }
-                                    runOnUiThread {
-                                        try {
-                                            binding.overlay.setResults(
-                                                snapshot, calib.speedUnit, calib.showLabels
-                                            )
-                                            binding.tvCount.text =
-                                                "%d nesne".format(snapshot.size)
-                                        } catch (_: Exception) { }
-                                    }
+                                    postDetections(dets, "Genel")
                                 } catch (_: Exception) { }
                             }
                             .addOnFailureListener { /* kareyi atla, çökme */ }
@@ -319,10 +312,35 @@ class MainActivity : AppCompatActivity() {
         } catch (_: Exception) { }
     }
 
+    private fun postDetections(dets: List<DetectedBox>, engine: String) {
+        val now = System.currentTimeMillis()
+        val tracked = try {
+            tracker.update(dets, now)
+        } catch (_: Exception) { emptyList() }
+        // UI thread ile yarış olmasın: kopya gönder
+        val snapshot = tracked.map {
+            it.copy(box = RectF(it.box))
+        }
+        runOnUiThread {
+            try {
+                binding.overlay.setResults(
+                    snapshot, calib.speedUnit, calib.showLabels
+                )
+                binding.tvCount.text = "%d nesne".format(snapshot.size)
+                if (reportedEngine != engine) {
+                    reportedEngine = engine
+                    binding.tvStatus.text =
+                        "Kalibrasyon: " + calib.summary() + " • " + engine
+                }
+            } catch (_: Exception) { }
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         try { detector?.close() } catch (_: Exception) { }
         detector = null
+        try { coco.close() } catch (_: Exception) { }
         cameraExecutor.shutdown()
     }
 }
