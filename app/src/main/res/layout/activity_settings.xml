@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Kamera / Birim Ayarları" android:textSize="22sp" android:textStyle="bold" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Kamera" />
+        <Spinner android:id="@+id/spCamera"
+            android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Hız birimi" />
+        <Spinner android:id="@+id/spUnit"
+            android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Algılama eşiği (güven)" />
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderConf"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:valueFrom="0.2" android:valueTo="0.9" android:stepSize="0.05" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Yumuşatma (kare sayısı)" />
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderSmooth"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:valueFrom="2" android:valueTo="15" android:stepSize="1" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchLabels"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Etiketleri göster" />
+
+        <Button android:id="@+id/btnSaveSettings"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Kaydet" />
+    </LinearLayout>
+</ScrollView>

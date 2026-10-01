@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kalibrasyon"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Bildiğiniz bir uzunluğu kamerada ölçün. Örn: yere 2 metrelik bir şerit koyun, ekranda kaç piksel tuttuğunu tahmin edip girin." />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Bilinen mesafe (metre)" />
+        <EditText android:id="@+id/etKnown"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Piksel uzunluk (px)" />
+        <EditText android:id="@+id/etPixels"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+
+        <Button android:id="@+id/btnCalc"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Hesapla (px/m)" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Pixel per Meter (px/m)" />
+        <EditText android:id="@+id/etPpm"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+
+        <TextView android:id="@+id/tvExample"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Örnek" />
+
+        <Button android:id="@+id/btnSave"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Kaydet" />
+    </LinearLayout>
+</ScrollView>
