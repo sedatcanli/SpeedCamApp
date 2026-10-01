@@ -9,6 +9,8 @@ import android.util.Size
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.camera2.interop.Camera2Interop
+import androidx.camera.core.Camera
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private var detector: ObjectDetector? = null
     private var boundCameraKey: String? = null
     private var cameraStarting = false
+    private var camera: Camera? = null
 
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -55,6 +58,12 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnExit.setOnClickListener {
             finishAffinity()
+        }
+
+        // Zoom kaydırıcısı (dijital zoom: telefoto yerine geçer)
+        binding.sliderZoom.addOnChangeListener { _, value, fromUser ->
+            if (fromUser) setZoom(value)
+            binding.tvZoom.text = "%.1fx".format(binding.sliderZoom.value)
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
@@ -109,15 +118,34 @@ class MainActivity : AppCompatActivity() {
             cameraStarting = false
             try {
                 val provider = providerFuture.get()
-                val preview = Preview.Builder().build().also {
+
+                // Fiziksel kamera (geniş/tele) seçildiyse mantıksal kameraya bağlanıp
+                // fiziksel ID'yi Camera2Interop ile dayat.
+                val wantedId = calib.cameraId?.ifEmpty { null }
+                val logicalId =
+                    CameraHelper.logicalIdFor(this, wantedId, calib.cameraFacing)
+                val physicalId =
+                    if (wantedId != null && logicalId != null && wantedId != logicalId)
+                        wantedId else null
+
+                val previewBuilder = Preview.Builder()
+                val analysisBuilder = ImageAnalysis.Builder()
+                    .setTargetResolution(Size(1280, 720))
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                if (physicalId != null) {
+                    try {
+                        Camera2Interop.Extender(previewBuilder)
+                            .setPhysicalCameraId(physicalId)
+                        Camera2Interop.Extender(analysisBuilder)
+                            .setPhysicalCameraId(physicalId)
+                    } catch (_: Exception) { }
+                }
+                val preview = previewBuilder.build().also {
                     it.setSurfaceProvider(binding.previewView.surfaceProvider)
                 }
                 val selector = CameraHelper.selectorFor(calib)
 
-                val analysis = ImageAnalysis.Builder()
-                    .setTargetResolution(Size(1280, 720))
-                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                    .build()
+                val analysis = analysisBuilder.build()
 
                 val det = detector ?: return@addListener
                 analysis.setAnalyzer(cameraExecutor) { imageProxy ->
@@ -193,8 +221,9 @@ class MainActivity : AppCompatActivity() {
 
                 try {
                     provider.unbindAll()
-                    provider.bindToLifecycle(this, selector, preview, analysis)
+                    camera = provider.bindToLifecycle(this, selector, preview, analysis)
                     boundCameraKey = key
+                    runOnUiThread { setupZoomSlider() }
                 } catch (e: Exception) {
                     boundCameraKey = null
                     runOnUiThread {
@@ -211,6 +240,26 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }, ContextCompat.getMainExecutor(this))
+    }
+
+    private fun setupZoomSlider() {
+        try {
+            val cam = camera ?: return
+            val state = cam.cameraInfo.zoomState.value
+            val max = state?.maxZoomRatio?.coerceIn(1f, 20f) ?: 8f
+            val min = state?.minZoomRatio?.coerceIn(0.5f, 1f) ?: 1f
+            binding.sliderZoom.valueFrom = min
+            binding.sliderZoom.valueTo = max
+            binding.sliderZoom.value =
+                cam.cameraInfo.zoomState.value?.zoomRatio?.coerceIn(min, max) ?: 1f
+            binding.tvZoom.text = "%.1fx".format(binding.sliderZoom.value)
+        } catch (_: Exception) { }
+    }
+
+    private fun setZoom(ratio: Float) {
+        try {
+            camera?.cameraControl?.setZoomRatio(ratio)
+        } catch (_: Exception) { }
     }
 
     override fun onDestroy() {
