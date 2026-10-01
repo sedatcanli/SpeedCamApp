@@ -36,7 +36,7 @@ class CocoDetector(private val context: Context) {
                 .setBaseOptions(baseOptions)
                 .build()
             detector = ObjectDetector.createFromFileAndOptions(
-                modelFile.absolutePath, options
+                modelFile, options
             )
             builtThreshold = threshold
             ready = true
