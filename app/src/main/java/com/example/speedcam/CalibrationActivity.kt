@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.speedcam.databinding.ActivityCalibrationBinding
 
 /**
- * Kalibrasyon mantığı:
- * Kullanıcı gerçek dünyada bildiği bir uzunluğu (örn. 2 m'lik çizgi / kapı genişliği)
- * kamerada kaç piksel tuttuğunu girer -> px/m hesaplanır.
- * Hız formülü: hız(m/s) = (piksel_hareket / px_per_metre) / geçen_süre
+ * Trigonometrik kalibrasyon (iğne deliği modeli):
+ *   görünür genişlik = 2 * Uzaklık * tan(FOV / 2)
+ *   metre/piksel = görünür genişlik / görüntü genişliği (px)
+ *   hız = piksel_hareket * metre/piksel / süre
+ *
+ * Uzaklık kullanıcıdan alınır; FOV, piksel boyutu, sensör ve kamera
+ * çözünürlüğü sistemden otomatik okunur (elle düzeltilebilir).
  */
 class CalibrationActivity : AppCompatActivity() {
 
@@ -22,42 +25,111 @@ class CalibrationActivity : AppCompatActivity() {
         setContentView(binding.root)
         calib = CalibrationManager(this)
 
-        binding.etPpm.setText(calib.pixelsPerMeter.toString())
-        binding.etKnown.setText("2.0")
-        binding.etPixels.setText("200")
+        // İlk açılışta sistemden otomatik oku
+        try {
+            calib.refreshOptics(this, false)
+        } catch (_: Exception) { }
 
+        fillFields()
         updatePreview()
 
-        binding.btnCalc.setOnClickListener {
-            val known = binding.etKnown.text.toString().toFloatOrNull()
-            val px = binding.etPixels.text.toString().toFloatOrNull()
-            if (known == null || px == null || known <= 0 || px <= 0) {
-                Toast.makeText(this, "Geçerli sayı girin", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+        binding.btnRefreshOptics.setOnClickListener {
+            try {
+                val info = calib.refreshOptics(this, true)
+                if (info == null) {
+                    Toast.makeText(
+                        this, "Optik okunamadı, değerleri elle girin",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        this, "Okundu: %s".format(info.cameraId), Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (_: Exception) {
+                Toast.makeText(this, "Okuma hatası", Toast.LENGTH_SHORT).show()
             }
-            val ppm = calib.calibrateFromReference(px, known)
-            binding.etPpm.setText(ppm.toString())
+            fillFields()
             updatePreview()
-            Toast.makeText(this, "Kalibre edildi: %.1f px/m".format(ppm), Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnCalc.setOnClickListener {
+            if (!readInputs()) return@setOnClickListener
+            updatePreview()
         }
 
         binding.btnSave.setOnClickListener {
-            val ppm = binding.etPpm.text.toString().toFloatOrNull()
-            if (ppm == null || ppm <= 0) {
-                Toast.makeText(this, "Geçerli px/m girin", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            calib.pixelsPerMeter = ppm
+            if (!readInputs()) return@setOnClickListener
             Toast.makeText(this, "Kaydedildi", Toast.LENGTH_SHORT).show()
             finish()
         }
     }
 
+    private fun fillFields() {
+        binding.etDistance.setText(calib.distanceM.toString())
+        if (calib.fovHdeg > 0f) binding.etFovH.setText("%.1f".format(calib.fovHdeg))
+        if (calib.fovVdeg > 0f) binding.etFovV.setText("%.1f".format(calib.fovVdeg))
+        binding.tvOptics.text = opticsText()
+    }
+
+    private fun opticsText(): String {
+        val sb = StringBuilder()
+        if (calib.arrayW > 0) {
+            sb.append("Kamera: %d x %d (%.1f MP)\n".format(
+                calib.arrayW, calib.arrayH, calib.sensorMp))
+        } else sb.append("Kamera çözünürlüğü: okunamadı\n")
+        if (calib.sensorWmm > 0f) {
+            sb.append("Sensör: %.2f mm genişlik\n".format(calib.sensorWmm))
+        }
+        if (calib.pixelUm > 0f) {
+            sb.append("Piksel boyutu: %.2f µm\n".format(calib.pixelUm))
+        }
+        if (calib.focalMm > 0f) {
+            sb.append("Odak uzaklığı: %.2f mm".format(calib.focalMm))
+        }
+        if (sb.isEmpty()) sb.append("Henüz okunamadı — Yenile'ye basın")
+        return sb.toString()
+    }
+
+    /** Alanları okuyup kaydet; geçersizse false. */
+    private fun readInputs(): Boolean {
+        val d = binding.etDistance.text.toString().toFloatOrNull()
+        val fh = binding.etFovH.text.toString().toFloatOrNull()
+        val fv = binding.etFovV.text.toString().toFloatOrNull()
+        if (d == null || d < 0.5f || d > 500f) {
+            Toast.makeText(this, "Uzaklık 0.5 - 500 m olmalı", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (fh == null || fh < 5f || fh > 170f) {
+            Toast.makeText(this, "Yatay FOV 5 - 170° olmalı", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (fv == null || fv < 5f || fv > 170f) {
+            Toast.makeText(this, "Dikey FOV 5 - 170° olmalı", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        calib.distanceM = d
+        calib.fovHdeg = fh
+        calib.fovVdeg = fv
+        return true
+    }
+
     private fun updatePreview() {
-        val ppm = binding.etPpm.text.toString().toFloatOrNull() ?: calib.pixelsPerMeter
-        // Örnek: 100 px hareket, 0.2 sn'de ne hız yapar?
-        val exampleMs = (100f / ppm.coerceAtLeast(1f)) / 0.2f
-        binding.tvExample.text =
-            "Örnek: 100px / 0.2sn = %.2f m/s = %.1f km/h".format(exampleMs, exampleMs * 3.6f)
+        val d = binding.etDistance.text.toString().toFloatOrNull() ?: calib.distanceM
+        val fh = binding.etFovH.text.toString().toFloatOrNull() ?: calib.fovHdeg
+        // Analiz karesi 1280x720 üzerinden örnekle
+        val imgW = 1280f
+        val rad = Math.toRadians(fh.toDouble())
+        if (rad > 0.01) {
+            val visW = 2 * d * Math.tan(rad / 2)
+            val cmPerPx = visW / imgW * 100
+            val exMs = (100f / imgW * visW).toFloat() / 0.2f
+            binding.tvExample.text =
+                "%.0f m uzakta 1 px = %.1f cm\nÖrnek: 100px / 0.2sn = %.1f km/h".format(
+                    d, cmPerPx, exMs * 3.6f
+                )
+        } else {
+            binding.tvExample.text = "Önce geçerli FOV girin"
+        }
     }
 }

@@ -23,11 +23,13 @@ data class TrackedObject(
 
 /**
  * Basit centroid takipçi.
- * Ardışık karelerde en yakın merkezi eşleştirir, ppm (pixel-per-meter)
- * kalibrasyonu ile hızı hesaplar: metre = piksel / ppm, hız = metre / sn.
+ * Ardışık karelerde en yakın merkezi eşleştirir, eksen başına metre/piksel
+ * ölçeğiyle (trigonometrik kalibrasyon) hızı hesaplar:
+ *   metre = sqrt((dx*mx)^2 + (dy*my)^2), hız = metre / süre.
  */
 class ObjectTracker(
-    var pixelsPerMeter: Float = 100f,
+    var metersPerPixelX: Float = 0.01f,
+    var metersPerPixelY: Float = 0.01f,
     var smoothingWindow: Int = 5,
     private val maxMatchDistancePx: Float = 180f,
     private val maxIdleMs: Long = 1200L
@@ -69,15 +71,14 @@ class ObjectTracker(
     }
 
     private fun computeSpeed(t: TrackedObject): Float {
-        if (t.trail.size < 2 || pixelsPerMeter <= 0f) return 0f
+        if (t.trail.size < 2) return 0f
         val first = t.trail.first()
         val last = t.trail.last()
         val dtSec = (last.second - first.second) / 1000f
         if (dtSec <= 0.01f) return t.speedMs // çok küçük aralık, eski değeri koru
-        val dx = last.first.x - first.first.x
-        val dy = last.first.y - first.first.y
-        val distPx = hypot(dx.toDouble(), dy.toDouble()).toFloat()
-        val distM = distPx / pixelsPerMeter
+        val dxM = (last.first.x - first.first.x) * metersPerPixelX
+        val dyM = (last.first.y - first.first.y) * metersPerPixelY
+        val distM = hypot(dxM.toDouble(), dyM.toDouble()).toFloat()
         val instant = distM / dtSec
         // Ani sıçramaları yumuşat: %70 eski + %30 yeni
         return t.speedMs * 0.7f + instant * 0.3f

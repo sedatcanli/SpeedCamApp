@@ -101,8 +101,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        tracker.pixelsPerMeter = calib.pixelsPerMeter
         tracker.smoothingWindow = calib.smoothingWindow
+        try { calib.refreshOptics(this, false) } catch (_: Exception) { }
         motion.threshold = calib.motionThreshold
         motion.start()
         try {
@@ -144,7 +144,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startCamera(force: Boolean) {
-        tracker.pixelsPerMeter = calib.pixelsPerMeter
         tracker.smoothingWindow = calib.smoothingWindow
         ensureDetector()
 
@@ -223,7 +222,7 @@ class MainActivity : AppCompatActivity() {
                                         ).let { DetectedBox(it, d.label, d.confidence) }
                                     } catch (_: Exception) { null }
                                 }
-                                postDetections(dets, "COCO")
+                                postDetections(dets, "COCO", imgW, imgH)
                             } catch (_: Exception) { closeOnce() }
                             return@setAnalyzer
                         }
@@ -266,7 +265,7 @@ class MainActivity : AppCompatActivity() {
                                             else DetectedBox(mapped, label, conf)
                                         } catch (_: Exception) { null }
                                     }
-                                    postDetections(dets, "Genel")
+                                    postDetections(dets, "Genel", imgW, imgH)
                                 } catch (_: Exception) { }
                             }
                             .addOnFailureListener { /* kareyi atla, çökme */ }
@@ -346,7 +345,9 @@ class MainActivity : AppCompatActivity() {
         } catch (_: Exception) { }
     }
 
-    private fun postDetections(dets: List<DetectedBox>, engine: String) {
+    private fun postDetections(
+        dets: List<DetectedBox>, engine: String, imgW: Float, imgH: Float
+    ) {
         // Telefon hareket ediyorsa ölçüm yapma (yanlış hız üretmemek için)
         if (motion.isMoving) {
             runOnUiThread {
@@ -358,6 +359,12 @@ class MainActivity : AppCompatActivity() {
             }
             return
         }
+        // Kare boyutuna göre trigonometrik ölçeği güncelle
+        try {
+            val (mx, my) = calib.metersPerPixel(imgW, imgH)
+            tracker.metersPerPixelX = mx
+            tracker.metersPerPixelY = my
+        } catch (_: Exception) { }
         val now = System.currentTimeMillis()
         val tracked = try {
             tracker.update(dets, now)

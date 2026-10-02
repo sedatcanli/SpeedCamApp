@@ -10,6 +10,20 @@ import androidx.core.content.ContextCompat
 
 data class CamEntry(val cameraId: String, val label: String, val facing: Int)
 
+/** Telefondan okunan optik veriler (iğne deliği modeli için). */
+data class OpticsInfo(
+    val cameraId: String,
+    val sensorWmm: Float,
+    val sensorHmm: Float,
+    val arrayW: Int,
+    val arrayH: Int,
+    val focalMm: Float,
+    val pixelUm: Float,
+    val mp: Float,
+    val fovHdeg: Float,
+    val fovVdeg: Float
+)
+
 object CameraHelper {
 
     /**
@@ -137,5 +151,61 @@ object CameraHelper {
         // Fiziksel ID filtreleme bağlama anında Camera2Interop ile yapılır,
         // burada sadece yön filtresi yeterli.
         return CameraSelector.Builder().requireLensFacing(calib.cameraFacing).build()
+    }
+
+    /**
+     * Seçili kameranın optik verilerini sistemden okur:
+     * sensör boyutu, piksel dizisi, odak uzaklığı -> piksel boyutu + görüş açısı.
+     * wantedId yoksa aynı yöndeki ilk kameraya düşer.
+     */
+    fun readOptics(context: Context, wantedId: String?, facing: Int): OpticsInfo? {
+        return try {
+            val mgr = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+            val ids = mgr.cameraIdList ?: return null
+            if (ids.isEmpty()) return null
+            // Önce istenen ID, yoksa aynı yöndeki ilk kamera
+            var pick: String? = null
+            if (!wantedId.isNullOrEmpty() && ids.contains(wantedId)) pick = wantedId
+            if (pick == null) {
+                for (id in ids) {
+                    try {
+                        val cc = mgr.getCameraCharacteristics(id)
+                        val f = cc.get(CameraCharacteristics.LENS_FACING)
+                        val wantRaw = if (facing == CameraSelector.LENS_FACING_FRONT)
+                            CameraCharacteristics.LENS_FACING_FRONT
+                        else CameraCharacteristics.LENS_FACING_BACK
+                        if (f == wantRaw) {
+                            pick = id
+                            break
+                        }
+                    } catch (_: Exception) { }
+                }
+            }
+            if (pick == null) pick = ids[0]
+            val c = mgr.getCameraCharacteristics(pick)
+            val sensor = c.get(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE)
+                ?: return null
+            val array = c.get(CameraCharacteristics.SENSOR_INFO_PIXEL_ARRAY_SIZE)
+                ?: return null
+            val focals = c.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)
+            val focal = focals?.firstOrNull() ?: return null
+            if (sensor.width <= 0f || sensor.height <= 0f || focal <= 0f) return null
+            if (array.width <= 0 || array.height <= 0) return null
+            val pixelUm = sensor.width * 1000f / array.width
+            val mp = array.width * array.height / 1_000_000f
+            val fovH = Math.toDegrees(
+                (2 * Math.atan(sensor.width / (2 * focal))).toDouble()
+            ).toFloat()
+            val fovV = Math.toDegrees(
+                (2 * Math.atan(sensor.height / (2 * focal))).toDouble()
+            ).toFloat()
+            OpticsInfo(
+                cameraId = pick,
+                sensorWmm = sensor.width, sensorHmm = sensor.height,
+                arrayW = array.width, arrayH = array.height,
+                focalMm = focal, pixelUm = pixelUm, mp = mp,
+                fovHdeg = fovH, fovVdeg = fovV
+            )
+        } catch (_: Exception) { null }
     }
 }
