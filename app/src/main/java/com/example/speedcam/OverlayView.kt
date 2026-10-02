@@ -15,6 +15,13 @@ class OverlayView @JvmOverloads constructor(
     var tracks: List<TrackedObject> = emptyList()
     var speedUnit: String = SpeedUnit.KMH
     var showLabels: Boolean = true
+    var warning = false
+
+    private val warnPaint = Paint().apply {
+        color = Color.RED
+        style = Paint.Style.STROKE
+        strokeWidth = 14f
+    }
 
     private val boxPaint = Paint().apply {
         color = Color.GREEN
@@ -35,8 +42,20 @@ class OverlayView @JvmOverloads constructor(
         postInvalidate()
     }
 
+    fun setWarning(w: Boolean) {
+        if (warning != w) {
+            warning = w
+            postInvalidate()
+        }
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        if (warning) {
+            // Genel görüntünün etrafına kırmızı çerçeve
+            val p = warnPaint.strokeWidth / 2f
+            canvas.drawRect(p, p, width - p, height - p, warnPaint)
+        }
         for (t in tracks) {
             val speed = SpeedUnit.toDisplay(t.speedMs, speedUnit)
             val max = SpeedUnit.toDisplay(t.maxSpeedMs, speedUnit)

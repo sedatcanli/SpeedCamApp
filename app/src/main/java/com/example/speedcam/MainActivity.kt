@@ -54,6 +54,17 @@ class MainActivity : AppCompatActivity() {
         calib = CalibrationManager(this)
         ensureDetector()
         coco = CocoDetector(this)
+        motion = MotionMonitor(this)
+        motion.onStateChanged = { moving ->
+            runOnUiThread {
+                try {
+                    binding.tvMotion.visibility =
+                        if (moving) android.view.View.VISIBLE else android.view.View.GONE
+                    binding.overlay.setWarning(moving)
+                    if (moving) binding.tvCount.text = "Duraklatıldı"
+                } catch (_: Exception) { }
+            }
+        }
         applyFullscreen()
 
         binding.btnCalib.setOnClickListener {
@@ -92,6 +103,8 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         tracker.pixelsPerMeter = calib.pixelsPerMeter
         tracker.smoothingWindow = calib.smoothingWindow
+        motion.threshold = calib.motionThreshold
+        motion.start()
         try {
             binding.tvStatus.text = "Kalibrasyon: " + calib.summary()
         } catch (_: Exception) { }
@@ -102,6 +115,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        try { motion.stop() } catch (_: Exception) { }
         // Ekrandan çıkınca kamerayı bırak (arka planda çökme/ısınma olmasın)
         try {
             ProcessCameraProvider.getInstance(this).get().unbindAll()
@@ -111,6 +125,7 @@ class MainActivity : AppCompatActivity() {
 
     private var detectorThreshold = -1f
     private lateinit var coco: CocoDetector
+    private lateinit var motion: MotionMonitor
     private var reportedEngine: String? = null
 
     /**
@@ -331,6 +346,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun postDetections(dets: List<DetectedBox>, engine: String) {
+        // Telefon hareket ediyorsa ölçüm yapma (yanlış hız üretmemek için)
+        if (motion.isMoving) {
+            runOnUiThread {
+                try {
+                    binding.overlay.setResults(emptyList(), calib.speedUnit, calib.showLabels)
+                    binding.overlay.setWarning(true)
+                    binding.tvCount.text = "Duraklatıldı"
+                } catch (_: Exception) { }
+            }
+            return
+        }
         val now = System.currentTimeMillis()
         val tracked = try {
             tracker.update(dets, now)
@@ -356,6 +382,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        try { motion.stop() } catch (_: Exception) { }
         try { detector?.close() } catch (_: Exception) { }
         detector = null
         try { coco.close() } catch (_: Exception) { }

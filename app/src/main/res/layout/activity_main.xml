@@ -46,6 +46,21 @@
         app:layout_constraintTop_toBottomOf="@id/tvStatus"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/tvMotion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#CCAA0000"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp"
+        android:visibility="gone"
+        android:text="Telefon hareket ediyor - ölçüm duraklatıldı"
+        app:layout_constraintTop_toBottomOf="@id/tvStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvCount" />
+
     <LinearLayout
         android:id="@+id/zoomBar"
         android:layout_width="0dp"

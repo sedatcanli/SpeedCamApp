@@ -28,6 +28,7 @@ class SettingsActivity : AppCompatActivity() {
         binding.sliderConf.value = calib.detectionConfidence
         binding.sliderSmooth.value = calib.smoothingWindow.toFloat()
         binding.switchLabels.isChecked = calib.showLabels
+        binding.sliderMotion.value = calib.motionThreshold
 
         // Önce eski basit liste (kamera izni yoksa bile ekran açılsın)
         setCameraSpinner(
@@ -61,6 +62,7 @@ class SettingsActivity : AppCompatActivity() {
             calib.detectionConfidence = binding.sliderConf.value
             calib.smoothingWindow = binding.sliderSmooth.value.toInt()
             calib.showLabels = binding.switchLabels.isChecked
+            calib.motionThreshold = binding.sliderMotion.value
             Toast.makeText(this, "Ayarlar kaydedildi", Toast.LENGTH_SHORT).show()
             finish()
         }
