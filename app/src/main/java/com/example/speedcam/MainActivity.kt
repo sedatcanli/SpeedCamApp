@@ -423,9 +423,17 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         try { motion.stop() } catch (_: Exception) { }
+        // Önce kare akışını durdur, analyzer'ın işi bitsin, sonra kapat.
+        // Yoksa native detect() ortasında close() çöker.
+        try {
+            ProcessCameraProvider.getInstance(this).get().unbindAll()
+        } catch (_: Exception) { }
+        cameraExecutor.shutdown()
+        try {
+            cameraExecutor.awaitTermination(2, java.util.concurrent.TimeUnit.SECONDS)
+        } catch (_: Exception) { }
         try { detector?.close() } catch (_: Exception) { }
         detector = null
         try { coco.close() } catch (_: Exception) { }
-        cameraExecutor.shutdown()
     }
 }

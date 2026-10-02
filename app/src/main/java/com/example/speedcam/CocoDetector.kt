@@ -15,13 +15,16 @@ class CocoDetector(private val context: Context) {
 
     private var detector: ObjectDetector? = null
     private var builtThreshold = -1f
+    // detect() ve close() farklı thread'lerden gelir; kilitsiz kapatma
+    // native çökmeye yol açar ("pure virtual function called").
+    private val lock = Any()
     var ready = false
         private set
 
     /** Eşik değiştiyse modeli yeniden kurar. Aynı tek thread'den çağrılmalı. */
-    fun ensure(threshold: Float): Boolean {
+    fun ensure(threshold: Float): Boolean = synchronized(lock) {
         if (ready && builtThreshold == threshold) return true
-        close()
+        closeLocked()
         return try {
             val modelFile = File(context.filesDir, "mobilenet_ssd.tflite")
             if (!modelFile.exists()) {
@@ -47,7 +50,7 @@ class CocoDetector(private val context: Context) {
         }
     }
 
-    fun detect(bitmap: Bitmap): List<DetectedBox> {
+    fun detect(bitmap: Bitmap): List<DetectedBox> = synchronized(lock) {
         val det = detector ?: return emptyList()
         return try {
             val image = TensorImage.fromBitmap(bitmap)
@@ -68,6 +71,10 @@ class CocoDetector(private val context: Context) {
     }
 
     fun close() {
+        synchronized(lock) { closeLocked() }
+    }
+
+    private fun closeLocked() {
         try { detector?.close() } catch (_: Exception) { }
         detector = null
         ready = false
