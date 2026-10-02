@@ -206,6 +206,7 @@ object CameraHelper {
             }
             if (pick == null) pick = ids[0]
             val c = characteristicsFor(mgr, pick)
+            val sensor = c.get(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE)
                 ?: return null
             val array = c.get(CameraCharacteristics.SENSOR_INFO_PIXEL_ARRAY_SIZE)
                 ?: return null
