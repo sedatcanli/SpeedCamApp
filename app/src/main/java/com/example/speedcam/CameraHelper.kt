@@ -154,6 +154,28 @@ object CameraHelper {
     }
 
     /**
+     * Fiziksel lens ID'si verildiyse o lensin kendi karakteristiğini,
+     * yoksa mantıksal kameranınkini döndürür (API 29+).
+     */
+    private fun characteristicsFor(
+        mgr: CameraManager, id: String
+    ): CameraCharacteristics {
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= 29) {
+                for (logical in mgr.cameraIdList) {
+                    try {
+                        val lc = mgr.getCameraCharacteristics(logical)
+                        if (lc.physicalCameraIds.contains(id)) {
+                            return lc.getPhysicalCameraCharacteristics(id)
+                        }
+                    } catch (_: Throwable) { }
+                }
+            }
+        } catch (_: Throwable) { }
+        return mgr.getCameraCharacteristics(id)
+    }
+
+    /**
      * Seçili kameranın optik verilerini sistemden okur:
      * sensör boyutu, piksel dizisi, odak uzaklığı -> piksel boyutu + görüş açısı.
      * wantedId yoksa aynı yöndeki ilk kameraya düşer.
@@ -163,9 +185,10 @@ object CameraHelper {
             val mgr = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
             val ids = mgr.cameraIdList ?: return null
             if (ids.isEmpty()) return null
-            // Önce istenen ID, yoksa aynı yöndeki ilk kamera
+            // Önce istenen ID (fiziksel lens ID'si de olabilir),
+            // yoksa aynı yöndeki ilk kamera
             var pick: String? = null
-            if (!wantedId.isNullOrEmpty() && ids.contains(wantedId)) pick = wantedId
+            if (!wantedId.isNullOrEmpty()) pick = wantedId
             if (pick == null) {
                 for (id in ids) {
                     try {
@@ -182,8 +205,7 @@ object CameraHelper {
                 }
             }
             if (pick == null) pick = ids[0]
-            val c = mgr.getCameraCharacteristics(pick)
-            val sensor = c.get(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE)
+            val c = characteristicsFor(mgr, pick)
                 ?: return null
             val array = c.get(CameraCharacteristics.SENSOR_INFO_PIXEL_ARRAY_SIZE)
                 ?: return null

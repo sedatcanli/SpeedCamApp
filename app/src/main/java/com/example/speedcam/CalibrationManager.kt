@@ -149,16 +149,23 @@ class CalibrationManager(context: Context) {
      * Verilen görüntü boyutu için eksen başına metre/piksel:
      * görünür genişlik = 2 * Uzaklık * tan(FOV/2).
      * FOV bilinmiyorsa eski 100 px/m varsayımına düşer.
+     * scaleCorr: referans ölçümle bulunan ince ayar katsayısı.
      */
     fun metersPerPixel(imgW: Float, imgH: Float): Pair<Float, Float> {
         val fh = Math.toRadians(fovHdeg.toDouble())
         val fv = Math.toRadians(fovVdeg.toDouble())
+        val corr = scaleCorr
         val mx = if (fh > 0.01 && imgW > 0)
-            (2 * distanceM * Math.tan(fh / 2) / imgW).toFloat() else 0.01f
+            (2 * distanceM * Math.tan(fh / 2) / imgW * corr).toFloat() else 0.01f
         val my = if (fv > 0.01 && imgH > 0)
-            (2 * distanceM * Math.tan(fv / 2) / imgH).toFloat() else 0.01f
+            (2 * distanceM * Math.tan(fv / 2) / imgH * corr).toFloat() else 0.01f
         return Pair(mx, my)
     }
+
+    /** Referans düzeltme: cetvel Y gösteriyorsa gerçek X ise katsayı X/Y */
+    var scaleCorr: Float
+        get() = prefs.getFloat("scaleCorr", 1f).coerceIn(0.3f, 3f)
+        set(v) = prefs.edit().putFloat("scaleCorr", v).apply()
 
     /** Bilinen mesafe (metre) + piksel uzunluktan ppm hesapla (eski yöntem, duruyor) */
     fun calibrateFromReference(pixelLength: Float, knownMeters: Float): Float {

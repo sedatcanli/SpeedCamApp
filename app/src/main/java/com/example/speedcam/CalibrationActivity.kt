@@ -62,6 +62,22 @@ class CalibrationActivity : AppCompatActivity() {
             updatePreview()
         }
 
+        binding.tvCorr.text = corrText()
+
+        binding.btnCorrect.setOnClickListener {
+            val real = parseDec(binding.etReal.text.toString())
+            val shown = parseDec(binding.etShown.text.toString())
+            if (real == null || shown == null || real <= 0f || shown <= 0f) {
+                Toast.makeText(this, "Gerçek ve gösterilen uzunluğu girin", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val corr = (real / shown).coerceIn(0.3f, 3f)
+            calib.scaleCorr = corr
+            binding.tvCorr.text = corrText()
+            updatePreview()
+            Toast.makeText(this, "Düzeltme uygulandı", Toast.LENGTH_SHORT).show()
+        }
+
         binding.btnSave.setOnClickListener {
             if (!readInputs()) return@setOnClickListener
             Toast.makeText(this, "Kaydedildi", Toast.LENGTH_SHORT).show()
@@ -78,8 +94,10 @@ class CalibrationActivity : AppCompatActivity() {
         binding.tvOptics.text = opticsText()
     }
 
-    private fun opticsText(): String {
-        val sb = StringBuilder()
+    private fun corrText(): String =
+        "İnce ayar katsayısı: %.3f (1.000 = düzeltme yok)".format(calib.scaleCorr)
+
+    private fun opticsText(): String {        val sb = StringBuilder()
         if (calib.arrayW > 0) {
             sb.append("Kamera: %d x %d (%.1f MP)\n".format(
                 calib.arrayW, calib.arrayH, calib.sensorMp))
@@ -128,7 +146,8 @@ class CalibrationActivity : AppCompatActivity() {
         val rad = Math.toRadians(fh.toDouble())
         if (rad > 0.01) {
             val zoom = try { calib.zoomRatio.coerceIn(0.5f, 20f) } catch (_: Exception) { 1f }
-            val visW = 2 * d * Math.tan(rad / 2) / zoom
+            val corr = try { calib.scaleCorr } catch (_: Exception) { 1f }
+            val visW = 2 * d * Math.tan(rad / 2) / zoom * corr
             val cmPerPx = visW / imgW * 100
             val exMs = (100f / imgW * visW).toFloat() / 0.2f
             binding.tvExample.text =

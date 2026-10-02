@@ -60,6 +60,27 @@
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginTop="8dp" android:text="Örnek" />
 
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Referansla ince ayar" android:textStyle="bold" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Bilinen bir uzunluğu kameraya tutun. Cetvelin gösterdiğini ve gerçeğini girin (örn. gerçek 0.6 m, gösterilen 0.9 m)." />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Gerçek uzunluk (metre)" />
+        <EditText android:id="@+id/etReal"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Cetvelin gösterdiği (metre)" />
+        <EditText android:id="@+id/etShown"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+        <Button android:id="@+id/btnCorrect"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Düzeltmeyi uygula" />
+        <TextView android:id="@+id/tvCorr"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="İnce ayar katsayısı" />
+
         <Button android:id="@+id/btnSave"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="16dp" android:text="Kaydet" />
