@@ -155,7 +155,9 @@ object CameraHelper {
 
     /**
      * Fiziksel lens ID'si verildiyse o lensin kendi karakteristiğini,
-     * yoksa mantıksal kameranınkini döndürür (API 29+).
+     * yoksa mantıksal kameranınkini döndürür.
+     * Doğrudan API çağrısı yerine yansıma kullanılır (bazı derleme
+     * ortamlarında stub çözülemediği için).
      */
     private fun characteristicsFor(
         mgr: CameraManager, id: String
@@ -166,7 +168,12 @@ object CameraHelper {
                     try {
                         val lc = mgr.getCameraCharacteristics(logical)
                         if (lc.physicalCameraIds.contains(id)) {
-                            return lc.getPhysicalCameraCharacteristics(id)
+                            val m = CameraCharacteristics::class.java.getMethod(
+                                "getPhysicalCameraCharacteristics",
+                                String::class.java
+                            )
+                            val pc = m.invoke(lc, id) as? CameraCharacteristics
+                            if (pc != null) return pc
                         }
                     } catch (_: Throwable) { }
                 }
