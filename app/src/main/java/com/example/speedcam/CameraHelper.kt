@@ -43,14 +43,20 @@ object CameraHelper {
                             c.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)
                         val focalStr = if (focal != null && focal.isNotEmpty())
                             " • %.1fmm".format(focal.minOrNull() ?: 0f) else ""
-                        val isLogical = c.get(
-                            CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES
-                        )?.contains(
-                            CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES_LOGICAL_MULTI_CAMERA
-                        ) == true
-                        val phys = try {
-                            if (isLogical) c.physicalCameraIds else emptySet()
-                        } catch (_: Exception) { emptySet<String>() }
+                        val isLogical = if (android.os.Build.VERSION.SDK_INT >= 28) {
+                            try {
+                                c.get(
+                                    CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES
+                                )?.contains(
+                                    CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES_LOGICAL_MULTI_CAMERA
+                                ) == true
+                            } catch (_: Throwable) { false }
+                        } else false
+                        val phys: Set<String> = try {
+                            if (isLogical && android.os.Build.VERSION.SDK_INT >= 28) {
+                                c.physicalCameraIds
+                            } else emptySet()
+                        } catch (_: Throwable) { emptySet() }
                         val kind = when {
                             facingLens == CameraSelector.LENS_FACING_FRONT -> "selfie"
                             isLogical && phys.size >= 2 -> "mantıksal"
@@ -117,9 +123,11 @@ object CameraHelper {
             for (id in mgr.cameraIdList) {
                 if (id == wantedId) return id
                 try {
-                    val c = mgr.getCameraCharacteristics(id)
-                    if (c.physicalCameraIds.contains(wantedId)) return id
-                } catch (_: Exception) { }
+                    if (android.os.Build.VERSION.SDK_INT >= 28) {
+                        val c = mgr.getCameraCharacteristics(id)
+                        if (c.physicalCameraIds.contains(wantedId)) return id
+                    }
+                } catch (_: Throwable) { }
             }
         } catch (_: Exception) { }
         return null

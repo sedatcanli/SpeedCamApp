@@ -25,8 +25,8 @@ class SettingsActivity : AppCompatActivity() {
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, units)
         binding.spUnit.setSelection(units.indexOf(calib.speedUnit).coerceAtLeast(0))
 
-        binding.sliderConf.value = calib.detectionConfidence
-        binding.sliderSmooth.value = calib.smoothingWindow.toFloat()
+        binding.sliderConf.value = calib.detectionConfidence.coerceIn(0.2f, 0.9f)
+        binding.sliderSmooth.value = calib.smoothingWindow.toFloat().coerceIn(2f, 15f)
         binding.switchLabels.isChecked = calib.showLabels
         binding.sliderMotion.value = calib.motionThreshold
 
@@ -40,10 +40,18 @@ class SettingsActivity : AppCompatActivity() {
 
         // Gerçek kamera listesi (geniş açı dahil): ID'leri göster
         CameraHelper.listCameras(this) { list ->
-            if (list.isNotEmpty()) {
-                camList = list
-                setCameraSpinner(list)
-            }
+            try {
+                if (list.isNotEmpty()) {
+                    camList = list
+                    setCameraSpinner(list)
+                }
+            } catch (_: Throwable) { }
+        }
+
+        binding.tvCrash.text = CrashLog.lastCrash(this) ?: "Kayıt yok"
+        binding.btnClearCrash.setOnClickListener {
+            CrashLog.clear(this)
+            binding.tvCrash.text = "Kayıt yok"
         }
 
         binding.btnSaveSettings.setOnClickListener {
