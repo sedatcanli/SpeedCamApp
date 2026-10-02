@@ -43,7 +43,7 @@ jobs:
 
       - name: Derleyici hatalarini ozetle (basarisizsa)
         if: failure()
-        run: grep -hE "^e: " build-*.log | sort -u | head -30 || true
+        run: 'grep -hE "^e: " build-*.log | sort -u | head -30 || true'
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
