@@ -87,8 +87,9 @@ class MainActivity : AppCompatActivity() {
         // Zoom kaydırıcısı (dijital zoom: telefoto yerine geçer, değer korunur)
         binding.sliderZoom.addOnChangeListener { _, value, fromUser ->
             if (fromUser) {
-                setZoom(value)
-                calib.zoomRatio = value
+                val clean = SliderUtils.snap(binding.sliderZoom, value)
+                setZoom(clean)
+                calib.zoomRatio = clean
             }
             binding.tvZoom.text = "%.1fx".format(value)
         }
@@ -362,9 +363,10 @@ class MainActivity : AppCompatActivity() {
             binding.sliderZoom.valueTo = max
             // Kayıtlı zoom'u geri yükle (döndürmede 1x'e dönmesin)
             val saved = calib.zoomRatio.coerceIn(min, max)
-            binding.sliderZoom.value = saved
-            binding.tvZoom.text = "%.1fx".format(saved)
-            setZoom(saved)
+            SliderUtils.setSafe(binding.sliderZoom, saved)
+            val applied = try { binding.sliderZoom.value } catch (_: Exception) { saved }
+            binding.tvZoom.text = "%.1fx".format(applied)
+            setZoom(applied)
         } catch (_: Exception) { }
     }
 

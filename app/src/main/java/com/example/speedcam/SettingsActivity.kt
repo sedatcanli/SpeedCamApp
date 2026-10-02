@@ -25,10 +25,14 @@ class SettingsActivity : AppCompatActivity() {
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, units)
         binding.spUnit.setSelection(units.indexOf(calib.speedUnit).coerceAtLeast(0))
 
-        binding.sliderConf.value = calib.detectionConfidence.coerceIn(0.2f, 0.9f)
-        binding.sliderSmooth.value = calib.smoothingWindow.toFloat().coerceIn(2f, 15f)
+        SliderUtils.setSafe(
+            binding.sliderConf, calib.detectionConfidence.coerceIn(0.2f, 0.9f)
+        )
+        SliderUtils.setSafe(
+            binding.sliderSmooth, calib.smoothingWindow.toFloat().coerceIn(2f, 15f)
+        )
         binding.switchLabels.isChecked = calib.showLabels
-        binding.sliderMotion.value = calib.motionThreshold
+        SliderUtils.setSafe(binding.sliderMotion, calib.motionThreshold)
 
         // Önce eski basit liste (kamera izni yoksa bile ekran açılsın)
         setCameraSpinner(
@@ -67,10 +71,12 @@ class SettingsActivity : AppCompatActivity() {
                     CameraSelector.LENS_FACING_BACK else CameraSelector.LENS_FACING_FRONT
             }
             calib.speedUnit = units[binding.spUnit.selectedItemPosition]
-            calib.detectionConfidence = binding.sliderConf.value
+            calib.detectionConfidence =
+                SliderUtils.snap(binding.sliderConf, binding.sliderConf.value)
             calib.smoothingWindow = binding.sliderSmooth.value.toInt()
             calib.showLabels = binding.switchLabels.isChecked
-            calib.motionThreshold = binding.sliderMotion.value
+            calib.motionThreshold =
+                SliderUtils.snap(binding.sliderMotion, binding.sliderMotion.value)
             Toast.makeText(this, "Ayarlar kaydedildi", Toast.LENGTH_SHORT).show()
             finish()
         }
