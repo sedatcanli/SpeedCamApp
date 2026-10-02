@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
         ensureDetector()
         coco = CocoDetector(this)
         motion = MotionMonitor(this)
-        motion.onStateChanged = { moving ->
-            runOnUiThread {
+        showCrashDialogIfAny()
+        motion.onStateChanged = { moving ->            runOnUiThread {
                 try {
                     binding.tvMotion.visibility =
                         if (moving) android.view.View.VISIBLE else android.view.View.GONE
@@ -298,6 +298,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     /** Her yönde gerçek tam ekran; çubuklar kaydırınca geçici görünür. */
+    /** Varsa son çökme kaydını göster + kopyalama sun (nedeni bulmak için). */
+    private fun showCrashDialogIfAny() {
+        try {
+            val log = CrashLog.lastCrash(this) ?: return
+            val version = try {
+                packageManager.getPackageInfo(packageName, 0).versionName
+            } catch (_: Exception) { "?" }
+            androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Çökme kaydı (v$version)")
+                .setMessage(log.take(3000))
+                .setPositiveButton("Kopyala") { _, _ ->
+                    try {
+                        val cm = getSystemService(
+                            android.content.Context.CLIPBOARD_SERVICE
+                        ) as android.content.ClipboardManager
+                        cm.setPrimaryClip(
+                            android.content.ClipData.newPlainText("crash", log)
+                        )
+                        Toast.makeText(
+                            this, "Kopyalandı, bana yapıştır", Toast.LENGTH_LONG
+                        ).show()
+                    } catch (_: Exception) { }
+                }
+                .setNegativeButton("Temizle") { _, _ -> CrashLog.clear(this) }
+                .setNeutralButton("Kapat", null)
+                .show()
+        } catch (_: Exception) { }
+    }
+
     private fun applyFullscreen() {
         try {
             WindowCompat.setDecorFitsSystemWindows(window, false)
