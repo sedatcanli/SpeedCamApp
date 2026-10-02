@@ -376,6 +376,7 @@ class MainActivity : AppCompatActivity() {
         }
         // Kare boyutuna göre trigonometrik ölçeği güncelle.
         // Zoom büyütmesi görüş alanını daraltır: ölçek zoom'a bölünür.
+        var mPerViewPx = 0f
         try {
             val zoom = try {
                 camera?.cameraInfo?.zoomState?.value?.zoomRatio
@@ -385,6 +386,8 @@ class MainActivity : AppCompatActivity() {
             tracker.metersPerPixelX = mx / zoom
             tracker.metersPerPixelY = my / zoom
             tracker.ghostMs = (calib.ghostSec * 1000).toLong()
+            val viewW = try { binding.previewView.width.toFloat() } catch (_: Exception) { 0f }
+            if (viewW > 0f && imgW > 0f) mPerViewPx = mx / zoom * imgW / viewW
         } catch (_: Exception) { }
         val now = System.currentTimeMillis()
         val tracked = try {
@@ -406,6 +409,7 @@ class MainActivity : AppCompatActivity() {
                 binding.overlay.setResults(
                     snapshot, calib.speedUnit, calib.showLabels
                 )
+                if (mPerViewPx > 0f) binding.overlay.setScaleBar(mPerViewPx)
                 binding.tvCount.text = "%d nesne".format(snapshot.size)
                 if (reportedEngine != engine) {
                     reportedEngine = engine

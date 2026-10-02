@@ -55,6 +55,16 @@ class OverlayView @JvmOverloads constructor(
         }
     }
 
+    /** Referans cetvel: ekrandaki 1 pikselin kaç metre olduğu (görünüm koordinatı). */
+    private var metersPerViewPx = 0f
+
+    fun setScaleBar(mPerPx: Float) {
+        if (mPerPx > 0f && mPerPx != metersPerViewPx) {
+            metersPerViewPx = mPerPx
+            postInvalidate()
+        }
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (warnActive) {
@@ -62,6 +72,7 @@ class OverlayView @JvmOverloads constructor(
             val p = warnPaint.strokeWidth / 2f
             canvas.drawRect(p, p, width - p, height - p, warnPaint)
         }
+        drawScaleBar(canvas)
         for (t in tracks) {
             val speed = SpeedUnit.toDisplay(t.speedMs, speedUnit)
             val max = SpeedUnit.toDisplay(t.maxSpeedMs, speedUnit)
@@ -85,5 +96,46 @@ class OverlayView @JvmOverloads constructor(
             canvas.drawRect(x, y - 44f, x + tw + 16f, y + 8f, textBg)
             canvas.drawText(text, x + 8f, y, textPaint)
         }
+    }
+
+    private val scalePaint = Paint().apply {
+        color = Color.WHITE
+        style = Paint.Style.STROKE
+        strokeWidth = 8f
+        strokeCap = Paint.Cap.SQUARE
+    }
+
+    /** Sol altta dinamik referans cetvel (mesafe + FOV + zoom'a göre). */
+    private fun drawScaleBar(canvas: Canvas) {
+        val mpp = metersPerViewPx
+        if (mpp <= 0f || width <= 0) return
+        try {
+            // ~120 px'e denk gelen "güzel" uzunluğu seç (1-2-5 kuralı)
+            val raw = 120f * mpp
+            val mag = Math.pow(10.0, Math.floor(Math.log10(raw.toDouble()))).toFloat()
+            val norm = raw / mag
+            val nice = when {
+                norm >= 5f -> 5f * mag
+                norm >= 2f -> 2f * mag
+                else -> 1f * mag
+            }
+            val barPx = nice / mpp
+            if (barPx < 30f || barPx > width - 48f) return
+            val label = if (nice < 1f) "%d cm".format((nice * 100).toInt()) else {
+                val whole = nice.toInt()
+                if (nice == whole.toFloat()) "%d m".format(whole)
+                else "%.1f m".format(nice)
+            }
+            val tw = textPaint.measureText(label)
+            val x0 = 24f
+            val y = height - 40f
+            // Arka plan
+            canvas.drawRect(x0 - 12f, y - 56f, x0 + barPx + tw + 32f, y + 16f, textBg)
+            // Çizgi + uçlar
+            canvas.drawLine(x0, y, x0 + barPx, y, scalePaint)
+            canvas.drawLine(x0, y - 18f, x0, y + 18f, scalePaint)
+            canvas.drawLine(x0 + barPx, y - 18f, x0 + barPx, y + 18f, scalePaint)
+            canvas.drawText(label, x0 + barPx + 16f, y + 14f, textPaint)
+        } catch (_: Exception) { }
     }
 }
