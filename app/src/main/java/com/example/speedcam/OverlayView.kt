@@ -22,6 +22,12 @@ class OverlayView @JvmOverloads constructor(
         style = Paint.Style.STROKE
         strokeWidth = 14f
     }
+    private val ghostPaint = Paint().apply {
+        color = Color.argb(180, 170, 170, 170)
+        style = Paint.Style.STROKE
+        strokeWidth = 5f
+        pathEffect = android.graphics.DashPathEffect(floatArrayOf(24f, 18f), 0f)
+    }
 
     private val boxPaint = Paint().apply {
         color = Color.GREEN
@@ -59,13 +65,18 @@ class OverlayView @JvmOverloads constructor(
         for (t in tracks) {
             val speed = SpeedUnit.toDisplay(t.speedMs, speedUnit)
             val max = SpeedUnit.toDisplay(t.maxSpeedMs, speedUnit)
-            // Hıza göre renk: yavaş yeşil -> hızlı kırmızı
-            boxPaint.color = when {
-                t.speedMs < 2f -> Color.GREEN
-                t.speedMs < 8f -> Color.YELLOW
-                else -> Color.RED
+            if (t.ghost) {
+                // Kaybolan cisim: gri kesik çerçeve + son hız
+                canvas.drawRect(t.box, ghostPaint)
+            } else {
+                // Hıza göre renk: yavaş yeşil -> hızlı kırmızı
+                boxPaint.color = when {
+                    t.speedMs < 2f -> Color.GREEN
+                    t.speedMs < 8f -> Color.YELLOW
+                    else -> Color.RED
+                }
+                canvas.drawRect(t.box, boxPaint)
             }
-            canvas.drawRect(t.box, boxPaint)
             val label = if (showLabels && t.label != null) "${t.label} " else ""
             val text = "$label#${t.id} %.1f / %.1f %s".format(speed, max, speedUnit)
             val tw = textPaint.measureText(text)

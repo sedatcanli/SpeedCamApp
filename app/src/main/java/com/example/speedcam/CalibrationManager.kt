@@ -65,6 +65,16 @@ class CalibrationManager(context: Context) {
         get() = prefs.getFloat("minSpeed", 0f).coerceIn(0f, 5f)
         set(v) = prefs.edit().putFloat("minSpeed", v).apply()
 
+    /** Maksimum kutu boyutu (ekran oranı): bundan büyük kutular cisim değildir */
+    var maxBoxAreaPct: Float
+        get() = prefs.getFloat("maxBox", 0.8f).coerceIn(0.1f, 1f)
+        set(v) = prefs.edit().putFloat("maxBox", v).apply()
+
+    /** Kaybolan cismin son hızıyla gösterilme süresi (sn). 0 = kapalı */
+    var ghostSec: Float
+        get() = prefs.getFloat("ghostSec", 1.5f).coerceIn(0f, 3f)
+        set(v) = prefs.edit().putFloat("ghostSec", v).apply()
+
     // ---- Trigonometrik kalibrasyon (iğne deliği modeli) ----
     /** Ölçüm düzleminin kameraya uzaklığı (metre) — kullanıcı girer */
     var distanceM: Float

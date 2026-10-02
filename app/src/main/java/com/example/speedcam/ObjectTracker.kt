@@ -18,7 +18,9 @@ data class TrackedObject(
     var speedMs: Float = 0f,
     var maxSpeedMs: Float = 0f,
     var avgSpeedMs: Float = 0f,
-    val speedHistory: ArrayDeque<Pair<Long, Float>> = ArrayDeque()
+    val speedHistory: ArrayDeque<Pair<Long, Float>> = ArrayDeque(),
+    var ghost: Boolean = false,
+    var lastSeenMs: Long = 0L
 ) {
     fun center(): PointF = PointF(box.centerX(), box.centerY())
 }
@@ -34,15 +36,16 @@ class ObjectTracker(
     var metersPerPixelY: Float = 0.01f,
     var smoothingWindow: Int = 5,
     var avgWindowMs: Long = 2000L,
-    private val maxMatchDistancePx: Float = 180f,
-    private val maxIdleMs: Long = 1200L
+    /** Kaybolan nesnenin son hızıyla gösterilmeye devam süresi (ms) */
+    var ghostMs: Long = 1500L,
+    private val maxMatchDistancePx: Float = 180f
 ) {
     private val tracks = mutableMapOf<Int, TrackedObject>()
     private var nextId = 1
 
     fun update(detections: List<DetectedBox>, nowMs: Long): List<TrackedObject> {
-        // 1. Eski izleri temizle
-        tracks.entries.removeIf { nowMs - (it.value.trail.lastOrNull()?.second ?: 0L) > maxIdleMs }
+        // Hayalet süresi dolanları temizle
+        tracks.entries.removeIf { nowMs - it.value.lastSeenMs > ghostMs }
 
         val unmatched = tracks.values.toMutableSet()
 
@@ -60,6 +63,8 @@ class ObjectTracker(
                 unmatched.remove(best)
                 best.box = RectF(det.box)
                 best.label = det.label
+                best.ghost = false
+                best.lastSeenMs = nowMs
                 best.trail.addLast(Pair(c, nowMs))
                 while (best.trail.size > smoothingWindow) best.trail.removeFirst()
                 best.speedMs = computeSpeed(best)
@@ -74,9 +79,12 @@ class ObjectTracker(
             } else {
                 val t = TrackedObject(nextId++, RectF(det.box), det.label)
                 t.trail.addLast(Pair(c, nowMs))
+                t.lastSeenMs = nowMs
                 tracks[t.id] = t
             }
         }
+        // Eşleşmeyenler hayalet: son kutu + son hızla görünmeye devam eder
+        for (t in unmatched) t.ghost = true
         return tracks.values.sortedBy { it.id }
     }
 

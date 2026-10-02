@@ -38,6 +38,16 @@ class SettingsActivity : AppCompatActivity() {
         binding.sliderMinSpeed.addOnChangeListener { _, value, _ ->
             updateMinSpeedLabel(value)
         }
+        SliderUtils.setSafe(binding.sliderMaxBox, calib.maxBoxAreaPct * 100f)
+        updateMaxBoxLabel()
+        binding.sliderMaxBox.addOnChangeListener { _, value, _ ->
+            updateMaxBoxLabel(value)
+        }
+        SliderUtils.setSafe(binding.sliderGhost, calib.ghostSec)
+        updateGhostLabel()
+        binding.sliderGhost.addOnChangeListener { _, value, _ ->
+            updateGhostLabel(value)
+        }
 
         // Önce eski basit liste (kamera izni yoksa bile ekran açılsın)
         setCameraSpinner(
@@ -78,6 +88,10 @@ class SettingsActivity : AppCompatActivity() {
                 SliderUtils.snap(binding.sliderMotion, binding.sliderMotion.value)
             calib.minSpeedMs =
                 SliderUtils.snap(binding.sliderMinSpeed, binding.sliderMinSpeed.value)
+            calib.maxBoxAreaPct =
+                SliderUtils.snap(binding.sliderMaxBox, binding.sliderMaxBox.value) / 100f
+            calib.ghostSec =
+                SliderUtils.snap(binding.sliderGhost, binding.sliderGhost.value)
             Toast.makeText(this, "Ayarlar kaydedildi", Toast.LENGTH_SHORT).show()
             finish()
         }
@@ -91,6 +105,20 @@ class SettingsActivity : AppCompatActivity() {
         else "%.1f m/s (%.0f %s)".format(
             ms, SpeedUnit.toDisplay(ms, calib.speedUnit), calib.speedUnit
         )
+    }
+
+    private fun updateMaxBoxLabel(v: Float = -1f) {
+        val x = if (v < 0) {
+            try { binding.sliderMaxBox.value } catch (_: Exception) { 80f }
+        } else v
+        binding.tvMaxBox.text = "%%%d".format(x.toInt())
+    }
+
+    private fun updateGhostLabel(v: Float = -1f) {
+        val x = if (v < 0) {
+            try { binding.sliderGhost.value } catch (_: Exception) { 1.5f }
+        } else v
+        binding.tvGhost.text = if (x <= 0f) "Kapalı" else "%.1f sn".format(x)
     }
 
     private fun setCameraSpinner(list: List<CamEntry>) {

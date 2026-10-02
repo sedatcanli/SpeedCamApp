@@ -62,6 +62,30 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:valueFrom="0" android:valueTo="5" android:stepSize="0.1" />
 
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Maksimum kutu boyutu" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Ekranın bu kadarını kaplayan kutu cisim sayılmaz" />
+        <TextView android:id="@+id/tvMaxBox"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="%80" />
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderMaxBox"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:valueFrom="10" android:valueTo="100" android:stepSize="5" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Kayıp cismi gösterme süresi" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Kaybolan cisim son hızıyla bu süre görünür (0 = kapalı)" />
+        <TextView android:id="@+id/tvGhost"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="1.5 sn" />
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderGhost"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:valueFrom="0" android:valueTo="3" android:stepSize="0.5" />
+
         <Button android:id="@+id/btnSaveSettings"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="16dp" android:text="Kaydet" />

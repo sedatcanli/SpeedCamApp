@@ -214,7 +214,9 @@ class MainActivity : AppCompatActivity() {
                                 val scaleY = viewH / imgH
                                 val raw = coco.detect(bmp)
                                 try { bmp.recycle() } catch (_: Exception) { }
-                                val dets = raw.mapNotNull { d ->
+                                val maxF = try { calib.maxBoxAreaPct } catch (_: Exception) { 1f }
+                                val clean = BoxFilter.prepare(raw, imgW, imgH, maxF)
+                                val dets = clean.mapNotNull { d ->
                                     try {
                                         RectF(
                                             d.box.left * scaleX, d.box.top * scaleY,
@@ -252,18 +254,23 @@ class MainActivity : AppCompatActivity() {
                                     val scaleX = viewW / imgW
                                     val scaleY = viewH / imgH
 
-                                    val dets = objects.mapNotNull { obj ->
+                                    val rawFb = objects.mapNotNull { obj ->
                                         try {
                                             val b = obj.boundingBox
-                                            val mapped = RectF(
-                                                b.left * scaleX, b.top * scaleY,
-                                                b.right * scaleX, b.bottom * scaleY
-                                            )
                                             val label = TurkishLabels.of(obj.labels.firstOrNull()?.text)
                                             val conf = obj.labels.firstOrNull()?.confidence ?: 0f
                                             if (obj.labels.isNotEmpty() && conf < calib.detectionConfidence) null
-                                            else DetectedBox(mapped, label, conf)
+                                            else DetectedBox(RectF(b), label, conf)
                                         } catch (_: Exception) { null }
+                                    }
+                                    val maxFb = try { calib.maxBoxAreaPct } catch (_: Exception) { 1f }
+                                    val dets = BoxFilter.prepare(rawFb, imgW, imgH, maxFb).map { d ->
+                                        DetectedBox(
+                                            RectF(
+                                                d.box.left * scaleX, d.box.top * scaleY,
+                                                d.box.right * scaleX, d.box.bottom * scaleY
+                                            ), d.label, d.confidence
+                                        )
                                     }
                                     postDetections(dets, "Genel", imgW, imgH)
                                 } catch (_: Exception) { }
@@ -364,6 +371,7 @@ class MainActivity : AppCompatActivity() {
             val (mx, my) = calib.metersPerPixel(imgW, imgH)
             tracker.metersPerPixelX = mx
             tracker.metersPerPixelY = my
+            tracker.ghostMs = (calib.ghostSec * 1000).toLong()
         } catch (_: Exception) { }
         val now = System.currentTimeMillis()
         val tracked = try {
