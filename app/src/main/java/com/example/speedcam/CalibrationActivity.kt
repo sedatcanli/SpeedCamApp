@@ -19,6 +19,10 @@ class CalibrationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalibrationBinding
     private lateinit var calib: CalibrationManager
 
+    /** Türkçe virgül de kabul et (65,5 ve 65.5 aynı). */
+    private fun parseDec(s: String): Float? =
+        s.trim().replace(',', '.').toFloatOrNull()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCalibrationBinding.inflate(layoutInflater)
@@ -66,9 +70,11 @@ class CalibrationActivity : AppCompatActivity() {
     }
 
     private fun fillFields() {
-        binding.etDistance.setText(calib.distanceM.toString())
-        if (calib.fovHdeg > 0f) binding.etFovH.setText("%.1f".format(calib.fovHdeg))
-        if (calib.fovVdeg > 0f) binding.etFovV.setText("%.1f".format(calib.fovVdeg))
+        binding.etDistance.setText(calib.distanceM.toString().replace(',', '.'))
+        if (calib.fovHdeg > 0f) binding.etFovH.setText(
+            "%.1f".format(java.util.Locale.US, calib.fovHdeg))
+        if (calib.fovVdeg > 0f) binding.etFovV.setText(
+            "%.1f".format(java.util.Locale.US, calib.fovVdeg))
         binding.tvOptics.text = opticsText()
     }
 
@@ -93,9 +99,9 @@ class CalibrationActivity : AppCompatActivity() {
 
     /** Alanları okuyup kaydet; geçersizse false. */
     private fun readInputs(): Boolean {
-        val d = binding.etDistance.text.toString().toFloatOrNull()
-        val fh = binding.etFovH.text.toString().toFloatOrNull()
-        val fv = binding.etFovV.text.toString().toFloatOrNull()
+        val d = parseDec(binding.etDistance.text.toString())
+        val fh = parseDec(binding.etFovH.text.toString())
+        val fv = parseDec(binding.etFovV.text.toString())
         if (d == null || d < 0.5f || d > 500f) {
             Toast.makeText(this, "Uzaklık 0.5 - 500 m olmalı", Toast.LENGTH_SHORT).show()
             return false
@@ -115,8 +121,8 @@ class CalibrationActivity : AppCompatActivity() {
     }
 
     private fun updatePreview() {
-        val d = binding.etDistance.text.toString().toFloatOrNull() ?: calib.distanceM
-        val fh = binding.etFovH.text.toString().toFloatOrNull() ?: calib.fovHdeg
+        val d = parseDec(binding.etDistance.text.toString()) ?: calib.distanceM
+        val fh = parseDec(binding.etFovH.text.toString()) ?: calib.fovHdeg
         // Analiz karesi 1280x720 üzerinden örnekle
         val imgW = 1280f
         val rad = Math.toRadians(fh.toDouble())
