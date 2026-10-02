@@ -15,7 +15,7 @@ class OverlayView @JvmOverloads constructor(
     var tracks: List<TrackedObject> = emptyList()
     var speedUnit: String = SpeedUnit.KMH
     var showLabels: Boolean = true
-    var warning = false
+    private var warnActive = false
 
     private val warnPaint = Paint().apply {
         color = Color.RED
@@ -43,15 +43,15 @@ class OverlayView @JvmOverloads constructor(
     }
 
     fun setWarning(w: Boolean) {
-        if (warning != w) {
-            warning = w
+        if (warnActive != w) {
+            warnActive = w
             postInvalidate()
         }
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (warning) {
+        if (warnActive) {
             // Genel görüntünün etrafına kırmızı çerçeve
             val p = warnPaint.strokeWidth / 2f
             canvas.drawRect(p, p, width - p, height - p, warnPaint)
