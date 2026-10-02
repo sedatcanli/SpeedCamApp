@@ -60,6 +60,11 @@ class CalibrationManager(context: Context) {
         get() = prefs.getFloat("motion", 0.6f).coerceIn(0.1f, 3f)
         set(v) = prefs.edit().putFloat("motion", v).apply()
 
+    /** Minimum hız filtresi (m/s): 2 sn ortalaması bunun altındaysa gösterme. 0 = kapalı */
+    var minSpeedMs: Float
+        get() = prefs.getFloat("minSpeed", 0f).coerceIn(0f, 5f)
+        set(v) = prefs.edit().putFloat("minSpeed", v).apply()
+
     // ---- Trigonometrik kalibrasyon (iğne deliği modeli) ----
     /** Ölçüm düzleminin kameraya uzaklığı (metre) — kullanıcı girer */
     var distanceM: Float

@@ -50,6 +50,18 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:valueFrom="0.1" android:valueTo="3.0" android:stepSize="0.05" />
 
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Minimum hız filtresi" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="2 sn ortalaması bunun altında kalan nesne gösterilmez (0 = kapalı)" />
+        <TextView android:id="@+id/tvMinSpeed"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Kapalı" />
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderMinSpeed"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:valueFrom="0" android:valueTo="5" android:stepSize="0.1" />
+
         <Button android:id="@+id/btnSaveSettings"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="16dp" android:text="Kaydet" />

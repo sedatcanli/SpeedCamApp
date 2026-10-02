@@ -16,7 +16,9 @@ data class TrackedObject(
     var label: String?,
     val trail: ArrayDeque<Pair<PointF, Long>> = ArrayDeque(),
     var speedMs: Float = 0f,
-    var maxSpeedMs: Float = 0f
+    var maxSpeedMs: Float = 0f,
+    var avgSpeedMs: Float = 0f,
+    val speedHistory: ArrayDeque<Pair<Long, Float>> = ArrayDeque()
 ) {
     fun center(): PointF = PointF(box.centerX(), box.centerY())
 }
@@ -31,6 +33,7 @@ class ObjectTracker(
     var metersPerPixelX: Float = 0.01f,
     var metersPerPixelY: Float = 0.01f,
     var smoothingWindow: Int = 5,
+    var avgWindowMs: Long = 2000L,
     private val maxMatchDistancePx: Float = 180f,
     private val maxIdleMs: Long = 1200L
 ) {
@@ -61,6 +64,13 @@ class ObjectTracker(
                 while (best.trail.size > smoothingWindow) best.trail.removeFirst()
                 best.speedMs = computeSpeed(best)
                 if (best.speedMs > best.maxSpeedMs) best.maxSpeedMs = best.speedMs
+                // Son 2 sn'lik ortalama hız (yavaş nesne filtresi için)
+                best.speedHistory.addLast(Pair(nowMs, best.speedMs))
+                while (best.speedHistory.isNotEmpty() &&
+                    nowMs - best.speedHistory.first().first > avgWindowMs
+                ) best.speedHistory.removeFirst()
+                best.avgSpeedMs = if (best.speedHistory.isEmpty()) best.speedMs
+                else best.speedHistory.map { it.second }.average().toFloat()
             } else {
                 val t = TrackedObject(nextId++, RectF(det.box), det.label)
                 t.trail.addLast(Pair(c, nowMs))

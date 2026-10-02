@@ -33,6 +33,11 @@ class SettingsActivity : AppCompatActivity() {
         )
         binding.switchLabels.isChecked = calib.showLabels
         SliderUtils.setSafe(binding.sliderMotion, calib.motionThreshold)
+        SliderUtils.setSafe(binding.sliderMinSpeed, calib.minSpeedMs)
+        updateMinSpeedLabel()
+        binding.sliderMinSpeed.addOnChangeListener { _, value, _ ->
+            updateMinSpeedLabel(value)
+        }
 
         // Önce eski basit liste (kamera izni yoksa bile ekran açılsın)
         setCameraSpinner(
@@ -71,9 +76,21 @@ class SettingsActivity : AppCompatActivity() {
             calib.showLabels = binding.switchLabels.isChecked
             calib.motionThreshold =
                 SliderUtils.snap(binding.sliderMotion, binding.sliderMotion.value)
+            calib.minSpeedMs =
+                SliderUtils.snap(binding.sliderMinSpeed, binding.sliderMinSpeed.value)
             Toast.makeText(this, "Ayarlar kaydedildi", Toast.LENGTH_SHORT).show()
             finish()
         }
+    }
+
+    private fun updateMinSpeedLabel(v: Float = -1f) {
+        val ms = if (v < 0) {
+            try { binding.sliderMinSpeed.value } catch (_: Exception) { 0f }
+        } else v
+        binding.tvMinSpeed.text = if (ms <= 0f) "Kapalı"
+        else "%.1f m/s (%.0f %s)".format(
+            ms, SpeedUnit.toDisplay(ms, calib.speedUnit), calib.speedUnit
+        )
     }
 
     private fun setCameraSpinner(list: List<CamEntry>) {

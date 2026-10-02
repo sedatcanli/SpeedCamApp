@@ -369,8 +369,15 @@ class MainActivity : AppCompatActivity() {
         val tracked = try {
             tracker.update(dets, now)
         } catch (_: Exception) { emptyList() }
+        // Yavaş nesne filtresi: 2 sn ortalaması eşiğin altındaysa gösterme
+        // (takip sürer, hızlanınca yeniden görünür)
+        val minS = try { calib.minSpeedMs } catch (_: Exception) { 0f }
+        val visible = if (minS > 0f) {
+            try { tracked.filter { it.avgSpeedMs >= minS } }
+            catch (_: Exception) { tracked }
+        } else tracked
         // UI thread ile yarış olmasın: kopya gönder
-        val snapshot = tracked.map {
+        val snapshot = visible.map {
             it.copy(box = RectF(it.box))
         }
         runOnUiThread {
