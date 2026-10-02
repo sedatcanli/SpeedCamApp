@@ -113,16 +113,29 @@ class CalibrationManager(context: Context) {
     fun refreshOptics(context: Context, force: Boolean): OpticsInfo? {
         val info = CameraHelper.readOptics(context, cameraId, cameraFacing)
             ?: return null
-        if (force || fovHdeg <= 0f) fovHdeg = info.fovHdeg
-        if (force || fovVdeg <= 0f) fovVdeg = info.fovVdeg
+        var wroteFov = false
+        if (force || fovHdeg <= 0f) { fovHdeg = info.fovHdeg; wroteFov = true }
+        if (force || fovVdeg <= 0f) { fovVdeg = info.fovVdeg; wroteFov = true }
         focalMm = info.focalMm
         pixelUm = info.pixelUm
         sensorMp = info.mp
         sensorWmm = info.sensorWmm
         arrayW = info.arrayW
         arrayH = info.arrayH
+        if (wroteFov) {
+            opticsCamId = info.cameraId
+            opticsFacing = cameraFacing
+        }
         return info
     }
+
+    /** FOV değerleri hangi kamera için okundu */
+    var opticsCamId: String?
+        get() = prefs.getString("opticsCamId", null)
+        set(v) = prefs.edit().putString("opticsCamId", v).apply()
+    var opticsFacing: Int
+        get() = prefs.getInt("opticsFacing", -1)
+        set(v) = prefs.edit().putInt("opticsFacing", v).apply()
 
     /**
      * Verilen görüntü boyutu için eksen başına metre/piksel:

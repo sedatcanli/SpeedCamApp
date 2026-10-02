@@ -102,7 +102,15 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         tracker.smoothingWindow = calib.smoothingWindow
-        try { calib.refreshOptics(this, false) } catch (_: Exception) { }
+        try {
+            calib.refreshOptics(this, false)
+            // Kamera değiştiyse FOV'u yeni kameradan tazele
+            val curKey = (calib.cameraId ?: "") + "|" + calib.cameraFacing
+            val readKey = (calib.opticsCamId ?: "") + "|" + calib.opticsFacing
+            if (calib.fovHdeg > 0f && readKey != curKey) {
+                calib.refreshOptics(this, true)
+            }
+        } catch (_: Exception) { }
         motion.threshold = calib.motionThreshold
         motion.start()
         try {
@@ -366,11 +374,16 @@ class MainActivity : AppCompatActivity() {
             }
             return
         }
-        // Kare boyutuna göre trigonometrik ölçeği güncelle
+        // Kare boyutuna göre trigonometrik ölçeği güncelle.
+        // Zoom büyütmesi görüş alanını daraltır: ölçek zoom'a bölünür.
         try {
+            val zoom = try {
+                camera?.cameraInfo?.zoomState?.value?.zoomRatio
+                    ?: calib.zoomRatio
+            } catch (_: Exception) { calib.zoomRatio }.coerceIn(0.5f, 20f)
             val (mx, my) = calib.metersPerPixel(imgW, imgH)
-            tracker.metersPerPixelX = mx
-            tracker.metersPerPixelY = my
+            tracker.metersPerPixelX = mx / zoom
+            tracker.metersPerPixelY = my / zoom
             tracker.ghostMs = (calib.ghostSec * 1000).toLong()
         } catch (_: Exception) { }
         val now = System.currentTimeMillis()

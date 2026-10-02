@@ -127,12 +127,13 @@ class CalibrationActivity : AppCompatActivity() {
         val imgW = 1280f
         val rad = Math.toRadians(fh.toDouble())
         if (rad > 0.01) {
-            val visW = 2 * d * Math.tan(rad / 2)
+            val zoom = try { calib.zoomRatio.coerceIn(0.5f, 20f) } catch (_: Exception) { 1f }
+            val visW = 2 * d * Math.tan(rad / 2) / zoom
             val cmPerPx = visW / imgW * 100
             val exMs = (100f / imgW * visW).toFloat() / 0.2f
             binding.tvExample.text =
-                "%.0f m uzakta 1 px = %.1f cm\nÖrnek: 100px / 0.2sn = %.1f km/h".format(
-                    d, cmPerPx, exMs * 3.6f
+                "%.0f m uzakta (%.1fx zoom) 1 px = %.1f cm\nÖrnek: 100px / 0.2sn = %.1f km/h".format(
+                    d, zoom, cmPerPx, exMs * 3.6f
                 )
         } else {
             binding.tvExample.text = "Önce geçerli FOV girin"
