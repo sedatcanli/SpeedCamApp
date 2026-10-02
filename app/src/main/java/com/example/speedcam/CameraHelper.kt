@@ -194,10 +194,10 @@ object CameraHelper {
             val pixelUm = sensor.width * 1000f / array.width
             val mp = array.width * array.height / 1_000_000f
             val fovH = Math.toDegrees(
-                (2 * Math.atan(sensor.width / (2 * focal))).toDouble()
+                (2 * Math.atan((sensor.width / (2 * focal)).toDouble()))
             ).toFloat()
             val fovV = Math.toDegrees(
-                (2 * Math.atan(sensor.height / (2 * focal))).toDouble()
+                (2 * Math.atan((sensor.height / (2 * focal)).toDouble()))
             ).toFloat()
             OpticsInfo(
                 cameraId = pick,
