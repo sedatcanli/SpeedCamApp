@@ -55,9 +55,9 @@ class CalibrationManager(context: Context) {
         get() = prefs.getFloat("zoom", 1f).coerceIn(0.5f, 20f)
         set(v) = prefs.edit().putFloat("zoom", v).apply()
 
-    /** Hareket hassasiyeti: düşük değer = daha hassas (m/s2 benzeri skor) */
+    /** Hareket hassasiyeti: düşük değer = daha hassas */
     var motionThreshold: Float
-        get() = prefs.getFloat("motion", 1.2f).coerceIn(0.3f, 5f)
+        get() = prefs.getFloat("motion", 0.6f).coerceIn(0.1f, 3f)
         set(v) = prefs.edit().putFloat("motion", v).apply()
 
     /** Bilinen mesafe (metre) + piksel uzunluktan ppm hesapla */

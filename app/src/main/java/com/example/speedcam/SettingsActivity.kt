@@ -52,12 +52,6 @@ class SettingsActivity : AppCompatActivity() {
             } catch (_: Throwable) { }
         }
 
-        binding.tvCrash.text = CrashLog.lastCrash(this) ?: "Kayıt yok"
-        binding.btnClearCrash.setOnClickListener {
-            CrashLog.clear(this)
-            binding.tvCrash.text = "Kayıt yok"
-        }
-
         binding.btnSaveSettings.setOnClickListener {
             val pos = binding.spCamera.selectedItemPosition
             if (camList.isNotEmpty() && pos in camList.indices) {

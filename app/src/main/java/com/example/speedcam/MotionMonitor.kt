@@ -13,7 +13,7 @@ import kotlin.math.sqrt
  */
 class MotionMonitor(context: Context) {
 
-    var threshold = 1.2f
+    var threshold = 0.6f
     var onStateChanged: ((moving: Boolean) -> Unit)? = null
 
     @Volatile
@@ -26,6 +26,7 @@ class MotionMonitor(context: Context) {
     private val gyro: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
 
     private val gravity = FloatArray(3)
+    private var gravityReady = false
     private var gyroMag = 0f
     private var overCount = 0
     private var underCount = 0
@@ -34,15 +35,21 @@ class MotionMonitor(context: Context) {
         override fun onSensorChanged(e: SensorEvent) {
             when (e.sensor.type) {
                 Sensor.TYPE_ACCELEROMETER -> {
-                    // Yerçekimini ayıkla (low-pass), kalan = doğrusal hareket
-                    val alpha = 0.8f
+                    if (!gravityReady) {
+                        // İlk örnekte yerçekimini doğrudan al (açılışta yanlış uyarı olmasın)
+                        for (i in 0..2) gravity[i] = e.values[i]
+                        gravityReady = true
+                        return
+                    }
+                    // Yerçekimini yavaş takip et (hızlı hareketler skora girsin)
+                    val alpha = 0.9f
                     for (i in 0..2) gravity[i] = alpha * gravity[i] + (1 - alpha) * e.values[i]
                     var sum = 0f
                     for (i in 0..2) {
                         val lin = e.values[i] - gravity[i]
                         sum += lin * lin
                     }
-                    val score = sqrt(sum) + gyroMag * 2f
+                    val score = sqrt(sum) + gyroMag * 3f
                     pushScore(score)
                 }
                 Sensor.TYPE_GYROSCOPE -> {
@@ -62,14 +69,14 @@ class MotionMonitor(context: Context) {
         if (score > threshold) {
             overCount++
             underCount = 0
-            if (!isMoving && overCount >= 3) {
+            if (!isMoving && overCount >= 2) {
                 isMoving = true
                 try { onStateChanged?.invoke(true) } catch (_: Exception) { }
             }
         } else {
             underCount++
             overCount = 0
-            if (isMoving && underCount >= 8) {
+            if (isMoving && underCount >= 12) {
                 isMoving = false
                 try { onStateChanged?.invoke(false) } catch (_: Exception) { }
             }
@@ -93,6 +100,7 @@ class MotionMonitor(context: Context) {
 
     fun stop() {
         try { sensorManager.unregisterListener(listener) } catch (_: Exception) { }
+        gravityReady = false
         if (isMoving) {
             isMoving = false
             overCount = 0

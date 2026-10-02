@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Hız göstergesi dış yayı -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:pathData="M 26,72 A 30,30 0 1 1 82,72" />
+
+    <!-- Kadran çizgileri -->
+    <path
+        android:strokeColor="#B0BEC5"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M 28,43 L 22.8,40 M 39,32 L 36,26.8 M 54,28 L 54,22 M 69,32 L 72,26.8 M 80,43 L 85.2,40" />
+
+    <!-- İbre (kırmızı) -->
+    <path
+        android:strokeColor="#FF3B30"
+        android:strokeWidth="6"
+        android:strokeLineCap="round"
+        android:pathData="M 47.5,68.5 L 67,35.5" />
+
+    <!-- Göbek -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 54,52 A 6,6 0 1 1 53.9,52 Z" />
+    <path
+        android:fillColor="#0B1E3A"
+        android:pathData="M 54,55.5 A 2.5,2.5 0 1 1 53.9,55.5 Z" />
+</vector>
