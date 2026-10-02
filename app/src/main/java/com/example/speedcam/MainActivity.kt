@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         ensureDetector()
         coco = CocoDetector(this)
         motion = MotionMonitor(this)
+        binding.overlay.onRulerTap = { showDistanceDialog() }
         motion.onStateChanged = { moving ->            runOnUiThread {
                 try {
                     binding.tvMotion.visibility =
@@ -357,6 +358,70 @@ class MainActivity : AppCompatActivity() {
     private fun setZoom(ratio: Float) {
         try {
             camera?.cameraControl?.setZoomRatio(ratio)
+        } catch (_: Exception) { }
+    }
+
+    /** Cetvele dokununca: logaritmik uzaklık kaydırıcısı (0.5 - 100 m). */
+    private fun showDistanceDialog() {
+        try {
+            val density = resources.displayMetrics.density
+            val pad = (16 * density).toInt()
+            val tv = android.widget.TextView(this).apply {
+                textSize = 20f
+                gravity = android.view.Gravity.CENTER
+            }
+            val slider = com.google.android.material.slider.Slider(this).apply {
+                valueFrom = 0f
+                valueTo = 1000f
+                stepSize = 1f
+            }
+            fun distOf(v: Float): Float {
+                val t = (v / 1000f).coerceIn(0f, 1f)
+                return (0.5 * Math.pow(200.0, t.toDouble())).toFloat()
+            }
+            fun sliderOf(d: Float): Float {
+                val c = d.coerceIn(0.5f, 100f)
+                return (1000f * Math.log((c / 0.5).toDouble()) / Math.log(200.0)).toFloat()
+                    .coerceIn(0f, 1000f)
+            }
+            fun fmt(d: Float): String =
+                if (d < 10f) "%.1f m".format(d) else "%.0f m".format(d)
+            SliderUtils.setSafe(slider, sliderOf(calib.distanceM))
+            tv.text = fmt(distOf(slider.value))
+            slider.addOnChangeListener { _, v, _ ->
+                val d = distOf(v)
+                tv.text = fmt(d)
+                calib.distanceM = d.coerceIn(0.5f, 500f)
+            }
+            val layout = android.widget.LinearLayout(this).apply {
+                orientation = android.widget.LinearLayout.VERTICAL
+                setPadding(pad, pad, pad, pad)
+                addView(
+                    tv,
+                    android.widget.LinearLayout.LayoutParams(
+                        android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                        android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                )
+                addView(
+                    slider,
+                    android.widget.LinearLayout.LayoutParams(
+                        android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                        android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                )
+            }
+            androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Cisim uzaklığı")
+                .setView(layout)
+                .setPositiveButton("Tamam") { _, _ ->
+                    reportedEngine = null
+                    try {
+                        binding.tvStatus.text = "Kalibrasyon: " + calib.summary()
+                    } catch (_: Exception) { }
+                }
+                .setNegativeButton("Vazgeç", null)
+                .show()
         } catch (_: Exception) { }
     }
 

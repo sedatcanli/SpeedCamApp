@@ -75,6 +75,14 @@ class CalibrationManager(context: Context) {
         get() = prefs.getFloat("ghostSec", 1.5f).coerceIn(0f, 3f)
         set(v) = prefs.edit().putFloat("ghostSec", v).apply()
 
+    /** Cetvel biriminin ekrandaki konumu (0..1 oran, serbest sürüklenir) */
+    var rulerFx: Float
+        get() = prefs.getFloat("rulerFx", 0f).coerceIn(0f, 1f)
+        set(v) = prefs.edit().putFloat("rulerFx", v).apply()
+    var rulerFy: Float
+        get() = prefs.getFloat("rulerFy", 1f).coerceIn(0f, 1f)
+        set(v) = prefs.edit().putFloat("rulerFy", v).apply()
+
     // ---- Trigonometrik kalibrasyon (iğne deliği modeli) ----
     /** Ölçüm düzleminin kameraya uzaklığı (metre) — kullanıcı girer */
     var distanceM: Float

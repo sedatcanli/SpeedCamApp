@@ -65,6 +65,72 @@ class OverlayView @JvmOverloads constructor(
         }
     }
 
+    // ---- Sürüklenebilir cetvel + uzaklık birimi ----
+    var onRulerTap: (() -> Unit)? = null
+    private val calibRef by lazy { CalibrationManager(context.applicationContext) }
+    private val unitRect = android.graphics.RectF()
+    private var lastUnitW = 0f
+    private var lastUnitH = 0f
+    private var dragging = false
+    private var dragId = -1
+    private var downX = 0f
+    private var downY = 0f
+    private var dragOffX = 0f
+    private var dragOffY = 0f
+    private var dragMoved = false
+
+    override fun onTouchEvent(e: android.view.MotionEvent): Boolean {
+        when (e.actionMasked) {
+            android.view.MotionEvent.ACTION_DOWN -> {
+                if (unitRect.contains(e.x, e.y)) {
+                    dragging = true
+                    dragMoved = false
+                    dragId = e.getPointerId(0)
+                    downX = e.x
+                    downY = e.y
+                    dragOffX = e.x - unitRect.left
+                    dragOffY = e.y - unitRect.top
+                    parent?.requestDisallowInterceptTouchEvent(true)
+                    return true
+                }
+            }
+            android.view.MotionEvent.ACTION_MOVE -> {
+                if (dragging) {
+                    val idx = e.findPointerIndex(dragId)
+                    if (idx >= 0) {
+                        val x = e.getX(idx)
+                        val y = e.getY(idx)
+                        if (kotlin.math.hypot(
+                                (x - downX).toDouble(), (y - downY).toDouble()
+                            ) > 12
+                        ) dragMoved = true
+                        if (dragMoved && width > 0 && height > 0) {
+                            val denomW = (width - lastUnitW).coerceAtLeast(1f)
+                            val denomH = (height - lastUnitH).coerceAtLeast(1f)
+                            calibRef.rulerFx =
+                                ((x - dragOffX) / denomW).coerceIn(0f, 1f)
+                            calibRef.rulerFy =
+                                ((y - dragOffY) / denomH).coerceIn(0f, 1f)
+                            invalidate()
+                        }
+                    }
+                    return true
+                }
+            }
+            android.view.MotionEvent.ACTION_UP,
+            android.view.MotionEvent.ACTION_CANCEL -> {
+                if (dragging) {
+                    dragging = false
+                    if (!dragMoved) {
+                        try { onRulerTap?.invoke() } catch (_: Exception) { }
+                    }
+                    return true
+                }
+            }
+        }
+        return super.onTouchEvent(e)
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (warnActive) {
@@ -105,10 +171,13 @@ class OverlayView @JvmOverloads constructor(
         strokeCap = Paint.Cap.SQUARE
     }
 
-    /** Sol altta dinamik referans cetvel (mesafe + FOV + zoom'a göre). */
+    /** Serbest sürüklenebilir cetvel + uzaklık birimi (konum hatırlanır). */
     private fun drawScaleBar(canvas: Canvas) {
         val mpp = metersPerViewPx
-        if (mpp <= 0f || width <= 0) return
+        if (mpp <= 0f || width <= 0 || height <= 0) {
+            unitRect.setEmpty()
+            return
+        }
         try {
             // ~120 px'e denk gelen "güzel" uzunluğu seç (1-2-5 kuralı)
             val raw = 120f * mpp
@@ -120,22 +189,41 @@ class OverlayView @JvmOverloads constructor(
                 else -> 1f * mag
             }
             val barPx = nice / mpp
-            if (barPx < 30f || barPx > width - 48f) return
-            val label = if (nice < 1f) "%d cm".format((nice * 100).toInt()) else {
+            if (barPx < 30f) {
+                unitRect.setEmpty()
+                return
+            }
+            val scaleLabel = if (nice < 1f) "%d cm".format((nice * 100).toInt()) else {
                 val whole = nice.toInt()
                 if (nice == whole.toFloat()) "%d m".format(whole)
                 else "%.1f m".format(nice)
             }
-            val tw = textPaint.measureText(label)
-            val x0 = 24f
-            val y = height - 40f
+            val dist = try { calibRef.distanceM } catch (_: Exception) { 0f }
+            val distLabel = if (dist < 10f) "Uzak: %.1f m".format(dist)
+            else "Uzak: %.0f m".format(dist)
+            val twScale = textPaint.measureText(scaleLabel)
+            val twDist = textPaint.measureText(distLabel)
+            val pad = 14f
+            val rowH = 56f
+            val unitW = pad * 2 + maxOf(barPx + 16f + twScale, twDist)
+            val unitH = pad * 2 + rowH * 2
+            val fx = try { calibRef.rulerFx } catch (_: Exception) { 0f }
+            val fy = try { calibRef.rulerFy } catch (_: Exception) { 1f }
+            val x0 = (fx * (width - unitW)).coerceIn(0f, (width - unitW).coerceAtLeast(0f))
+            val y0 = (fy * (height - unitH)).coerceIn(0f, (height - unitH).coerceAtLeast(0f))
+            lastUnitW = unitW
+            lastUnitH = unitH
+            unitRect.set(x0, y0, x0 + unitW, y0 + unitH)
             // Arka plan
-            canvas.drawRect(x0 - 12f, y - 56f, x0 + barPx + tw + 32f, y + 16f, textBg)
-            // Çizgi + uçlar
-            canvas.drawLine(x0, y, x0 + barPx, y, scalePaint)
-            canvas.drawLine(x0, y - 18f, x0, y + 18f, scalePaint)
-            canvas.drawLine(x0 + barPx, y - 18f, x0 + barPx, y + 18f, scalePaint)
-            canvas.drawText(label, x0 + barPx + 16f, y + 14f, textPaint)
+            canvas.drawRect(unitRect, textBg)
+            // 1. satır: cetvel çizgisi + uzunluk
+            val ly = y0 + pad + 30f
+            canvas.drawLine(x0 + pad, ly, x0 + pad + barPx, ly, scalePaint)
+            canvas.drawLine(x0 + pad, ly - 18f, x0 + pad, ly + 18f, scalePaint)
+            canvas.drawLine(x0 + pad + barPx, ly - 18f, x0 + pad + barPx, ly + 18f, scalePaint)
+            canvas.drawText(scaleLabel, x0 + pad + barPx + 16f, ly + 14f, textPaint)
+            // 2. satır: uzaklık (dokun = değiştir)
+            canvas.drawText(distLabel, x0 + pad, y0 + pad + rowH + 42f, textPaint)
         } catch (_: Exception) { }
     }
 }
