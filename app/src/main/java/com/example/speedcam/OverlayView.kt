@@ -126,13 +126,18 @@ class OverlayView @JvmOverloads constructor(
                                 calibRef.rulerFy =
                                     ((y - dragOffY) / denomH).coerceIn(0f, 1f)
                             } else {
-                                // Uçtan boyutlandır: yeni boyun en yakın güzel uzunluğu
+                                // Uçtan kalibrasyon: etiket sabit, ölçek uyar.
+                                // Yeni boy -> scaleCorr = L / (yeniPx * trig_ölçeği)
                                 val mpp = metersPerViewPx
-                                if (mpp > 0f) {
+                                val refL = try { calibRef.refLenM } catch (_: Exception) { 0f }
+                                val corrOld = try { calibRef.scaleCorr } catch (_: Exception) { 1f }
+                                if (mpp > 0f && refL > 0f && corrOld > 0f) {
                                     val newPx = kotlin.math.abs(x - fixedEndX)
-                                    val nice = snapNice(newPx * mpp)
-                                    val frac = (nice / mpp / width).coerceIn(0.15f, 0.9f)
-                                    calibRef.rulerTargetFrac = frac
+                                    if (newPx > 30f) {
+                                        val corrNew =
+                                            (refL * corrOld / (newPx * mpp)).coerceIn(0.3f, 3f)
+                                        calibRef.scaleCorr = corrNew
+                                    }
                                 }
                             }
                             invalidate()
@@ -153,23 +158,6 @@ class OverlayView @JvmOverloads constructor(
             }
         }
         return super.onTouchEvent(e)
-    }
-
-    /** İstenen metreye en yakın 1-2-5 güzel uzunluk. */
-    private fun snapNice(desiredM: Float): Float {
-        if (desiredM <= 0f) return 1f
-        val mag = Math.pow(10.0, Math.floor(Math.log10(desiredM.toDouble()))).toFloat()
-        val cands = floatArrayOf(1f * mag, 2f * mag, 5f * mag, 10f * mag)
-        var best = cands[0]
-        var bestD = kotlin.math.abs(desiredM - best)
-        for (c in cands) {
-            val dd = kotlin.math.abs(desiredM - c)
-            if (dd < bestD) {
-                bestD = dd
-                best = c
-            }
-        }
-        return best
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -232,19 +220,22 @@ class OverlayView @JvmOverloads constructor(
             return
         }
         try {
-            // Hedef boy (ekran genişliğine oran) -> en yakın güzel uzunluk
-            val targetFrac = try { calibRef.rulerTargetFrac } catch (_: Exception) { 0.55f }
-            val raw = targetFrac * width * mpp
-            val nice = snapNice(raw)
-            val barPx = nice / mpp
+            // Cetvel: seçili referans uzunluk, piksel hassasiyetinde.
+            // Uçlar sürüklenince etiket sabit kalır, ölçek katsayısı yazar.
+            val refL = try { calibRef.refLenM } catch (_: Exception) { 0f }
+            if (refL <= 0f) {
+                unitRect.setEmpty()
+                return
+            }
+            val barPx = refL / mpp
             if (barPx < 30f) {
                 unitRect.setEmpty()
                 return
             }
-            val scaleLabel = if (nice < 1f) "%d cm".format((nice * 100).toInt()) else {
-                val whole = nice.toInt()
-                if (nice == whole.toFloat()) "%d m".format(whole)
-                else "%.1f m".format(nice)
+            val scaleLabel = if (refL < 1f) "%d cm".format((refL * 100).toInt()) else {
+                val whole = refL.toInt()
+                if (refL == whole.toFloat()) "%d m".format(whole)
+                else "%.1f m".format(refL)
             }
             val dist = try { calibRef.distanceM } catch (_: Exception) { 0f }
             val distLabel = if (dist < 10f) "Uzak: %.1f m".format(dist)

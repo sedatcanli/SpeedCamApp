@@ -361,16 +361,25 @@ class MainActivity : AppCompatActivity() {
         } catch (_: Exception) { }
     }
 
-    /** Cetvele dokununca: logaritmik uzaklık kaydırıcısı (0.5 - 100 m). */
+    /** Cetvele dokununca: uzaklık + referans uzunluk (logaritmik). */
     private fun showDistanceDialog() {
         try {
             val density = resources.displayMetrics.density
             val pad = (16 * density).toInt()
-            val tv = android.widget.TextView(this).apply {
+            val tvDist = android.widget.TextView(this).apply {
                 textSize = 20f
                 gravity = android.view.Gravity.CENTER
             }
             val slider = com.google.android.material.slider.Slider(this).apply {
+                valueFrom = 0f
+                valueTo = 1000f
+                stepSize = 1f
+            }
+            val tvRef = android.widget.TextView(this).apply {
+                textSize = 20f
+                gravity = android.view.Gravity.CENTER
+            }
+            val sliderRef = com.google.android.material.slider.Slider(this).apply {
                 valueFrom = 0f
                 valueTo = 1000f
                 stepSize = 1f
@@ -384,35 +393,45 @@ class MainActivity : AppCompatActivity() {
                 return (1000f * Math.log((c / 0.5).toDouble()) / Math.log(200.0)).toFloat()
                     .coerceIn(0f, 1000f)
             }
+            fun refOf(v: Float): Float {
+                val t = (v / 1000f).coerceIn(0f, 1f)
+                return (0.1 * Math.pow(500.0, t.toDouble())).toFloat()
+            }
+            fun sliderOfRef(d: Float): Float {
+                val c = d.coerceIn(0.1f, 50f)
+                return (1000f * Math.log((c / 0.1).toDouble()) / Math.log(500.0)).toFloat()
+                    .coerceIn(0f, 1000f)
+            }
             fun fmt(d: Float): String =
                 if (d < 10f) "%.1f m".format(d) else "%.0f m".format(d)
             SliderUtils.setSafe(slider, sliderOf(calib.distanceM))
-            tv.text = fmt(distOf(slider.value))
+            tvDist.text = "Uzaklık: " + fmt(distOf(slider.value))
             slider.addOnChangeListener { _, v, _ ->
                 val d = distOf(v)
-                tv.text = fmt(d)
+                tvDist.text = "Uzaklık: " + fmt(d)
                 calib.distanceM = d.coerceIn(0.5f, 500f)
+            }
+            SliderUtils.setSafe(sliderRef, sliderOfRef(calib.refLenM))
+            tvRef.text = "Referans: " + fmt(refOf(sliderRef.value))
+            sliderRef.addOnChangeListener { _, v, _ ->
+                val d = refOf(v)
+                tvRef.text = "Referans: " + fmt(d)
+                calib.refLenM = d.coerceIn(0.05f, 100f)
             }
             val layout = android.widget.LinearLayout(this).apply {
                 orientation = android.widget.LinearLayout.VERTICAL
                 setPadding(pad, pad, pad, pad)
-                addView(
-                    tv,
-                    android.widget.LinearLayout.LayoutParams(
-                        android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
-                        android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
-                    )
+                val lp = android.widget.LinearLayout.LayoutParams(
+                    android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                    android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
                 )
-                addView(
-                    slider,
-                    android.widget.LinearLayout.LayoutParams(
-                        android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
-                        android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
-                    )
-                )
+                addView(tvDist, lp)
+                addView(slider, lp)
+                addView(tvRef, lp)
+                addView(sliderRef, lp)
             }
             androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("Cisim uzaklığı")
+                .setTitle("Cetvel ayarı")
                 .setView(layout)
                 .setPositiveButton("Tamam") { _, _ ->
                     reportedEngine = null

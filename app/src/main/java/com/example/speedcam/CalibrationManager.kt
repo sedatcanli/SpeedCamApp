@@ -88,6 +88,11 @@ class CalibrationManager(context: Context) {
         get() = prefs.getFloat("rulerTarget", 0.55f).coerceIn(0.15f, 0.9f)
         set(v) = prefs.edit().putFloat("rulerTarget", v).apply()
 
+    /** Cetvelin temsil ettiği referans uzunluk (m). Uçlar buna göre kalibre eder */
+    var refLenM: Float
+        get() = prefs.getFloat("refLen", 2f).coerceIn(0.05f, 100f)
+        set(v) = prefs.edit().putFloat("refLen", v).apply()
+
     // ---- Trigonometrik kalibrasyon (iğne deliği modeli) ----
     /** Ölçüm düzleminin kameraya uzaklığı (metre) — kullanıcı girer */
     var distanceM: Float
