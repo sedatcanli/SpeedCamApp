@@ -83,6 +83,11 @@ class CalibrationManager(context: Context) {
         get() = prefs.getFloat("rulerFy", 1f).coerceIn(0f, 1f)
         set(v) = prefs.edit().putFloat("rulerFy", v).apply()
 
+    /** Cetvel hedef boyu (ekran genişliğine oran). Uçlardan sürüklenince değişir */
+    var rulerTargetFrac: Float
+        get() = prefs.getFloat("rulerTarget", 0.55f).coerceIn(0.15f, 0.9f)
+        set(v) = prefs.edit().putFloat("rulerTarget", v).apply()
+
     // ---- Trigonometrik kalibrasyon (iğne deliği modeli) ----
     /** Ölçüm düzleminin kameraya uzaklığı (metre) — kullanıcı girer */
     var distanceM: Float

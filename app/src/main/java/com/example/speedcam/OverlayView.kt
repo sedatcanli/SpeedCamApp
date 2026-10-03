@@ -65,37 +65,50 @@ class OverlayView @JvmOverloads constructor(
         }
     }
 
-    // ---- Sürüklenebilir cetvel + uzaklık birimi ----
+    // ---- Sürüklenebilir + boyutlandırılabilir cetvel birimi ----
     var onRulerTap: (() -> Unit)? = null
     private val calibRef by lazy { CalibrationManager(context.applicationContext) }
     private val unitRect = android.graphics.RectF()
     private var lastUnitW = 0f
     private var lastUnitH = 0f
-    private var dragging = false
+    private var lastBarX0 = 0f
+    private var lastBarX1 = 0f
+    private var lastBarY = 0f
+    private var dragMode = 0 // 0 yok, 1 taşı, 2 sol uç, 3 sağ uç
     private var dragId = -1
     private var downX = 0f
     private var downY = 0f
     private var dragOffX = 0f
     private var dragOffY = 0f
+    private var fixedEndX = 0f
     private var dragMoved = false
+
+    private fun endHit(x: Float, y: Float, ex: Float, ey: Float): Boolean =
+        kotlin.math.hypot((x - ex).toDouble(), (y - ey).toDouble()) <= 48f
 
     override fun onTouchEvent(e: android.view.MotionEvent): Boolean {
         when (e.actionMasked) {
             android.view.MotionEvent.ACTION_DOWN -> {
-                if (unitRect.contains(e.x, e.y)) {
-                    dragging = true
-                    dragMoved = false
-                    dragId = e.getPointerId(0)
-                    downX = e.x
-                    downY = e.y
-                    dragOffX = e.x - unitRect.left
-                    dragOffY = e.y - unitRect.top
-                    parent?.requestDisallowInterceptTouchEvent(true)
-                    return true
-                }
+                if (endHit(e.x, e.y, lastBarX0, lastBarY)) {
+                    dragMode = 2
+                    fixedEndX = lastBarX1
+                } else if (endHit(e.x, e.y, lastBarX1, lastBarY)) {
+                    dragMode = 3
+                    fixedEndX = lastBarX0
+                } else if (unitRect.contains(e.x, e.y)) {
+                    dragMode = 1
+                } else return super.onTouchEvent(e)
+                dragMoved = false
+                dragId = e.getPointerId(0)
+                downX = e.x
+                downY = e.y
+                dragOffX = e.x - unitRect.left
+                dragOffY = e.y - unitRect.top
+                parent?.requestDisallowInterceptTouchEvent(true)
+                return true
             }
             android.view.MotionEvent.ACTION_MOVE -> {
-                if (dragging) {
+                if (dragMode != 0) {
                     val idx = e.findPointerIndex(dragId)
                     if (idx >= 0) {
                         val x = e.getX(idx)
@@ -105,12 +118,23 @@ class OverlayView @JvmOverloads constructor(
                             ) > 12
                         ) dragMoved = true
                         if (dragMoved && width > 0 && height > 0) {
-                            val denomW = (width - lastUnitW).coerceAtLeast(1f)
-                            val denomH = (height - lastUnitH).coerceAtLeast(1f)
-                            calibRef.rulerFx =
-                                ((x - dragOffX) / denomW).coerceIn(0f, 1f)
-                            calibRef.rulerFy =
-                                ((y - dragOffY) / denomH).coerceIn(0f, 1f)
+                            if (dragMode == 1) {
+                                val denomW = (width - lastUnitW).coerceAtLeast(1f)
+                                val denomH = (height - lastUnitH).coerceAtLeast(1f)
+                                calibRef.rulerFx =
+                                    ((x - dragOffX) / denomW).coerceIn(0f, 1f)
+                                calibRef.rulerFy =
+                                    ((y - dragOffY) / denomH).coerceIn(0f, 1f)
+                            } else {
+                                // Uçtan boyutlandır: yeni boyun en yakın güzel uzunluğu
+                                val mpp = metersPerViewPx
+                                if (mpp > 0f) {
+                                    val newPx = kotlin.math.abs(x - fixedEndX)
+                                    val nice = snapNice(newPx * mpp)
+                                    val frac = (nice / mpp / width).coerceIn(0.15f, 0.9f)
+                                    calibRef.rulerTargetFrac = frac
+                                }
+                            }
                             invalidate()
                         }
                     }
@@ -119,8 +143,8 @@ class OverlayView @JvmOverloads constructor(
             }
             android.view.MotionEvent.ACTION_UP,
             android.view.MotionEvent.ACTION_CANCEL -> {
-                if (dragging) {
-                    dragging = false
+                if (dragMode != 0) {
+                    dragMode = 0
                     if (!dragMoved) {
                         try { onRulerTap?.invoke() } catch (_: Exception) { }
                     }
@@ -129,6 +153,23 @@ class OverlayView @JvmOverloads constructor(
             }
         }
         return super.onTouchEvent(e)
+    }
+
+    /** İstenen metreye en yakın 1-2-5 güzel uzunluk. */
+    private fun snapNice(desiredM: Float): Float {
+        if (desiredM <= 0f) return 1f
+        val mag = Math.pow(10.0, Math.floor(Math.log10(desiredM.toDouble()))).toFloat()
+        val cands = floatArrayOf(1f * mag, 2f * mag, 5f * mag, 10f * mag)
+        var best = cands[0]
+        var bestD = kotlin.math.abs(desiredM - best)
+        for (c in cands) {
+            val dd = kotlin.math.abs(desiredM - c)
+            if (dd < bestD) {
+                bestD = dd
+                best = c
+            }
+        }
+        return best
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -171,7 +212,19 @@ class OverlayView @JvmOverloads constructor(
         strokeCap = Paint.Cap.SQUARE
     }
 
-    /** Serbest sürüklenebilir cetvel + uzaklık birimi (konum hatırlanır). */
+    private val rulerBg = Paint().apply { color = Color.argb(130, 128, 128, 128) }
+    private val handlePaint = Paint().apply {
+        color = Color.WHITE
+        style = Paint.Style.FILL
+        isAntiAlias = true
+    }
+    private val handleEdge = Paint().apply {
+        color = Color.argb(200, 60, 60, 60)
+        style = Paint.Style.STROKE
+        strokeWidth = 3f
+    }
+
+    /** Serbest sürüklenebilir + uçlarından boyutlandırılabilir cetvel birimi. */
     private fun drawScaleBar(canvas: Canvas) {
         val mpp = metersPerViewPx
         if (mpp <= 0f || width <= 0 || height <= 0) {
@@ -179,15 +232,10 @@ class OverlayView @JvmOverloads constructor(
             return
         }
         try {
-            // ~120 px'e denk gelen "güzel" uzunluğu seç (1-2-5 kuralı)
-            val raw = 120f * mpp
-            val mag = Math.pow(10.0, Math.floor(Math.log10(raw.toDouble()))).toFloat()
-            val norm = raw / mag
-            val nice = when {
-                norm >= 5f -> 5f * mag
-                norm >= 2f -> 2f * mag
-                else -> 1f * mag
-            }
+            // Hedef boy (ekran genişliğine oran) -> en yakın güzel uzunluk
+            val targetFrac = try { calibRef.rulerTargetFrac } catch (_: Exception) { 0.55f }
+            val raw = targetFrac * width * mpp
+            val nice = snapNice(raw)
             val barPx = nice / mpp
             if (barPx < 30f) {
                 unitRect.setEmpty()
@@ -214,13 +262,21 @@ class OverlayView @JvmOverloads constructor(
             lastUnitW = unitW
             lastUnitH = unitH
             unitRect.set(x0, y0, x0 + unitW, y0 + unitH)
-            // Arka plan
-            canvas.drawRect(unitRect, textBg)
+            // Gri yarı şeffaf arka plan
+            canvas.drawRect(unitRect, rulerBg)
             // 1. satır: cetvel çizgisi + uzunluk
             val ly = y0 + pad + 30f
-            canvas.drawLine(x0 + pad, ly, x0 + pad + barPx, ly, scalePaint)
-            canvas.drawLine(x0 + pad, ly - 18f, x0 + pad, ly + 18f, scalePaint)
-            canvas.drawLine(x0 + pad + barPx, ly - 18f, x0 + pad + barPx, ly + 18f, scalePaint)
+            lastBarX0 = x0 + pad
+            lastBarX1 = x0 + pad + barPx
+            lastBarY = ly
+            canvas.drawLine(lastBarX0, ly, lastBarX1, ly, scalePaint)
+            canvas.drawLine(lastBarX0, ly - 18f, lastBarX0, ly + 18f, scalePaint)
+            canvas.drawLine(lastBarX1, ly - 18f, lastBarX1, ly + 18f, scalePaint)
+            // Tutamaçlar (uçlardan boyutlandırma)
+            canvas.drawCircle(lastBarX0, ly, 16f, handlePaint)
+            canvas.drawCircle(lastBarX0, ly, 16f, handleEdge)
+            canvas.drawCircle(lastBarX1, ly, 16f, handlePaint)
+            canvas.drawCircle(lastBarX1, ly, 16f, handleEdge)
             canvas.drawText(scaleLabel, x0 + pad + barPx + 16f, ly + 14f, textPaint)
             // 2. satır: uzaklık (dokun = değiştir)
             canvas.drawText(distLabel, x0 + pad, y0 + pad + rowH + 42f, textPaint)
