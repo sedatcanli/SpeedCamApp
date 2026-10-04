@@ -462,7 +462,7 @@ class MainActivity : AppCompatActivity() {
                 addView(slider, lp)
                 addView(tvRef, lp)
                 addView(sliderRef, lp)
-                val tvFine = android.widget.TextView(this).apply {
+                val tvFine = android.widget.TextView(this@MainActivity).apply {
                     textSize = 14f
                     gravity = android.view.Gravity.CENTER
                     text = "İnce ayar (parmakla tutturamayınca)"
