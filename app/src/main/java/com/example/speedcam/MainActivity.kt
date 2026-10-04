@@ -418,6 +418,39 @@ class MainActivity : AppCompatActivity() {
                 tvRef.text = "Referans: " + fmt(d)
                 calib.refLenM = d.coerceIn(0.05f, 100f)
             }
+            // İnce ayar: ölçek katsayısını binde 2 adımlarla dürt
+            val tvCorr = android.widget.TextView(this).apply {
+                textSize = 18f
+                gravity = android.view.Gravity.CENTER
+            }
+            fun corrText(): String = "Ölçek: %.4f".format(calib.scaleCorr)
+            tvCorr.text = corrText()
+            val btnMinus = android.widget.Button(this).apply { text = "−" }
+            val btnPlus = android.widget.Button(this).apply { text = "+" }
+            btnMinus.setOnClickListener {
+                calib.scaleCorr = (calib.scaleCorr - 0.002f).coerceIn(0.3f, 3f)
+                tvCorr.text = corrText()
+            }
+            btnPlus.setOnClickListener {
+                calib.scaleCorr = (calib.scaleCorr + 0.002f).coerceIn(0.3f, 3f)
+                tvCorr.text = corrText()
+            }
+            val rowCorr = android.widget.LinearLayout(this).apply {
+                orientation = android.widget.LinearLayout.HORIZONTAL
+                gravity = android.view.Gravity.CENTER
+                addView(
+                    btnMinus,
+                    android.widget.LinearLayout.LayoutParams(0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                )
+                addView(
+                    tvCorr,
+                    android.widget.LinearLayout.LayoutParams(0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 2f)
+                )
+                addView(
+                    btnPlus,
+                    android.widget.LinearLayout.LayoutParams(0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                )
+            }
             val layout = android.widget.LinearLayout(this).apply {
                 orientation = android.widget.LinearLayout.VERTICAL
                 setPadding(pad, pad, pad, pad)
@@ -429,6 +462,13 @@ class MainActivity : AppCompatActivity() {
                 addView(slider, lp)
                 addView(tvRef, lp)
                 addView(sliderRef, lp)
+                val tvFine = android.widget.TextView(this).apply {
+                    textSize = 14f
+                    gravity = android.view.Gravity.CENTER
+                    text = "İnce ayar (parmakla tutturamayınca)"
+                }
+                addView(tvFine, lp)
+                addView(rowCorr, lp)
             }
             androidx.appcompat.app.AlertDialog.Builder(this)
                 .setTitle("Cetvel ayarı")
