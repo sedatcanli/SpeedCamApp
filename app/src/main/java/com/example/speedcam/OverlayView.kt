@@ -169,7 +169,8 @@ class OverlayView @JvmOverloads constructor(
         }
         drawScaleBar(canvas)
         for (t in tracks) {
-            val speed = SpeedUnit.toDisplay(t.speedMs, speedUnit)
+            // Gösterilen: 2 sn'lik ortalama hız / maks hız (anlık değil)
+            val speed = SpeedUnit.toDisplay(t.avgSpeedMs, speedUnit)
             val max = SpeedUnit.toDisplay(t.maxSpeedMs, speedUnit)
             if (t.ghost) {
                 // Kaybolan cisim: gri kesik çerçeve + son hız
@@ -177,8 +178,8 @@ class OverlayView @JvmOverloads constructor(
             } else {
                 // Hıza göre renk: yavaş yeşil -> hızlı kırmızı
                 boxPaint.color = when {
-                    t.speedMs < 2f -> Color.GREEN
-                    t.speedMs < 8f -> Color.YELLOW
+                    t.avgSpeedMs < 2f -> Color.GREEN
+                    t.avgSpeedMs < 8f -> Color.YELLOW
                     else -> Color.RED
                 }
                 canvas.drawRect(t.box, boxPaint)
