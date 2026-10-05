@@ -148,7 +148,16 @@ class CalibrationActivity : AppCompatActivity() {
             val zoom = try { calib.zoomRatio.coerceIn(0.5f, 20f) } catch (_: Exception) { 1f }
             val corr = try { calib.scaleCorr } catch (_: Exception) { 1f }
             val visW = 2 * d * Math.tan(rad / 2) / zoom * corr
-            val cmPerPx = visW / imgW * 100
+            // Sensör kırpması (ana hesapla aynı)
+            var hFrac = 1f
+            try {
+                if (calib.arrayW > 0 && calib.arrayH > 0) {
+                    val sa = calib.arrayW.toFloat() / calib.arrayH
+                    if (1280f / 720f < sa) hFrac =
+                        ((1280f / 720f) / sa).coerceIn(0.2f, 1f)
+                }
+            } catch (_: Exception) { }
+            val cmPerPx = visW / imgW * 100 * hFrac
             val exMs = (100f / imgW * visW).toFloat() / 0.2f
             binding.tvExample.text =
                 "%.0f m uzakta (%.1fx zoom) 1 px = %.1f cm\nÖrnek: 100px / 0.2sn = %.1f km/h".format(

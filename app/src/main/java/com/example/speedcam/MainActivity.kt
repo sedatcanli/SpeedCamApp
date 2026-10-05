@@ -219,8 +219,10 @@ class MainActivity : AppCompatActivity() {
                                     try { bmp.recycle() } catch (_: Exception) { }
                                     return@setAnalyzer
                                 }
-                                val scaleX = viewW / imgW
-                                val scaleY = viewH / imgH
+                                // PreviewView FILL modda kırpar: tek ölçek + kaydırma
+                                val fillS = kotlin.math.max(viewW / imgW, viewH / imgH)
+                                val fillOffX = (viewW - imgW * fillS) / 2f
+                                val fillOffY = (viewH - imgH * fillS) / 2f
                                 val raw = coco.detect(bmp)
                                 try { bmp.recycle() } catch (_: Exception) { }
                                 val maxF = try { calib.maxBoxAreaPct } catch (_: Exception) { 1f }
@@ -228,8 +230,10 @@ class MainActivity : AppCompatActivity() {
                                 val dets = clean.mapNotNull { d ->
                                     try {
                                         RectF(
-                                            d.box.left * scaleX, d.box.top * scaleY,
-                                            d.box.right * scaleX, d.box.bottom * scaleY
+                                            d.box.left * fillS + fillOffX,
+                                            d.box.top * fillS + fillOffY,
+                                            d.box.right * fillS + fillOffX,
+                                            d.box.bottom * fillS + fillOffY
                                         ).let { DetectedBox(it, d.label, d.confidence) }
                                     } catch (_: Exception) { null }
                                 }
@@ -260,8 +264,10 @@ class MainActivity : AppCompatActivity() {
                                         imgH = imageProxy.height.toFloat()
                                     }
                                     if (imgW <= 0 || imgH <= 0) return@addOnSuccessListener
-                                    val scaleX = viewW / imgW
-                                    val scaleY = viewH / imgH
+                                    // PreviewView FILL modda kırpar: tek ölçek + kaydırma
+                                    val fillS = kotlin.math.max(viewW / imgW, viewH / imgH)
+                                    val fillOffX = (viewW - imgW * fillS) / 2f
+                                    val fillOffY = (viewH - imgH * fillS) / 2f
 
                                     val rawFb = objects.mapNotNull { obj ->
                                         try {
@@ -276,8 +282,10 @@ class MainActivity : AppCompatActivity() {
                                     val dets = BoxFilter.prepare(rawFb, imgW, imgH, maxFb).map { d ->
                                         DetectedBox(
                                             RectF(
-                                                d.box.left * scaleX, d.box.top * scaleY,
-                                                d.box.right * scaleX, d.box.bottom * scaleY
+                                                d.box.left * fillS + fillOffX,
+                                                d.box.top * fillS + fillOffY,
+                                                d.box.right * fillS + fillOffX,
+                                                d.box.bottom * fillS + fillOffY
                                             ), d.label, d.confidence
                                         )
                                     }
@@ -511,7 +519,11 @@ class MainActivity : AppCompatActivity() {
             tracker.metersPerPixelY = my / zoom
             tracker.ghostMs = (calib.ghostSec * 1000).toLong()
             val viewW = try { binding.previewView.width.toFloat() } catch (_: Exception) { 0f }
-            if (viewW > 0f && imgW > 0f) mPerViewPx = mx / zoom * imgW / viewW
+            val viewH = try { binding.previewView.height.toFloat() } catch (_: Exception) { 0f }
+            if (viewW > 0f && viewH > 0f && imgW > 0f && imgH > 0f) {
+                val fillS = kotlin.math.max(viewW / imgW, viewH / imgH)
+                mPerViewPx = mx / zoom / fillS
+            }
         } catch (_: Exception) { }
         val now = System.currentTimeMillis()
         val tracked = try {

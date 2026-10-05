@@ -165,10 +165,23 @@ class CalibrationManager(context: Context) {
         val fh = Math.toRadians(fovHdeg.toDouble())
         val fv = Math.toRadians(fovVdeg.toDouble())
         val corr = scaleCorr
-        val mx = if (fh > 0.01 && imgW > 0)
+        var mx = if (fh > 0.01 && imgW > 0)
             (2 * distanceM * Math.tan(fh / 2) / imgW * corr).toFloat() else 0.01f
-        val my = if (fv > 0.01 && imgH > 0)
+        var my = if (fv > 0.01 && imgH > 0)
             (2 * distanceM * Math.tan(fv / 2) / imgH * corr).toFloat() else 0.01f
+        // Sensörden karta kırpma: analiz akışı tam sensör değilse (örn. 4:3
+        // sensörden 16:9 akış) kırpılan eksenin ölçeği küçülür.
+        try {
+            if (arrayW > 0 && arrayH > 0 && imgW > 0 && imgH > 0) {
+                val sensorAspect = arrayW.toFloat() / arrayH
+                val imgAspect = imgW / imgH
+                if (imgAspect > sensorAspect) {
+                    my *= ((imgH / imgW) / (arrayH.toFloat() / arrayW)).coerceIn(0.2f, 1f)
+                } else {
+                    mx *= ((imgW / imgH) / (arrayW.toFloat() / arrayH)).coerceIn(0.2f, 1f)
+                }
+            }
+        } catch (_: Exception) { }
         return Pair(mx, my)
     }
 
