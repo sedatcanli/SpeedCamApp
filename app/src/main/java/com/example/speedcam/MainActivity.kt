@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         calib = CalibrationManager(this)
         ensureDetector()
-        coco = CocoDetector(this)
+        yolo = YoloDetector(this)
         motion = MotionMonitor(this)
         binding.overlay.onRulerTap = { showDistanceDialog() }
         motion.onStateChanged = { moving ->            runOnUiThread {
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 ProcessCameraProvider.getInstance(this).get().unbindAll()
             } catch (_: Exception) { }
             try { detector?.close() } catch (_: Exception) { }
-            try { coco.close() } catch (_: Exception) { }
+            try { yolo.close() } catch (_: Exception) { }
             finishAndRemoveTask()
             android.os.Process.killProcess(android.os.Process.myPid())
         }
@@ -133,12 +133,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var detectorThreshold = -1f
-    private lateinit var coco: CocoDetector
+    private lateinit var yolo: YoloDetector
     private lateinit var motion: MotionMonitor
     private var reportedEngine: String? = null
 
     /**
-     * Dahili genel dedektör (yedek). Birincil motor COCO'dur.
+     * Dahili genel dedektor (yedek). Birincil motor YOLOv8'dir.
      */
     private fun ensureDetector() {
         if (detector != null) return
@@ -205,8 +205,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     try {
-                        // 1) Birincil: COCO motoru (araba, insan... Türkçe etiket)
-                        if (coco.ensure(calib.detectionConfidence)) {
+                        // 1) Birincil: YOLOv8 motoru (araba, insan... Turkce etiket)
+                        if (yolo.ensure()) {
                             try {
                                 val bmp = imageProxy.toUprightBitmap()
                                 closeOnce()
@@ -223,7 +223,7 @@ class MainActivity : AppCompatActivity() {
                                 val fillS = kotlin.math.max(viewW / imgW, viewH / imgH)
                                 val fillOffX = (viewW - imgW * fillS) / 2f
                                 val fillOffY = (viewH - imgH * fillS) / 2f
-                                val raw = coco.detect(bmp)
+                                val raw = yolo.detect(bmp, calib.detectionConfidence)
                                 try { bmp.recycle() } catch (_: Exception) { }
                                 val maxF = try { calib.maxBoxAreaPct } catch (_: Exception) { 1f }
                                 val clean = BoxFilter.prepare(raw, imgW, imgH, maxF)
@@ -237,7 +237,7 @@ class MainActivity : AppCompatActivity() {
                                         ).let { DetectedBox(it, d.label, d.confidence) }
                                     } catch (_: Exception) { null }
                                 }
-                                postDetections(dets, "COCO", imgW, imgH)
+                                postDetections(dets, "YOLO", imgW, imgH)
                             } catch (_: Exception) { closeOnce() }
                             return@setAnalyzer
                         }
@@ -570,6 +570,6 @@ class MainActivity : AppCompatActivity() {
         } catch (_: Exception) { }
         try { detector?.close() } catch (_: Exception) { }
         detector = null
-        try { coco.close() } catch (_: Exception) { }
+        try { yolo.close() } catch (_: Exception) { }
     }
 }

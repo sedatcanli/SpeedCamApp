@@ -58,12 +58,10 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:$cameraxVersion")
 
-    // ML Kit Object Detection + Tracking
+    // ML Kit Object Detection (yedek genel dedektör)
     implementation("com.google.mlkit:object-detection:17.0.1")
-    // COCO modelli özel dedektör (araba, insan, bisiklet...)
-    implementation("com.google.mlkit:object-detection-custom:17.0.1")
-    // TF Hub SSD modeli için Task-Vision motoru
-    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
+    // YOLOv8 TFLite çıkarımı (birincil motor)
+    implementation("org.tensorflow:tensorflow-lite:2.16.1")
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")

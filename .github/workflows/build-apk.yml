@@ -26,12 +26,18 @@ jobs:
       - name: Accept licenses
         run: yes | sdkmanager --licenses || true
 
-      - name: Ensure COCO model asset
+      - name: Restore YOLO model cache
+        id: yolo-cache
+        uses: actions/cache@v4
+        with:
+          path: app/src/main/assets/yolov8n.tflite
+          key: yolov8n-tflite-640-fp32-v1
+
+      - name: Export YOLOv8n to TFLite
+        if: steps.yolo-cache.outputs.cache-hit != 'true'
         run: |
-          mkdir -p app/src/main/assets
-          if [ ! -f app/src/main/assets/mobilenet_ssd.tflite ]; then
-            curl -L -o app/src/main/assets/mobilenet_ssd.tflite "https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite"
-          fi
+          pip install -q "ultralytics==8.3.40" "tensorflow==2.16.1" onnx tf-keras
+          python tools/export_yolo.py
           ls -la app/src/main/assets/
 
       - name: Build debug APK (flaky indirmelerde 3 kez dener)
