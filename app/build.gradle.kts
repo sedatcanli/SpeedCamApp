@@ -60,8 +60,8 @@ dependencies {
 
     // ML Kit Object Detection (yedek genel dedektör)
     implementation("com.google.mlkit:object-detection:17.0.1")
-    // YOLOv8 TFLite çıkarımı (birincil motor)
-    implementation("org.tensorflow:tensorflow-lite:2.16.1")
+    // YOLOv8 ONNX Runtime çıkarımı (birincil motor)
+    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.20.0")
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
