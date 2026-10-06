@@ -26,19 +26,17 @@ jobs:
       - name: Accept licenses
         run: yes | sdkmanager --licenses || true
 
-      - name: Restore YOLO model cache
-        id: yolo-cache
-        uses: actions/cache@v4
-        with:
-          path: app/src/main/assets/yolov8n.tflite
-          key: yolov8n-tflite-640-fp32-v1
-
-      - name: Export YOLOv8n to TFLite
-        if: steps.yolo-cache.outputs.cache-hit != 'true'
+      - name: Download YOLO model
         run: |
-          pip install -q "ultralytics==8.3.40" "tensorflow==2.16.1" onnx tf-keras onnxruntime "onnx2tf>1.17.5,<=1.22.3" onnxslim tflite_support "sng4onnx>=1.0.1" "onnx_graphsurgeon>=0.3.26"
-          python tools/export_yolo.py
+          mkdir -p app/src/main/assets
+          f=app/src/main/assets/yolo.tflite
+          if [ ! -f "$f" ]; then
+            for v in v7.0 v6.2; do
+              curl -sSL -o "$f" "https://github.com/ultralytics/yolov5/releases/download/$v/yolov5n.tflite" && break
+            done
+          fi
           ls -la app/src/main/assets/
+          test "$(stat -c%s "$f")" -gt 1000000
 
       - name: Build debug APK (flaky indirmelerde 3 kez dener)
         run: |

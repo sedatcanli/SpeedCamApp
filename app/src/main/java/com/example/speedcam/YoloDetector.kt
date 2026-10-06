@@ -12,8 +12,9 @@ import java.nio.channels.FileChannel
 import kotlin.math.min
 
 /**
- * YOLOv8-Nano (COCO 80 sınıf) doğrudan TFLite çıkarımı.
- * Model: assets/yolov8n.tflite (640x640, fp32, NMS'siz çıktı [1,84,8400]).
+ * YOLO (COCO 80 sınıf) doğrudan TFLite çıkarımı.
+ * Model: assets/yolo.tflite (YOLOv5-nano, 640x640, çıktı [1,N,85]:
+ * x,y,w,h + nesnellik + 80 sınıf).
  */
 class YoloDetector(private val context: Context) {
 
@@ -25,9 +26,9 @@ class YoloDetector(private val context: Context) {
     fun ensure(): Boolean = synchronized(lock) {
         if (ready) return true
         return try {
-            val f = File(context.filesDir, "yolov8n.tflite")
+            val f = File(context.filesDir, "yolo.tflite")
             if (!f.exists()) {
-                context.assets.open("yolov8n.tflite").use { input ->
+                context.assets.open("yolo.tflite").use { input ->
                     f.outputStream().use { output -> input.copyTo(output) }
                 }
             }
@@ -75,27 +76,42 @@ class YoloDetector(private val context: Context) {
             }
             input.rewind()
 
-            val out = Array(1) { Array(84) { FloatArray(8400) } }
+            val outShape = try { tf.getOutputTensor(0).shape() } catch (_: Exception) { null }
+            val rows = if (outShape != null && outShape.size == 3) outShape[1] else 25200
+            val out = Array(1) { Array(rows) { FloatArray(85) } }
             tf.run(input, out)
             val o = out[0]
             val bw = bitmap.width.toFloat()
             val bh = bitmap.height.toFloat()
             val dets = ArrayList<DetectedBox>(32)
-            for (j in 0 until 8400) {
+            for (j in 0 until rows) {
+                var obj = o[j][4]
+                if (obj < 0f || obj > 1f) obj = sigmoid(obj)
+                if (obj < scoreThr) continue
                 var bc = -1
-                var bs = scoreThr
-                for (c in 4 until 84) {
-                    val sc = o[c][j]
+                var bs = 0f
+                for (c in 5 until 85) {
+                    var sc = o[j][c]
+                    if (sc < 0f || sc > 1f) sc = sigmoid(sc)
                     if (sc > bs) {
                         bs = sc
-                        bc = c - 4
+                        bc = c - 5
                     }
                 }
                 if (bc < 0) continue
-                val cx = o[0][j] * s
-                val cy = o[1][j] * s
-                val w = o[2][j] * s
-                val h = o[3][j] * s
+                val score = obj * bs
+                if (score < scoreThr) continue
+                var cx = o[j][0]
+                var cy = o[j][1]
+                var w = o[j][2]
+                var h = o[j][3]
+                // Normalize (0..1) ise piksele çevir, değilse zaten piksel
+                if (cx <= 1.5f && cy <= 1.5f && w <= 1.5f && h <= 1.5f && w > 0f && h > 0f) {
+                    cx *= s
+                    cy *= s
+                    w *= s
+                    h *= s
+                }
                 var x0 = (cx - w / 2 - padX) / scale
                 var y0 = (cy - h / 2 - padY) / scale
                 var x1 = (cx + w / 2 - padX) / scale
@@ -123,6 +139,9 @@ class YoloDetector(private val context: Context) {
             ready = false
         }
     }
+
+    private fun sigmoid(x: Float): Float =
+        (1.0 / (1.0 + Math.exp(-x.toDouble()))).toFloat()
 
     private fun loadModel(f: File): ByteBuffer {
         val fis = FileInputStream(f)
