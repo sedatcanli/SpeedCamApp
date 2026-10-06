@@ -18,6 +18,13 @@
             android:layout_width="match_parent" android:layout_height="wrap_content" />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="Analiz çözünürlüğü" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Hızlı kasmayan, Detaylı uzak cisimleri daha iyi yakalar" />
+        <Spinner android:id="@+id/spRes"
+            android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginTop="16dp" android:text="Hız birimi" />
         <Spinner android:id="@+id/spUnit"
             android:layout_width="match_parent" android:layout_height="wrap_content" />

@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
         tracker.smoothingWindow = calib.smoothingWindow
         ensureDetector()
 
-        val key = (calib.cameraId ?: "") + "|" + calib.cameraFacing
+        val key = (calib.cameraId ?: "") + "|" + calib.cameraFacing + "|" + calib.analysisRes
         if (!force && key == boundCameraKey) return
         if (cameraStarting) return
         cameraStarting = true
@@ -177,8 +177,9 @@ class MainActivity : AppCompatActivity() {
                         wantedId else null
 
                 val previewBuilder = Preview.Builder()
+                val (aw, ah) = calib.analysisSize()
                 val analysisBuilder = ImageAnalysis.Builder()
-                    .setTargetResolution(Size(1280, 720))
+                    .setTargetResolution(Size(aw, ah))
                     .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 if (physicalId != null) {
                     try {

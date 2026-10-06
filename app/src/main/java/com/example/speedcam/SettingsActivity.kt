@@ -25,6 +25,14 @@ class SettingsActivity : AppCompatActivity() {
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, units)
         binding.spUnit.setSelection(units.indexOf(calib.speedUnit).coerceAtLeast(0))
 
+        // Analiz çözünürlüğü
+        val resNames = listOf(
+            "Hızlı (640x480)", "Dengeli (1280x720)", "Detaylı (1920x1080)"
+        )
+        binding.spRes.adapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resNames)
+        binding.spRes.setSelection(calib.analysisRes)
+
         SliderUtils.setSafe(
             binding.sliderConf, calib.detectionConfidence.coerceIn(0.2f, 0.9f)
         )
@@ -80,6 +88,7 @@ class SettingsActivity : AppCompatActivity() {
                     CameraSelector.LENS_FACING_BACK else CameraSelector.LENS_FACING_FRONT
             }
             calib.speedUnit = units[binding.spUnit.selectedItemPosition]
+            calib.analysisRes = binding.spRes.selectedItemPosition.coerceIn(0, 2)
             calib.detectionConfidence =
                 SliderUtils.snap(binding.sliderConf, binding.sliderConf.value)
             calib.smoothingWindow = binding.sliderSmooth.value.toInt()

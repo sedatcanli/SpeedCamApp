@@ -93,6 +93,17 @@ class CalibrationManager(context: Context) {
         get() = prefs.getFloat("refLen", 2f).coerceIn(0.05f, 100f)
         set(v) = prefs.edit().putFloat("refLen", v).apply()
 
+    /** Analiz çözünürlüğü: 0=Hızlı 640x480, 1=Dengeli 1280x720, 2=Detaylı 1920x1080 */
+    var analysisRes: Int
+        get() = prefs.getInt("analysisRes", 1).coerceIn(0, 2)
+        set(v) = prefs.edit().putInt("analysisRes", v).apply()
+
+    fun analysisSize(): Pair<Int, Int> = when (analysisRes) {
+        0 -> Pair(640, 480)
+        2 -> Pair(1920, 1080)
+        else -> Pair(1280, 720)
+    }
+
     // ---- Trigonometrik kalibrasyon (iğne deliği modeli) ----
     /** Ölçüm düzleminin kameraya uzaklığı (metre) — kullanıcı girer */
     var distanceM: Float
