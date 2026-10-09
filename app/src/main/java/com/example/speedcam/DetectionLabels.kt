@@ -1,8 +1,29 @@
 package com.example.speedcam
 
-/** COCO (80 sınıf) İngilizce etiket -> Türkçe karşılık. */
-object TurkishLabels {
-    private val map = mapOf(
+import java.util.Locale
+
+/**
+ * COCO (80 sınıf) etiketleri uygulama dilini takip eder:
+ * Türkçe seçiliyse Türkçe, diğer tüm dillerde İngilizce.
+ */
+object DetectionLabels {
+
+    fun of(english: String?): String? {
+        if (english == null) return null
+        if (!isTurkish()) return english
+        return TR[english.lowercase(Locale.US)] ?: english
+    }
+
+    private fun isTurkish(): Boolean {
+        return try {
+            val locales =
+                androidx.appcompat.app.AppCompatDelegate.getApplicationLocales()
+            if (!locales.isEmpty) locales[0]?.language == "tr"
+            else Locale.getDefault().language == "tr"
+        } catch (_: Exception) { false }
+    }
+
+    private val TR = mapOf(
         "person" to "İnsan",
         "bicycle" to "Bisiklet",
         "car" to "Araba",
@@ -84,9 +105,4 @@ object TurkishLabels {
         "hair drier" to "Saç kurutma",
         "toothbrush" to "Diş fırçası"
     )
-
-    fun of(english: String?): String? {
-        if (english == null) return null
-        return map[english.lowercase()] ?: english
-    }
 }

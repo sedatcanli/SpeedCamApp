@@ -273,7 +273,7 @@ class MainActivity : AppCompatActivity() {
                                     val rawFb = objects.mapNotNull { obj ->
                                         try {
                                             val b = obj.boundingBox
-                                            val label = TurkishLabels.of(obj.labels.firstOrNull()?.text)
+                                            val label = DetectionLabels.of(obj.labels.firstOrNull()?.text)
                                             val conf = obj.labels.firstOrNull()?.confidence ?: 0f
                                             if (obj.labels.isNotEmpty() && conf < calib.detectionConfidence) null
                                             else DetectedBox(RectF(b), label, conf)
