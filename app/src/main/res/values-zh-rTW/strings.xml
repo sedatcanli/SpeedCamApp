@@ -61,6 +61,14 @@
     <string name="cancel">取消</string>
     <string name="label_language">語言</string>
     <string name="system_default">系統預設</string>
+    <string name="calib_mode">校準模式</string>
+    <string name="mode_manual">手動</string>
+    <string name="mode_auto">自動</string>
+    <string name="mode_manual_desc">手動：按距離 + 視場角 + 係數換算。</string>
+    <string name="mode_auto_desc">自動：按已知目標尺寸換算。無已知目標時用手動值。</string>
+    <string name="dim_title">尺寸（公分）</string>
+    <string name="dim_w">寬（公分）</string>
+    <string name="dim_h">高（公分）</string>
     <string name="label_targets">目標物體</string>
     <string name="targets_desc">僅測量所選項。選擇全部時測量所有。</string>
     <string name="target_all">全部</string>

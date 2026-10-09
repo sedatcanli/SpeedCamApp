@@ -61,6 +61,14 @@
     <string name="cancel">キャンセル</string>
     <string name="label_language">言語</string>
     <string name="system_default">システム既定</string>
+    <string name="calib_mode">校正モード</string>
+    <string name="mode_manual">手動</string>
+    <string name="mode_auto">自動</string>
+    <string name="mode_manual_desc">手動：距離＋画角＋係数で換算。</string>
+    <string name="mode_auto_desc">自動：既知サイズから換算。既知物なしは手動値。</string>
+    <string name="dim_title">サイズ (cm)</string>
+    <string name="dim_w">幅 (cm)</string>
+    <string name="dim_h">高さ (cm)</string>
     <string name="label_targets">対象物</string>
     <string name="targets_desc">選択分のみ計測。全てでは全計測。</string>
     <string name="target_all">すべて</string>

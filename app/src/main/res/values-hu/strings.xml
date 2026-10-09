@@ -61,6 +61,14 @@
     <string name="cancel">Mégse</string>
     <string name="label_language">Nyelv</string>
     <string name="system_default">Rendszer alapértelmezett</string>
+    <string name="calib_mode">Kalibrálási mód</string>
+    <string name="mode_manual">Kézi</string>
+    <string name="mode_auto">Automata</string>
+    <string name="mode_manual_desc">Kézi: skála távolság + FOV + tényező alapján.</string>
+    <string name="mode_auto_desc">Automata: skála ismert méretekből. Ismert cél nélkül Kézi értékek.</string>
+    <string name="dim_title">Méret (cm)</string>
+    <string name="dim_w">Szélesség (cm)</string>
+    <string name="dim_h">Magasság (cm)</string>
     <string name="label_targets">Célobjektumok</string>
     <string name="targets_desc">Csak a kiválasztottak mérve. Mindennél minden.</string>
     <string name="target_all">Mind</string>

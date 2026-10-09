@@ -61,6 +61,14 @@
     <string name="cancel">Vazgeç</string>
     <string name="label_language">Dil</string>
     <string name="system_default">Sistem varsayılanı</string>
+    <string name="calib_mode">Kalibrasyon modu</string>
+    <string name="mode_manual">Manuel</string>
+    <string name="mode_auto">Otomatik</string>
+    <string name="mode_manual_desc">Manuel: uzaklık + FOV + katsayı ile ölçeklenir.</string>
+    <string name="mode_auto_desc">Otomatik: bilinen hedef boyutlarından ölçeklenir. Bilinen hedef yoksa Manuel değerlere düşer.</string>
+    <string name="dim_title">Boyut (cm)</string>
+    <string name="dim_w">En (cm)</string>
+    <string name="dim_h">Boy (cm)</string>
     <string name="label_targets">Hedef nesneler</string>
     <string name="targets_desc">Yalnızca seçililer ölçülür. Tümü açıkken her şey ölçülür.</string>
     <string name="target_all">Tümü</string>

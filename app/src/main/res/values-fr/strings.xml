@@ -61,6 +61,14 @@
     <string name="cancel">Annuler</string>
     <string name="label_language">Langue</string>
     <string name="system_default">Défaut système</string>
+    <string name="calib_mode">Mode d\'étalonnage</string>
+    <string name="mode_manual">Manuel</string>
+    <string name="mode_auto">Automatique</string>
+    <string name="mode_manual_desc">Manuel : échelle depuis distance + FOV + facteur.</string>
+    <string name="mode_auto_desc">Automatique : échelle depuis tailles cibles connues. Sans cible connue, valeurs Manuelles.</string>
+    <string name="dim_title">Taille (cm)</string>
+    <string name="dim_w">Largeur (cm)</string>
+    <string name="dim_h">Hauteur (cm)</string>
     <string name="label_targets">Objets cibles</string>
     <string name="targets_desc">Seuls les sélectionnés sont mesurés. Avec Tout, tout est mesuré.</string>
     <string name="target_all">Tout</string>

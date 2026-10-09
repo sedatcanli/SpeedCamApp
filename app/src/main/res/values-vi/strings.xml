@@ -61,6 +61,14 @@
     <string name="cancel">Hủy</string>
     <string name="label_language">Ngôn ngữ</string>
     <string name="system_default">Mặc định hệ thống</string>
+    <string name="calib_mode">Chế độ hiệu chuẩn</string>
+    <string name="mode_manual">Thủ công</string>
+    <string name="mode_auto">Tự động</string>
+    <string name="mode_manual_desc">Thủ công: tỉ lệ từ khoảng cách + FOV + hệ số.</string>
+    <string name="mode_auto_desc">Tự động: tỉ lệ từ kích thước đã biết. Không có mục tiêu thì dùng Thủ công.</string>
+    <string name="dim_title">Kích thước (cm)</string>
+    <string name="dim_w">Rộng (cm)</string>
+    <string name="dim_h">Cao (cm)</string>
     <string name="label_targets">Vật mục tiêu</string>
     <string name="targets_desc">Chỉ đo mục đã chọn. Tất cả đo mọi thứ.</string>
     <string name="target_all">Tất cả</string>

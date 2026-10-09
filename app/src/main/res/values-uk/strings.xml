@@ -61,6 +61,14 @@
     <string name="cancel">Скасувати</string>
     <string name="label_language">Мова</string>
     <string name="system_default">Системна</string>
+    <string name="calib_mode">Режим калібрування</string>
+    <string name="mode_manual">Ручний</string>
+    <string name="mode_auto">Авто</string>
+    <string name="mode_manual_desc">Ручний: масштаб з відстані + FOV + коефіцієнта.</string>
+    <string name="mode_auto_desc">Авто: масштаб з відомих розмірів. Без відомої цілі — Ручні значення.</string>
+    <string name="dim_title">Розмір (см)</string>
+    <string name="dim_w">Ширина (см)</string>
+    <string name="dim_h">Висота (см)</string>
     <string name="label_targets">Цільові об\'єкти</string>
     <string name="targets_desc">Вимірюються лише вибрані. При «Все» — все.</string>
     <string name="target_all">Все</string>

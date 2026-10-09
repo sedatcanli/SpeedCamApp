@@ -61,6 +61,14 @@
     <string name="cancel">Anuluj</string>
     <string name="label_language">Język</string>
     <string name="system_default">Domyślny systemu</string>
+    <string name="calib_mode">Tryb kalibracji</string>
+    <string name="mode_manual">Ręczny</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_manual_desc">Ręczny: skala z odległości + FOV + współczynnika.</string>
+    <string name="mode_auto_desc">Auto: skala ze znanych rozmiarów. Bez znanego celu wartości Ręczne.</string>
+    <string name="dim_title">Wymiar (cm)</string>
+    <string name="dim_w">Szerokość (cm)</string>
+    <string name="dim_h">Wysokość (cm)</string>
     <string name="label_targets">Obiekty docelowe</string>
     <string name="targets_desc">Mierzone tylko wybrane. Przy Wszystkie – wszystko.</string>
     <string name="target_all">Wszystkie</string>

@@ -104,6 +104,18 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         tracker.smoothingWindow = calib.smoothingWindow
         try {
+            // Otomatik kalibrasyon için sınıf -> boyut önbelleği (metre)
+            val m = HashMap<String, Pair<Float, Float>>()
+            for (o in TargetActivity.OPTIONS) {
+                if (o.coco.size == 1 && o.id == o.coco.first()) {
+                    val w = calib.dimWcm(o.id) / 100f
+                    val h = calib.dimHcm(o.id) / 100f
+                    if (w > 0f && h > 0f) m[o.id] = Pair(w, h)
+                }
+            }
+            dimCache = m
+        } catch (_: Exception) { }
+        try {
             calib.refreshOptics(this, false)
             // Kamera değiştiyse FOV'u yeni kameradan tazele
             val curKey = (calib.cameraId ?: "") + "|" + calib.cameraFacing
@@ -136,6 +148,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var yolo: YoloDetector
     private lateinit var motion: MotionMonitor
     private var reportedEngine: String? = null
+    private val autoScale = AutoScaleEstimator()
+    private var dimCache: Map<String, Pair<Float, Float>> = emptyMap()
 
     /**
      * Dahili genel dedektor (yedek). Birincil motor YOLOv8'dir.
@@ -508,24 +522,55 @@ class MainActivity : AppCompatActivity() {
             }
             return
         }
-        // Kare boyutuna göre trigonometrik ölçeği güncelle.
-        // Zoom büyütmesi görüş alanını daraltır: ölçek zoom'a bölünür.
+        // Ölçek: trig (Manuel) veya hedef boyutlarından otomatik (Otomatik).
+        // Hepsi GÖRÜNÜM pikseli cinsinden (kutular görünümde).
         var mPerViewPx = 0f
+        var effEngine = engine
         try {
             val zoom = try {
                 camera?.cameraInfo?.zoomState?.value?.zoomRatio
                     ?: calib.zoomRatio
             } catch (_: Exception) { calib.zoomRatio }.coerceIn(0.5f, 20f)
             val (mx, my) = calib.metersPerPixel(imgW, imgH)
-            tracker.metersPerPixelX = mx / zoom
-            tracker.metersPerPixelY = my / zoom
-            tracker.ghostMs = (calib.ghostSec * 1000).toLong()
             val viewW = try { binding.previewView.width.toFloat() } catch (_: Exception) { 0f }
             val viewH = try { binding.previewView.height.toFloat() } catch (_: Exception) { 0f }
-            if (viewW > 0f && viewH > 0f && imgW > 0f && imgH > 0f) {
-                val fillS = kotlin.math.max(viewW / imgW, viewH / imgH)
-                mPerViewPx = mx / zoom / fillS
+            val fillS = if (viewW > 0f && viewH > 0f && imgW > 0f && imgH > 0f) {
+                kotlin.math.max(viewW / imgW, viewH / imgH)
+            } else 1f
+            var ex = mx / zoom / fillS
+            var ey = my / zoom / fillS
+            tracker.ghostMs = (calib.ghostSec * 1000).toLong()
+            val auto = try { calib.calibMode == "auto" } catch (_: Exception) { false }
+            if (auto) {
+                val nowA = System.currentTimeMillis()
+                for (d in dets) {
+                    try {
+                        val e = d.eng ?: continue
+                        val dims = dimCache[e] ?: continue
+                        val bw = d.box.width()
+                        val bh = d.box.height()
+                        if (bw <= 0f || bh <= 0f) continue
+                        val obs = kotlin.math.sqrt(
+                            (dims.first * dims.second / 10000f / (bw * bh)).toDouble()
+                        ).toFloat()
+                        // Trig ölçeğin 0.2x-5x bandı dışı = yanlış sınıf/boyut, at
+                        if (obs > ex * 0.2f && obs < ex * 5f) {
+                            autoScale.add(obs, nowA)
+                        }
+                    } catch (_: Exception) { }
+                }
+                val med = try { autoScale.median(nowA) } catch (_: Exception) { null }
+                if (med != null && med > 0f) {
+                    ex = med
+                    ey = med
+                    effEngine = engine + " •OTO"
+                } else {
+                    effEngine = engine + " •OTO?"
+                }
             }
+            tracker.metersPerPixelX = ex
+            tracker.metersPerPixelY = ey
+            mPerViewPx = ex
         } catch (_: Exception) { }
         val now = System.currentTimeMillis()
         // Hedef filtresi: seçili değilse takibe bile girmez
@@ -560,10 +605,10 @@ class MainActivity : AppCompatActivity() {
                 )
                 if (mPerViewPx > 0f) binding.overlay.setScaleBar(mPerViewPx)
                 binding.tvCount.text = getString(R.string.objects_count, snapshot.size)
-                if (reportedEngine != engine) {
-                    reportedEngine = engine
+                if (reportedEngine != effEngine) {
+                    reportedEngine = effEngine
                     binding.tvStatus.text =
-                        getString(R.string.status_calibration, calib.summary(this)) + " • " + engine
+                        getString(R.string.status_calibration, calib.summary(this)) + " • " + effEngine
                 }
             } catch (_: Exception) { }
         }

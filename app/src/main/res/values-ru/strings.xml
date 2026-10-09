@@ -61,6 +61,14 @@
     <string name="cancel">Отмена</string>
     <string name="label_language">Язык</string>
     <string name="system_default">Системный</string>
+    <string name="calib_mode">Режим калибровки</string>
+    <string name="mode_manual">Ручной</string>
+    <string name="mode_auto">Авто</string>
+    <string name="mode_manual_desc">Ручной: масштаб из дистанции + FOV + коэффициента.</string>
+    <string name="mode_auto_desc">Авто: масштаб из известных размеров. Без известной цели — Ручные значения.</string>
+    <string name="dim_title">Размер (см)</string>
+    <string name="dim_w">Ширина (см)</string>
+    <string name="dim_h">Высота (см)</string>
     <string name="label_targets">Целевые объекты</string>
     <string name="targets_desc">Измеряются только выбранные. При «Все» — всё.</string>
     <string name="target_all">Все</string>

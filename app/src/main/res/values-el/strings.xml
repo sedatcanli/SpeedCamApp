@@ -61,6 +61,14 @@
     <string name="cancel">Άκυρο</string>
     <string name="label_language">Γλώσσα</string>
     <string name="system_default">Προεπιλογή συστήματος</string>
+    <string name="calib_mode">Λειτουργία βαθμονόμησης</string>
+    <string name="mode_manual">Χειροκίνητη</string>
+    <string name="mode_auto">Αυτόματη</string>
+    <string name="mode_manual_desc">Χειροκίνητη: κλίμακα από απόσταση + FOV + συντελεστή.</string>
+    <string name="mode_auto_desc">Αυτόματη: κλίμακα από γνωστά μεγέθη. Χωρίς γνωστό στόχο, Χειροκίνητες τιμές.</string>
+    <string name="dim_title">Διάσταση (εκ.)</string>
+    <string name="dim_w">Πλάτος (εκ.)</string>
+    <string name="dim_h">Ύψος (εκ.)</string>
     <string name="label_targets">Αντικείμενα-στόχοι</string>
     <string name="targets_desc">Μετρούνται μόνο τα επιλεγμένα. Με Όλα, όλα.</string>
     <string name="target_all">Όλα</string>

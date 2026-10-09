@@ -61,6 +61,14 @@
     <string name="cancel">Annuleren</string>
     <string name="label_language">Taal</string>
     <string name="system_default">Systeemstandaard</string>
+    <string name="calib_mode">Kalibratiemodus</string>
+    <string name="mode_manual">Handmatig</string>
+    <string name="mode_auto">Automatisch</string>
+    <string name="mode_manual_desc">Handmatig: schaal uit afstand + FOV + factor.</string>
+    <string name="mode_auto_desc">Automatisch: schaal uit bekende maten. Zonder bekend doel Handmatige waarden.</string>
+    <string name="dim_title">Maat (cm)</string>
+    <string name="dim_w">Breedte (cm)</string>
+    <string name="dim_h">Hoogte (cm)</string>
     <string name="label_targets">Doelobjecten</string>
     <string name="targets_desc">Alleen gekozen worden gemeten. Met Alles alles.</string>
     <string name="target_all">Alles</string>

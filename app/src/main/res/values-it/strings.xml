@@ -61,6 +61,14 @@
     <string name="cancel">Annulla</string>
     <string name="label_language">Lingua</string>
     <string name="system_default">Predefinito di sistema</string>
+    <string name="calib_mode">Modalità calibrazione</string>
+    <string name="mode_manual">Manuale</string>
+    <string name="mode_auto">Automatica</string>
+    <string name="mode_manual_desc">Manuale: scala da distanza + FOV + fattore.</string>
+    <string name="mode_auto_desc">Automatica: scala da dimensioni note. Senza bersaglio noto, valori Manuali.</string>
+    <string name="dim_title">Dimensioni (cm)</string>
+    <string name="dim_w">Larghezza (cm)</string>
+    <string name="dim_h">Altezza (cm)</string>
     <string name="label_targets">Oggetti bersaglio</string>
     <string name="targets_desc">Solo i selezionati vengono misurati. Con Tutti, tutto.</string>
     <string name="target_all">Tutti</string>

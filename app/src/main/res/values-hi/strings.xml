@@ -61,6 +61,14 @@
     <string name="cancel">रद्द करें</string>
     <string name="label_language">भाषा</string>
     <string name="system_default">सिस्टम डिफ़ॉल्ट</string>
+    <string name="calib_mode">अंशांकन मोड</string>
+    <string name="mode_manual">मैनुअल</string>
+    <string name="mode_auto">ऑटो</string>
+    <string name="mode_manual_desc">मैनुअल: दूरी + FOV + गुणांक से स्केल।</string>
+    <string name="mode_auto_desc">ऑटो: ज्ञात आकारों से स्केल। ज्ञात लक्ष्य न हो तो मैनुअल मान।</string>
+    <string name="dim_title">आकार (सेमी)</string>
+    <string name="dim_w">चौड़ाई (सेमी)</string>
+    <string name="dim_h">ऊंचाई (सेमी)</string>
     <string name="label_targets">लक्ष्य वस्तुएं</string>
     <string name="targets_desc">केवल चुनी हुई मापी जाती हैं। सभी पर सब कुछ।</string>
     <string name="target_all">सभी</string>

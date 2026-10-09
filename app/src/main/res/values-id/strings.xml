@@ -61,6 +61,14 @@
     <string name="cancel">Batal</string>
     <string name="label_language">Bahasa</string>
     <string name="system_default">Bawaan sistem</string>
+    <string name="calib_mode">Mode kalibrasi</string>
+    <string name="mode_manual">Manual</string>
+    <string name="mode_auto">Otomatis</string>
+    <string name="mode_manual_desc">Manual: skala dari jarak + FOV + faktor.</string>
+    <string name="mode_auto_desc">Otomatis: skala dari ukuran target dikenal. Tanpa target, nilai Manual.</string>
+    <string name="dim_title">Ukuran (cm)</string>
+    <string name="dim_w">Lebar (cm)</string>
+    <string name="dim_h">Tinggi (cm)</string>
     <string name="label_targets">Objek target</string>
     <string name="targets_desc">Hanya yang dipilih diukur. Semua mengukur semuanya.</string>
     <string name="target_all">Semua</string>

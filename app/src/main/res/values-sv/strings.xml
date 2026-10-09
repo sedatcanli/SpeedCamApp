@@ -61,6 +61,14 @@
     <string name="cancel">Avbryt</string>
     <string name="label_language">Språk</string>
     <string name="system_default">Systemstandard</string>
+    <string name="calib_mode">Kalibreringsläge</string>
+    <string name="mode_manual">Manuell</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_manual_desc">Manuell: skala från avstånd + FOV + faktor.</string>
+    <string name="mode_auto_desc">Auto: skala från kända storlekar. Utan känt mål, Manuella värden.</string>
+    <string name="dim_title">Mått (cm)</string>
+    <string name="dim_w">Bredd (cm)</string>
+    <string name="dim_h">Höjd (cm)</string>
     <string name="label_targets">Målobjekt</string>
     <string name="targets_desc">Endast valda mäts. Med Alla mäts allt.</string>
     <string name="target_all">Alla</string>

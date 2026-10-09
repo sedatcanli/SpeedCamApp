@@ -61,6 +61,14 @@
     <string name="cancel">Одустани</string>
     <string name="label_language">Језик</string>
     <string name="system_default">Системски подраз.</string>
+    <string name="calib_mode">Режим калибрације</string>
+    <string name="mode_manual">Ручно</string>
+    <string name="mode_auto">Ауто</string>
+    <string name="mode_manual_desc">Ручно: размера из даљине + FOV + фактора.</string>
+    <string name="mode_auto_desc">Ауто: размера из познатих величина. Без познате мете, Ручне вредности.</string>
+    <string name="dim_title">Димензија (цм)</string>
+    <string name="dim_w">Ширина (цм)</string>
+    <string name="dim_h">Висина (цм)</string>
     <string name="label_targets">Циљани објекти</string>
     <string name="targets_desc">Мере се само одабрани. Са Све се мери све.</string>
     <string name="target_all">Све</string>

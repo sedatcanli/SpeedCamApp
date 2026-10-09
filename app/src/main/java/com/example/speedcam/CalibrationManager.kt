@@ -107,6 +107,31 @@ class CalibrationManager(context: Context) {
         }
     }
 
+    /** Hedef nesne gerçek boyutu (cm). Yoksa varsayılan, o da yoksa 0. */
+    fun dimWcm(id: String): Float {
+        return try {
+            val v = prefs.getFloat("dimW_$id", -1f)
+            if (v > 0f) v else TargetActivity.DEFAULT_DIMS[id]?.first ?: 0f
+        } catch (_: Exception) {
+            TargetActivity.DEFAULT_DIMS[id]?.first ?: 0f
+        }
+    }
+
+    fun dimHcm(id: String): Float {
+        return try {
+            val v = prefs.getFloat("dimH_$id", -1f)
+            if (v > 0f) v else TargetActivity.DEFAULT_DIMS[id]?.second ?: 0f
+        } catch (_: Exception) {
+            TargetActivity.DEFAULT_DIMS[id]?.second ?: 0f
+        }
+    }
+
+    fun setDimsCm(id: String, w: Float, h: Float) {
+        try {
+            prefs.edit().putFloat("dimW_$id", w).putFloat("dimH_$id", h).apply()
+        } catch (_: Exception) { }
+    }
+
     fun setTargetIds(s: Set<String>) {
         try {
             prefs.edit().putStringSet("targetIds", s.toSet()).apply()
@@ -122,6 +147,11 @@ class CalibrationManager(context: Context) {
         }
         return out
     }
+
+    /** Kalibrasyon modu: "manual" (trig+katsayı) veya "auto" (hedef nesne boyutu) */
+    var calibMode: String
+        get() = prefs.getString("calibMode", "manual") ?: "manual"
+        set(v) = prefs.edit().putString("calibMode", v).apply()
 
     /** Cetvelin temsil ettiği referans uzunluk (m). Uçlar buna göre kalibre eder */
     var refLenM: Float

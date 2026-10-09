@@ -61,6 +61,14 @@
     <string name="cancel">Odustani</string>
     <string name="label_language">Jezik</string>
     <string name="system_default">Zadano sustava</string>
+    <string name="calib_mode">Način kalibracije</string>
+    <string name="mode_manual">Ručno</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_manual_desc">Ručno: mjerilo iz udaljenosti + FOV + faktora.</string>
+    <string name="mode_auto_desc">Auto: mjerilo iz poznatih veličina. Bez poznatog cilja Ručne vrijednosti.</string>
+    <string name="dim_title">Dimenzija (cm)</string>
+    <string name="dim_w">Širina (cm)</string>
+    <string name="dim_h">Visina (cm)</string>
     <string name="label_targets">Ciljani objekti</string>
     <string name="targets_desc">Mjere se samo odabrani. Sa Sve se mjeri sve.</string>
     <string name="target_all">Sve</string>

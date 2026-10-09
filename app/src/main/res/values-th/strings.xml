@@ -61,6 +61,14 @@
     <string name="cancel">ยกเลิก</string>
     <string name="label_language">ภาษา</string>
     <string name="system_default">ค่าเริ่มต้นระบบ</string>
+    <string name="calib_mode">โหมดสอบเทียบ</string>
+    <string name="mode_manual">แมนนวล</string>
+    <string name="mode_auto">อัตโนมัติ</string>
+    <string name="mode_manual_desc">แมนนวล: สเกลจากระยะ + FOV + ตัวคูณ</string>
+    <string name="mode_auto_desc">อัตโนมัติ: สเกลจากขนาดที่ทราบ ไม่มีเป้าที่ทราบใช้ค่าแมนนวล</string>
+    <string name="dim_title">ขนาด (ซม.)</string>
+    <string name="dim_w">กว้าง (ซม.)</string>
+    <string name="dim_h">สูง (ซม.)</string>
     <string name="label_targets">วัตถุเป้าหมาย</string>
     <string name="targets_desc">วัดเฉพาะที่เลือก ทั้งหมดวัดทุกอย่าง</string>
     <string name="target_all">ทั้งหมด</string>

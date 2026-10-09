@@ -61,6 +61,14 @@
     <string name="cancel">Cancel</string>
     <string name="label_language">Language</string>
     <string name="system_default">System default</string>
+    <string name="calib_mode">Calibration mode</string>
+    <string name="mode_manual">Manual</string>
+    <string name="mode_auto">Automatic</string>
+    <string name="mode_manual_desc">Manual: scale from distance + FOV + factor.</string>
+    <string name="mode_auto_desc">Automatic: scale from known target sizes. Falls back to Manual values when no known target is visible.</string>
+    <string name="dim_title">Size (cm)</string>
+    <string name="dim_w">Width (cm)</string>
+    <string name="dim_h">Height (cm)</string>
     <string name="label_targets">Target objects</string>
     <string name="targets_desc">Only selected objects are measured. When All is on, everything is measured.</string>
     <string name="target_all">All</string>

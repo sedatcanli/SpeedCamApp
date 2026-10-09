@@ -61,6 +61,14 @@
     <string name="cancel">취소</string>
     <string name="label_language">언어</string>
     <string name="system_default">시스템 기본값</string>
+    <string name="calib_mode">보정 모드</string>
+    <string name="mode_manual">수동</string>
+    <string name="mode_auto">자동</string>
+    <string name="mode_manual_desc">수동: 거리 + 화각 + 계수로 환산.</string>
+    <string name="mode_auto_desc">자동: 알려진 크기에서 환산. 알려진 대상 없으면 수동값.</string>
+    <string name="dim_title">크기 (cm)</string>
+    <string name="dim_w">너비 (cm)</string>
+    <string name="dim_h">높이 (cm)</string>
     <string name="label_targets">대상 물체</string>
     <string name="targets_desc">선택 항목만 측정. 전체 시 모두 측정.</string>
     <string name="target_all">전체</string>

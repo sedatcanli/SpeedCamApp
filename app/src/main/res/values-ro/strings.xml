@@ -61,6 +61,14 @@
     <string name="cancel">Anulează</string>
     <string name="label_language">Limbă</string>
     <string name="system_default">Implicit sistem</string>
+    <string name="calib_mode">Mod de calibrare</string>
+    <string name="mode_manual">Manual</string>
+    <string name="mode_auto">Automat</string>
+    <string name="mode_manual_desc">Manual: scară din distanță + FOV + factor.</string>
+    <string name="mode_auto_desc">Automat: scară din dimensiuni cunoscute. Fără țintă cunoscută, valori Manuale.</string>
+    <string name="dim_title">Dimensiune (cm)</string>
+    <string name="dim_w">Lățime (cm)</string>
+    <string name="dim_h">Înălțime (cm)</string>
     <string name="label_targets">Obiecte țintă</string>
     <string name="targets_desc">Se măsoară doar cele selectate. Cu Toate, tot.</string>
     <string name="target_all">Toate</string>

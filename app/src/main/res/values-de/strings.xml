@@ -61,6 +61,14 @@
     <string name="cancel">Abbrechen</string>
     <string name="label_language">Sprache</string>
     <string name="system_default">Systemstandard</string>
+    <string name="calib_mode">Kalibrierungsmodus</string>
+    <string name="mode_manual">Manuell</string>
+    <string name="mode_auto">Automatisch</string>
+    <string name="mode_manual_desc">Manuell: Maßstab aus Entfernung + FOV + Faktor.</string>
+    <string name="mode_auto_desc">Automatisch: Maßstab aus bekannten Zielgrößen. Ohne bekanntes Ziel gelten Manuell-Werte.</string>
+    <string name="dim_title">Größe (cm)</string>
+    <string name="dim_w">Breite (cm)</string>
+    <string name="dim_h">Höhe (cm)</string>
     <string name="label_targets">Zielobjekte</string>
     <string name="targets_desc">Nur Gewählte werden gemessen. Bei Alle wird alles gemessen.</string>
     <string name="target_all">Alle</string>

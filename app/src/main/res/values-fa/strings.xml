@@ -61,6 +61,14 @@
     <string name="cancel">لغو</string>
     <string name="label_language">زبان</string>
     <string name="system_default">پیش‌فرض سیستم</string>
+    <string name="calib_mode">حالت کالیبراسیون</string>
+    <string name="mode_manual">دستی</string>
+    <string name="mode_auto">خودکار</string>
+    <string name="mode_manual_desc">دستی: مقیاس از فاصله + FOV + ضریب.</string>
+    <string name="mode_auto_desc">خودکار: مقیاس از اندازه‌های معلوم. بدون هدف معلوم، مقادیر دستی.</string>
+    <string name="dim_title">اندازه (سانتی‌متر)</string>
+    <string name="dim_w">عرض (سانتی‌متر)</string>
+    <string name="dim_h">ارتفاع (سانتی‌متر)</string>
     <string name="label_targets">اشیای هدف</string>
     <string name="targets_desc">فقط انتخاب‌شده‌ها اندازه‌گیری می‌شوند. با «همه»، همه.</string>
     <string name="target_all">همه</string>

@@ -61,6 +61,14 @@
     <string name="cancel">ביטול</string>
     <string name="label_language">שפה</string>
     <string name="system_default">ברירת מחדל מערכת</string>
+    <string name="calib_mode">מצב כיול</string>
+    <string name="mode_manual">ידני</string>
+    <string name="mode_auto">אוטומטי</string>
+    <string name="mode_manual_desc">ידני: סקאלה ממרחק + FOV + מקדם.</string>
+    <string name="mode_auto_desc">אוטומטי: סקאלה מגדלים ידועים. ללא מטרה ידועה, ערכים ידניים.</string>
+    <string name="dim_title">מידה (ס״מ)</string>
+    <string name="dim_w">רוחב (ס״מ)</string>
+    <string name="dim_h">גובה (ס״מ)</string>
     <string name="label_targets">עצמי מטרה</string>
     <string name="targets_desc">נמדדים רק הנבחרים. עם הכל - הכל.</string>
     <string name="target_all">הכל</string>

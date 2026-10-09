@@ -37,6 +37,18 @@ class CalibrationActivity : AppCompatActivity() {
         fillFields()
         updatePreview()
 
+        if (calib.calibMode == "auto") binding.rbAuto.isChecked = true
+        else binding.rbManual.isChecked = true
+        updateModeDesc()
+
+        binding.rgMode.setOnCheckedChangeListener { _, id ->
+            try {
+                calib.calibMode =
+                    if (id == binding.rbAuto.id) "auto" else "manual"
+                updateModeDesc()
+            } catch (_: Exception) { }
+        }
+
         binding.btnRefreshOptics.setOnClickListener {
             try {
                 val info = calib.refreshOptics(this, true)
@@ -83,6 +95,17 @@ class CalibrationActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.msg_saved), Toast.LENGTH_SHORT).show()
             finish()
         }
+    }
+
+    private fun updateModeDesc() {
+        try {
+            val auto = calib.calibMode == "auto"
+            binding.tvModeDesc.text = if (auto) {
+                getString(R.string.mode_auto_desc)
+            } else {
+                getString(R.string.mode_manual_desc)
+            }
+        } catch (_: Exception) { }
     }
 
     private fun fillFields() {

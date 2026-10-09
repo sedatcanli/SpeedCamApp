@@ -61,6 +61,14 @@
     <string name="cancel">Отказ</string>
     <string name="label_language">Език</string>
     <string name="system_default">Системен по подразбиране</string>
+    <string name="calib_mode">Режим на калибриране</string>
+    <string name="mode_manual">Ръчен</string>
+    <string name="mode_auto">Авто</string>
+    <string name="mode_manual_desc">Ръчен: мащаб от разстояние + FOV + коефициент.</string>
+    <string name="mode_auto_desc">Авто: мащаб от известни размери. Без известна цел — Ръчни стойности.</string>
+    <string name="dim_title">Размер (см)</string>
+    <string name="dim_w">Ширина (см)</string>
+    <string name="dim_h">Височина (см)</string>
     <string name="label_targets">Целеви обекти</string>
     <string name="targets_desc">Мерят се само избраните. При Всички — всичко.</string>
     <string name="target_all">Всички</string>

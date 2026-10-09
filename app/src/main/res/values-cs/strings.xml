@@ -61,6 +61,14 @@
     <string name="cancel">Zrušit</string>
     <string name="label_language">Jazyk</string>
     <string name="system_default">Výchozí systému</string>
+    <string name="calib_mode">Režim kalibrace</string>
+    <string name="mode_manual">Ruční</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_manual_desc">Ruční: měřítko ze vzdálenosti + FOV + koeficientu.</string>
+    <string name="mode_auto_desc">Auto: měřítko ze známých velikostí. Bez známého cíle Ruční hodnoty.</string>
+    <string name="dim_title">Rozměr (cm)</string>
+    <string name="dim_w">Šířka (cm)</string>
+    <string name="dim_h">Výška (cm)</string>
     <string name="label_targets">Cílové objekty</string>
     <string name="targets_desc">Měří se jen vybrané. Při Vše se měří vše.</string>
     <string name="target_all">Vše</string>

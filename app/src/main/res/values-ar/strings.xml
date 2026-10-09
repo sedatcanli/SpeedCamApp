@@ -61,6 +61,14 @@
     <string name="cancel">إلغاء</string>
     <string name="label_language">اللغة</string>
     <string name="system_default">افتراضي النظام</string>
+    <string name="calib_mode">وضع المعايرة</string>
+    <string name="mode_manual">يدوي</string>
+    <string name="mode_auto">تلقائي</string>
+    <string name="mode_manual_desc">يدوي: المقياس من المسافة + FOV + المعامل.</string>
+    <string name="mode_auto_desc">تلقائي: المقياس من الأحجام المعروفة. بدون هدف معروف، القيم اليدوية.</string>
+    <string name="dim_title">الحجم (سم)</string>
+    <string name="dim_w">العرض (سم)</string>
+    <string name="dim_h">الارتفاع (سم)</string>
     <string name="label_targets">الأجسام المستهدفة</string>
     <string name="targets_desc">تُقاس المحددة فقط. عند الكل يُقاس كل شيء.</string>
     <string name="target_all">الكل</string>

@@ -23,6 +23,22 @@
             android:text="@string/calib_desc" />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="@string/calib_mode" android:textStyle="bold" />
+        <RadioGroup android:id="@+id/rgMode"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/rbManual"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="@string/mode_manual" />
+            <RadioButton android:id="@+id/rbAuto"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="@string/mode_auto" />
+        </RadioGroup>
+        <TextView android:id="@+id/tvModeDesc"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/mode_auto_desc" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginTop="16dp" android:text="@string/label_optics_auto" android:textStyle="bold" />
         <TextView android:id="@+id/tvOptics"
             android:layout_width="match_parent" android:layout_height="wrap_content"
