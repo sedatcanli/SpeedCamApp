@@ -1,4 +1,4 @@
-"""YOLOv8n.pt -> yolo.onnx (640) export eder.
+"""YOLOv11n.pt -> yolo.onnx (640) export eder.
 
 Kullanim (yerel):  pip install ultralytics onnx
                    python tools/export_yolo.py
@@ -18,12 +18,12 @@ def main() -> None:
         return
     from ultralytics import YOLO
 
-    model = YOLO("yolov8n.pt")  # ilk calistirmada indirir
+    model = YOLO("yolo11n.pt")  # ilk calistirmada indirir
     exported = Path(model.export(format="onnx", imgsz=640, verbose=False))
     if not exported.is_absolute():
         exported = Path.cwd() / exported
     if not exported.exists():
-        found = [p for p in ROOT.rglob("yolov8n.onnx")]
+        found = [p for p in ROOT.rglob("yolo11n.onnx")]
         if not found:
             print("Export ciktisi bulunamadi", file=sys.stderr)
             sys.exit(1)

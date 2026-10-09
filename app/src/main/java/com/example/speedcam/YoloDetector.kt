@@ -11,7 +11,7 @@ import java.nio.FloatBuffer
 import kotlin.math.min
 
 /**
- * YOLOv8-Nano (COCO 80 sınıf) ONNX Runtime çıkarımı.
+ * YOLOv11-Nano (COCO 80 sınıf) ONNX Runtime çıkarımı.
  * Model: assets/yolo.onnx (640x640, çıktı [1,84,8400] transpoze).
  */
 class YoloDetector(private val context: Context) {

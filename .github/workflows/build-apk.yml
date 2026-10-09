@@ -31,7 +31,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: app/src/main/assets/yolo.onnx
-          key: yolov8n-onnx-640-v1
+          key: yolo11n-onnx-640-v1
 
       - name: Export YOLOv8n to ONNX
         if: steps.yolo-cache.outputs.cache-hit != 'true'
