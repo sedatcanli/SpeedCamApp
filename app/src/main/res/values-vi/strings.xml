@@ -65,6 +65,7 @@
     <string name="targets_desc">Chỉ đo mục đã chọn. Tất cả đo mọi thứ.</string>
     <string name="target_all">Tất cả</string>
     <string name="target_escooter">Xe scooter điện</string>
+    <string name="target_other">Mọi thứ khác</string>
     <string name="targets_note">Lưu ý: mô hình không phân biệt phụ loại (vd. bóng, sedan/SUV); một số qua lớp gần giống.</string>
     <string name="example_template">Cách %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nVí dụ: 100px / 0,2s = %4$.1f km/h</string>
     <string name="msg_optics_fail">Không đọc được quang học, nhập tay</string>

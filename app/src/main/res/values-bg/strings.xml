@@ -65,6 +65,7 @@
     <string name="targets_desc">Мерят се само избраните. При Всички — всичко.</string>
     <string name="target_all">Всички</string>
     <string name="target_escooter">Ел. тротинетка</string>
+    <string name="target_other">Всичко останало</string>
     <string name="targets_note">Бележка: моделът не различава подтипове (напр. топки, седан/SUV); част — през подобен клас.</string>
     <string name="example_template">От %1$.0f м (зуум %2$.1fx) 1 px = %3$.1f см\nПример: 100px / 0,2с = %4$.1f км/ч</string>
     <string name="msg_optics_fail">Оптиката не се чете, въведете ръчно</string>

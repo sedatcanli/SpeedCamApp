@@ -65,6 +65,7 @@
     <string name="targets_desc">Mjere se samo odabrani. Sa Sve se mjeri sve.</string>
     <string name="target_all">Sve</string>
     <string name="target_escooter">E-romobil</string>
+    <string name="target_other">Sve ostalo</string>
     <string name="targets_note">Napomena: model ne razlikuje podtipove (npr. lopte, sedan/SUV); neki sličnom klasom.</string>
     <string name="example_template">S %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nPrimjer: 100px / 0,2s = %4$.1f km/h</string>
     <string name="msg_optics_fail">Optika nečitljiva, unesite ručno</string>

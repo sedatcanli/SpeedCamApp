@@ -65,6 +65,7 @@
     <string name="targets_desc">Se măsoară doar cele selectate. Cu Toate, tot.</string>
     <string name="target_all">Toate</string>
     <string name="target_escooter">Trotinetă electrică</string>
+    <string name="target_other">Tot restul</string>
     <string name="targets_note">Notă: modelul nu distinge subtipuri (ex. mingi, sedan/SUV); unele prin clasă similară.</string>
     <string name="example_template">De la %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nExemplu: 100px / 0,2s = %4$.1f km/h</string>
     <string name="msg_optics_fail">Optica ilizibilă, introduceți manual</string>

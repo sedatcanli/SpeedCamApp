@@ -532,7 +532,12 @@ class MainActivity : AppCompatActivity() {
         val useAll = try { calib.targetAll } catch (_: Exception) { true }
         val useDets = if (useAll) dets else try {
             val allow = calib.targetCoco()
-            dets.filter { it.eng != null && allow.contains(it.eng) }
+            val allowOther = calib.targetIds().contains("other")
+            dets.filter { d ->
+                val e = d.eng
+                if (e != null && allow.contains(e)) true
+                else allowOther && (e == null || !TargetActivity.ALL_COCO.contains(e))
+            }
         } catch (_: Exception) { dets }
         val tracked = try {
             tracker.update(useDets, now)

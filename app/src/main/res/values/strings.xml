@@ -65,6 +65,7 @@
     <string name="targets_desc">Only selected objects are measured. When All is on, everything is measured.</string>
     <string name="target_all">All</string>
     <string name="target_escooter">E-Scooter</string>
+    <string name="target_other">Everything else</string>
     <string name="targets_note">Note: the model cannot split subtypes (e.g. ball types, sedan/SUV); some are caught via similar class.</string>
     <string name="example_template">%1$.0f m away (%2$.1fx zoom) 1 px = %3$.1f cm\nExample: 100px / 0.2s = %4$.1f km/h</string>
     <string name="msg_optics_fail">Could not read optics, enter manually</string>

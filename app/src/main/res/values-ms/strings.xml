@@ -65,6 +65,7 @@
     <string name="targets_desc">Hanya yang dipilih diukur. Semua mengukur semua.</string>
     <string name="target_all">Semua</string>
     <string name="target_escooter">E-Skuter</string>
+    <string name="target_other">Semua yang lain</string>
     <string name="targets_note">Nota: model tidak beza subjenis (cth. bola, sedan/SUV); sebahagian via kelas serupa.</string>
     <string name="example_template">Jarak %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nContoh: 100px / 0,2s = %4$.1f km/j</string>
     <string name="msg_optics_fail">Optik tidak dibaca, isi manual</string>

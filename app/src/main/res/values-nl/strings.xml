@@ -65,6 +65,7 @@
     <string name="targets_desc">Alleen gekozen worden gemeten. Met Alles alles.</string>
     <string name="target_all">Alles</string>
     <string name="target_escooter">E-step</string>
+    <string name="target_other">Al het andere</string>
     <string name="targets_note">Opmerking: model splitst geen subtypes (bijv. ballen, sedan/SUV); sommige via soortgelijke klasse.</string>
     <string name="example_template">Op %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nVoorbeeld: 100px / 0,2s = %4$.1f km/u</string>
     <string name="msg_optics_fail">Optiek onleesbaar, handmatig invoeren</string>

@@ -65,6 +65,7 @@
     <string name="targets_desc">تُقاس المحددة فقط. عند الكل يُقاس كل شيء.</string>
     <string name="target_all">الكل</string>
     <string name="target_escooter">سكوتر كهربائي</string>
+    <string name="target_other">كل شيء آخر</string>
     <string name="targets_note">ملاحظة: النموذج لا يميز الأنواع الفرعية (مثل الكرات، سيدان/SUV)؛ بعضها بفئة مشابهة.</string>
     <string name="example_template">على بعد %1$.0f م (تقريب %2$.1fx) 1 بكسل = %3$.1f سم\nمثال: 100 بكسل / 0.2 ث = %4$.1f كم/س</string>
     <string name="msg_optics_fail">تعذر قراءة البصريات، أدخل يدويا</string>

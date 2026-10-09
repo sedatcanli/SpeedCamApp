@@ -65,6 +65,7 @@
     <string name="targets_desc">僅測量所選項。選擇全部時測量所有。</string>
     <string name="target_all">全部</string>
     <string name="target_escooter">電動滑板車</string>
+    <string name="target_other">其他所有</string>
     <string name="targets_note">註：模型無法區分亞型（如球類、轎車/SUV）；部分透過相似類別捕獲。</string>
     <string name="example_template">%1$.0f 公尺處（變焦 %2$.1fx）1 像素 = %3$.1f 公分\n範例：100 像素 / 0.2 秒 = %4$.1f 公里/時</string>
     <string name="msg_optics_fail">光學參數讀取失敗，請手動輸入</string>

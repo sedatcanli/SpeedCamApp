@@ -65,6 +65,7 @@
     <string name="targets_desc">Измеряются только выбранные. При «Все» — всё.</string>
     <string name="target_all">Все</string>
     <string name="target_escooter">Электросамокат</string>
+    <string name="target_other">Всё остальное</string>
     <string name="targets_note">Примечание: модель не различает подтипы (напр. мячи, седан/SUV); часть — через похожий класс.</string>
     <string name="example_template">С %1$.0f м (зум %2$.1fx) 1 px = %3$.1f см\nПример: 100px / 0,2с = %4$.1f км/ч</string>
     <string name="msg_optics_fail">Оптика не читается, введите вручную</string>

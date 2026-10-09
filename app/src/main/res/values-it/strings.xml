@@ -65,6 +65,7 @@
     <string name="targets_desc">Solo i selezionati vengono misurati. Con Tutti, tutto.</string>
     <string name="target_all">Tutti</string>
     <string name="target_escooter">E-Scooter</string>
+    <string name="target_other">Tutto il resto</string>
     <string name="targets_note">Nota: il modello non distingue i sottotipi (es. palle, berlina/SUV); alcuni per classe simile.</string>
     <string name="example_template">A %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nEsempio: 100px / 0,2s = %4$.1f km/h</string>
     <string name="msg_optics_fail">Ottica illeggibile, inserire a mano</string>

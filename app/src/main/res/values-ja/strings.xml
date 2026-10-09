@@ -65,6 +65,7 @@
     <string name="targets_desc">選択分のみ計測。全てでは全計測。</string>
     <string name="target_all">すべて</string>
     <string name="target_escooter">電動スクーター</string>
+    <string name="target_other">その他すべて</string>
     <string name="targets_note">注：モデルは亜種を区別不可（例：球種、セダン/SUV）。一部は類似クラスで検出。</string>
     <string name="example_template">%1$.0f m先（ズーム %2$.1f倍）1 px = %3$.1f cm\n例：100px / 0.2秒 = %4$.1f km/h</string>
     <string name="msg_optics_fail">光学値が読めません、手動入力</string>

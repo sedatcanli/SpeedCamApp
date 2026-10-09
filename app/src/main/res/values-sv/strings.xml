@@ -65,6 +65,7 @@
     <string name="targets_desc">Endast valda mäts. Med Alla mäts allt.</string>
     <string name="target_all">Alla</string>
     <string name="target_escooter">Elsparkcykel</string>
+    <string name="target_other">Allt annat</string>
     <string name="targets_note">Obs: modellen skiljer inte undertyper (t.ex. bollar, sedan/SUV); vissa via liknande klass.</string>
     <string name="example_template">%1$.0f m bort (zoom %2$.1fx) 1 px = %3$.1f cm\nExempel: 100px / 0,2s = %4$.1f km/h</string>
     <string name="msg_optics_fail">Optik oläslig, ange manuellt</string>

@@ -65,6 +65,7 @@
     <string name="targets_desc">فقط انتخاب‌شده‌ها اندازه‌گیری می‌شوند. با «همه»، همه.</string>
     <string name="target_all">همه</string>
     <string name="target_escooter">اسکوتر برقی</string>
+    <string name="target_other">هر چیز دیگر</string>
     <string name="targets_note">نکته: مدل زیرگونه‌ها را تشخیص نمی‌دهد (مثل توپ‌ها، سدان/SUV)؛ برخی با کلاس مشابه.</string>
     <string name="example_template">در %1$.0f متری (زوم %2$.1fx) هر پیکسل = %3$.1f سانتی‌متر\nمثال: 100 پیکسل / 0.2 ثانیه = %4$.1f کیلومتر/ساعت</string>
     <string name="msg_optics_fail">اپتیک خوانده نشد، دستی وارد کنید</string>

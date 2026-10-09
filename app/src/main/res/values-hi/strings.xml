@@ -65,6 +65,7 @@
     <string name="targets_desc">केवल चुनी हुई मापी जाती हैं। सभी पर सब कुछ।</string>
     <string name="target_all">सभी</string>
     <string name="target_escooter">ई-स्कूटर</string>
+    <string name="target_other">बाकी सब कुछ</string>
     <string name="targets_note">नोट: मॉडल उप-प्रकार नहीं पहचानता (जैसे गेंदें, सेडान/SUV); कुछ समान वर्ग से।</string>
     <string name="example_template">%1$.0f मी दूरी (ज़ूम %2$.1fx) 1 px = %3$.1f सेमी\nउदाहरण: 100px / 0.2s = %4$.1f किमी/घं</string>
     <string name="msg_optics_fail">ऑप्टिक्स पढ़ा नहीं गया, हाथ से डालें</string>

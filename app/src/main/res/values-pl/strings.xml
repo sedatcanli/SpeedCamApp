@@ -65,6 +65,7 @@
     <string name="targets_desc">Mierzone tylko wybrane. Przy Wszystkie – wszystko.</string>
     <string name="target_all">Wszystkie</string>
     <string name="target_escooter">Hulajnoga elektr.</string>
+    <string name="target_other">Cała reszta</string>
     <string name="targets_note">Uwaga: model nie rozróżnia podtypów (np. piłki, sedan/SUV); część przez podobną klasę.</string>
     <string name="example_template">Z %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nPrzykład: 100px / 0,2s = %4$.1f km/h</string>
     <string name="msg_optics_fail">Optyka nieczytelna, wpisz ręcznie</string>
