@@ -50,8 +50,9 @@ object CameraHelper {
                             else -> CameraSelector.LENS_FACING_BACK
                         }
                         val facingStr = when (facingLens) {
-                            CameraSelector.LENS_FACING_FRONT -> "Ön"
-                            else -> "Arka"
+                            CameraSelector.LENS_FACING_FRONT ->
+                                context.getString(R.string.cam_front)
+                            else -> context.getString(R.string.cam_back)
                         }
                         val focal =
                             c.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)
@@ -72,9 +73,11 @@ object CameraHelper {
                             } else emptySet()
                         } catch (_: Throwable) { emptySet() }
                         val kind = when {
-                            facingLens == CameraSelector.LENS_FACING_FRONT -> "selfie"
-                            isLogical && phys.size >= 2 -> "mantıksal"
-                            else -> kindFromFocal(focal?.minOrNull())
+                            facingLens == CameraSelector.LENS_FACING_FRONT ->
+                                context.getString(R.string.kind_selfie)
+                            isLogical && phys.size >= 2 ->
+                                context.getString(R.string.kind_logical)
+                            else -> kindFromFocal(context, focal?.minOrNull())
                         }
                         out.add(
                             CamEntry(
@@ -98,11 +101,11 @@ object CameraHelper {
         listViaCameraX(context, done)
     }
 
-    private fun kindFromFocal(f: Float?): String = when {
-        f == null -> "kamera"
-        f < 3.0f -> "ultra-geniş"
-        f < 4.5f -> "geniş"
-        else -> "zoom/tele"
+    private fun kindFromFocal(context: Context, f: Float?): String = when {
+        f == null -> context.getString(R.string.kind_cam)
+        f < 3.0f -> context.getString(R.string.kind_ultra)
+        f < 4.5f -> context.getString(R.string.kind_wide)
+        else -> context.getString(R.string.kind_tele)
     }
 
     private fun listViaCameraX(context: Context, done: (List<CamEntry>) -> Unit) {
@@ -116,9 +119,11 @@ object CameraHelper {
                             ?: return@mapNotNull null
                         val facingLens = info.lensFacing
                         val facingStr = when (facingLens) {
-                            CameraSelector.LENS_FACING_BACK -> "Arka"
-                            CameraSelector.LENS_FACING_FRONT -> "Ön"
-                            else -> "Diğer"
+                            CameraSelector.LENS_FACING_BACK ->
+                                context.getString(R.string.cam_back)
+                            CameraSelector.LENS_FACING_FRONT ->
+                                context.getString(R.string.cam_front)
+                            else -> context.getString(R.string.cam_other)
                         }
                         CamEntry(id, "$facingStr (ID $id)", facingLens)
                     } catch (_: Exception) { null }

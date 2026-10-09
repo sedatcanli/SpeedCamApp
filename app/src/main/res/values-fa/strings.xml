@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">کالیبراسیون</string>
+    <string name="menu_camera_unit">دوربین / واحد</string>
+    <string name="menu_close">بستن</string>
+    <string name="status_calibration">کالیبراسیون: %1$s</string>
+    <string name="objects_count">%1$d شیء</string>
+    <string name="paused">متوقف</string>
+    <string name="motion_warning">گوشی در حال حرکت است - اندازه‌گیری متوقف شد</string>
+    <string name="title_settings">تنظیمات دوربین / واحد</string>
+    <string name="label_camera">دوربین</string>
+    <string name="cam_default_back">دوربین پشت (پیش‌فرض)</string>
+    <string name="cam_default_front">دوربین جلو (پیش‌فرض)</string>
+    <string name="label_unit">واحد سرعت</string>
+    <string name="unit_kmh">کیلومتر/ساعت</string>
+    <string name="unit_ms">متر/ثانیه</string>
+    <string name="unit_mph">مایل/ساعت</string>
+    <string name="label_analysis_res">وضوح تحلیل</string>
+    <string name="res_fast">سریع (640x480)</string>
+    <string name="res_balanced">متعادل (1280x720)</string>
+    <string name="res_detailed">دقیق (1920x1080)</string>
+    <string name="res_desc">سریع روان است، دقیق اشیای دور را بهتر می‌بیند</string>
+    <string name="label_conf">آستانه تشخیص</string>
+    <string name="label_smooth">هموارسازی (فریم)</string>
+    <string name="label_show_labels">نمایش برچسب‌ها</string>
+    <string name="label_motion">حساسیت حرکتی (کم = حساس)</string>
+    <string name="motion_desc">با لرزش، اندازه‌گیری با قاب قرمز متوقف می‌شود</string>
+    <string name="label_min_speed">فیلتر حداقل سرعت</string>
+    <string name="min_speed_desc">اشیای کمتر از میانگین ۲ ثانیه پنهان می‌شوند (0 = خاموش)</string>
+    <string name="min_speed_off">خاموش</string>
+    <string name="label_max_box">حداکثر اندازه قاب</string>
+    <string name="max_box_desc">قاب‌های بزرگ‌تر شیء نیستند</string>
+    <string name="label_ghost">مدت نمایش شیء گمشده</string>
+    <string name="ghost_desc">شیء گمشده با آخرین سرعت می‌ماند (0 = خاموش)</string>
+    <string name="ghost_off">خاموش</string>
+    <string name="save">ذخیره</string>
+    <string name="msg_saved">تنظیمات ذخیره شد</string>
+    <string name="msg_camera_perm">مجوز دوربین لازم است</string>
+    <string name="msg_camera_error">خطای دوربین: %1$s</string>
+    <string name="title_calibration">کالیبراسیون مثلثاتی</string>
+    <string name="calib_desc">سرعت = حرکت پیکسل × متر/پیکسل / زمان. متر/پیکسل = 2 × فاصله × تانژانت(FOV/2) / عرض تصویر. اپتیک خودکار خوانده می‌شود.</string>
+    <string name="label_optics_auto">مقادیر خودکار</string>
+    <string name="btn_refresh_optics">خواندن دوباره از گوشی</string>
+    <string name="label_distance">فاصله اشیا (متر)</string>
+    <string name="distance_desc">فاصله تا دوربین (مثلا جاده ۱۰ متر)</string>
+    <string name="label_fov_h">میدان دید افقی (درجه)</string>
+    <string name="label_fov_v">میدان دید عمودی (درجه)</string>
+    <string name="btn_calc_preview">محاسبه و پیش‌نمایش</string>
+    <string name="label_ref_fine">تنظیم دقیق با مرجع</string>
+    <string name="ref_desc">طول مشخصی را نشان دهید. مقدار نمایش‌داده‌شده و واقعی را وارد کنید (مثلا واقعی 0.6، نمایشی 0.9).</string>
+    <string name="label_real">طول واقعی (متر)</string>
+    <string name="label_shown">طول نمایش‌داده‌شده (متر)</string>
+    <string name="btn_apply_corr">اعمال تصحیح</string>
+    <string name="msg_corr_applied">تصحیح اعمال شد</string>
+    <string name="msg_invalid">اعداد معتبر وارد کنید</string>
+    <string name="corr_value">ضریب: %1$.3f (1.000 = هیچ)</string>
+    <string name="dlg_ruler_title">تنظیم خط‌کش</string>
+    <string name="dlg_distance">فاصله: %1$s</string>
+    <string name="dlg_reference">مرجع: %1$s</string>
+    <string name="ok">تأیید</string>
+    <string name="cancel">لغو</string>
+    <string name="label_language">زبان</string>
+    <string name="system_default">پیش‌فرض سیستم</string>
+    <string name="example_template">در %1$.0f متری (زوم %2$.1fx) هر پیکسل = %3$.1f سانتی‌متر\nمثال: 100 پیکسل / 0.2 ثانیه = %4$.1f کیلومتر/ساعت</string>
+    <string name="msg_optics_fail">اپتیک خوانده نشد، دستی وارد کنید</string>
+    <string name="msg_optics_ok">خوانده شد: %1$s</string>
+    <string name="msg_optics_err">خطای خواندن</string>
+    <string name="optics_cam">دوربین: %1$d × %2$d (%3$.1f مگاپیکسل)</string>
+    <string name="optics_sensor">حسگر: %1$.2f میلی‌متر عرض</string>
+    <string name="optics_pixel">اندازه پیکسل: %1$.2f میکرومتر</string>
+    <string name="optics_focal">فاصله کانونی: %1$.2f میلی‌متر</string>
+    <string name="optics_none">هنوز خوانده نشده — بروزرسانی را بزنید</string>
+    <string name="dlg_fine">تنظیم دقیق (اگر انگشت لغزید)</string>
+    <string name="scale_value">مقیاس: %1$.4f</string>
+    <string name="ruler_dist">فاصله: %1$s</string>
+    <string name="cam_back">پشت</string>
+    <string name="cam_front">جلو</string>
+    <string name="cam_other">دیگر</string>
+    <string name="kind_ultra">فوق عریض</string>
+    <string name="kind_wide">عریض</string>
+    <string name="kind_tele">زوم/تله</string>
+    <string name="kind_cam">دوربین</string>
+    <string name="kind_selfie">سلفی</string>
+    <string name="kind_logical">منطقی</string>
+</resources>

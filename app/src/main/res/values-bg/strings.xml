@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Калибриране</string>
+    <string name="menu_camera_unit">Камера / Мерна единица</string>
+    <string name="menu_close">Затвори</string>
+    <string name="status_calibration">Калибриране: %1$s</string>
+    <string name="objects_count">%1$d обекта</string>
+    <string name="paused">Пауза</string>
+    <string name="motion_warning">Телефонът се движи - измерването е на пауза</string>
+    <string name="title_settings">Настройки камера / единица</string>
+    <string name="label_camera">Камера</string>
+    <string name="cam_default_back">Задна камера (по подразбиране)</string>
+    <string name="cam_default_front">Предна камера (по подразбиране)</string>
+    <string name="label_unit">Единица за скорост</string>
+    <string name="unit_kmh">Километър/час</string>
+    <string name="unit_ms">Метър/секунда</string>
+    <string name="unit_mph">Мили/час</string>
+    <string name="label_analysis_res">Резолюция на анализа</string>
+    <string name="res_fast">Бърза (640x480)</string>
+    <string name="res_balanced">Балансирана (1280x720)</string>
+    <string name="res_detailed">Детайлна (1920x1080)</string>
+    <string name="res_desc">Бързата е плавна, Детайлната вижда по-добре далечни обекти</string>
+    <string name="label_conf">Праг на откриване</string>
+    <string name="label_smooth">Изглаждане (кадри)</string>
+    <string name="label_show_labels">Покажи етикети</string>
+    <string name="label_motion">Чувствителност при движение (ниска = чувств.)</string>
+    <string name="motion_desc">При трептене измерването паузира с червена рамка</string>
+    <string name="label_min_speed">Филтър минимална скорост</string>
+    <string name="min_speed_desc">Обекти под средното за 2 с са скрити (0 = изкл.)</string>
+    <string name="min_speed_off">Изкл.</string>
+    <string name="label_max_box">Максимален размер на рамката</string>
+    <string name="max_box_desc">По-големите рамки не са обекти</string>
+    <string name="label_ghost">Време за изгубен обект</string>
+    <string name="ghost_desc">Изгубеният обект се вижда с последната скорост (0 = изкл.)</string>
+    <string name="ghost_off">Изкл.</string>
+    <string name="save">Запази</string>
+    <string name="msg_saved">Настройките са запазени</string>
+    <string name="msg_camera_perm">Необходимо е разрешение за камера</string>
+    <string name="msg_camera_error">Грешка в камерата: %1$s</string>
+    <string name="title_calibration">Тригонометрично калибриране</string>
+    <string name="calib_desc">Скорост = движение в пиксели x метър/пиксел / време. метър/пиксел = 2 x Разстояние x tan(FOV/2) / ширина на образа. Оптиката се чете автоматично.</string>
+    <string name="label_optics_auto">Автоматично прочетени стойности</string>
+    <string name="btn_refresh_optics">Прочети отново от телефона</string>
+    <string name="label_distance">Разстояние до обектите (метри)</string>
+    <string name="distance_desc">Разстояние до камерата (напр. улица 10 м)</string>
+    <string name="label_fov_h">Хоризонтален FOV (градуси)</string>
+    <string name="label_fov_v">Вертикален FOV (градуси)</string>
+    <string name="btn_calc_preview">Изчисли и покажи</string>
+    <string name="label_ref_fine">Фина настройка с еталон</string>
+    <string name="ref_desc">Покажете известна дължина. Въведете показана и реална стойност (напр. реал. 0,6 м, показ. 0,9 м).</string>
+    <string name="label_real">Реална дължина (метри)</string>
+    <string name="label_shown">Показана дължина (метри)</string>
+    <string name="btn_apply_corr">Приложи корекцията</string>
+    <string name="msg_corr_applied">Корекцията е приложена</string>
+    <string name="msg_invalid">Въведете валидни числа</string>
+    <string name="corr_value">Коефициент: %1$.3f (1,000 = няма)</string>
+    <string name="dlg_ruler_title">Настройка на линийката</string>
+    <string name="dlg_distance">Разстояние: %1$s</string>
+    <string name="dlg_reference">Еталон: %1$s</string>
+    <string name="ok">ОК</string>
+    <string name="cancel">Отказ</string>
+    <string name="label_language">Език</string>
+    <string name="system_default">Системен по подразбиране</string>
+    <string name="example_template">От %1$.0f м (зуум %2$.1fx) 1 px = %3$.1f см\nПример: 100px / 0,2с = %4$.1f км/ч</string>
+    <string name="msg_optics_fail">Оптиката не се чете, въведете ръчно</string>
+    <string name="msg_optics_ok">Прочетено: %1$s</string>
+    <string name="msg_optics_err">Грешка при четене</string>
+    <string name="optics_cam">Камера: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Сензор: %1$.2f мм ширина</string>
+    <string name="optics_pixel">Размер на пиксела: %1$.2f µm</string>
+    <string name="optics_focal">Фокусно разстояние: %1$.2f мм</string>
+    <string name="optics_none">Все още непрочетено — натиснете Обнови</string>
+    <string name="dlg_fine">Фина настройка (ако пръстите се плъзгат)</string>
+    <string name="scale_value">Мащаб: %1$.4f</string>
+    <string name="ruler_dist">Разст.: %1$s</string>
+    <string name="cam_back">Задна</string>
+    <string name="cam_front">Предна</string>
+    <string name="cam_other">Друга</string>
+    <string name="kind_ultra">ултраширока</string>
+    <string name="kind_wide">широка</string>
+    <string name="kind_tele">зуум/теле</string>
+    <string name="kind_cam">камера</string>
+    <string name="kind_selfie">селфи</string>
+    <string name="kind_logical">логическа</string>
+</resources>

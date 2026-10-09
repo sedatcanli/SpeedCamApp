@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">보정</string>
+    <string name="menu_camera_unit">카메라 / 단위</string>
+    <string name="menu_close">닫기</string>
+    <string name="status_calibration">보정: %1$s</string>
+    <string name="objects_count">%1$d개 물체</string>
+    <string name="paused">일시정지됨</string>
+    <string name="motion_warning">휴대폰이 움직입니다 - 측정 일시정지</string>
+    <string name="title_settings">카메라 / 단위 설정</string>
+    <string name="label_camera">카메라</string>
+    <string name="cam_default_back">후면 카메라 (기본)</string>
+    <string name="cam_default_front">전면 카메라 (기본)</string>
+    <string name="label_unit">속도 단위</string>
+    <string name="unit_kmh">킬로미터/시간</string>
+    <string name="unit_ms">미터/초</string>
+    <string name="unit_mph">마일/시간</string>
+    <string name="label_analysis_res">분석 해상도</string>
+    <string name="res_fast">빠름 (640x480)</string>
+    <string name="res_balanced">균형 (1280x720)</string>
+    <string name="res_detailed">정밀 (1920x1080)</string>
+    <string name="res_desc">빠름은 부드럽고, 정밀은 먼 물체를 잘 잡습니다</string>
+    <string name="label_conf">감지 임계값</string>
+    <string name="label_smooth">평활화 (프레임)</string>
+    <string name="label_show_labels">레이블 표시</string>
+    <string name="label_motion">움직임 감도 (낮음 = 민감)</string>
+    <string name="motion_desc">흔들리면 빨간 테두리로 측정 일시정지</string>
+    <string name="label_min_speed">최소 속도 필터</string>
+    <string name="min_speed_desc">2초 평균 미만 물체 숨김 (0 = 끔)</string>
+    <string name="min_speed_off">끔</string>
+    <string name="label_max_box">최대 상자 크기</string>
+    <string name="max_box_desc">더 큰 상자는 물체가 아닙니다</string>
+    <string name="label_ghost">놓친 물체 표시 시간</string>
+    <string name="ghost_desc">놓친 물체를 마지막 속도로 표시 (0 = 끔)</string>
+    <string name="ghost_off">끔</string>
+    <string name="save">저장</string>
+    <string name="msg_saved">설정이 저장되었습니다</string>
+    <string name="msg_camera_perm">카메라 권한이 필요합니다</string>
+    <string name="msg_camera_error">카메라 오류: %1$s</string>
+    <string name="title_calibration">삼각 보정</string>
+    <string name="calib_desc">속도 = 픽셀 이동 × 미터/픽셀 / 시간. 미터/픽셀 = 2 × 거리 × tan(FOV/2) / 영상 너비. 광학값은 자동 판독.</string>
+    <string name="label_optics_auto">자동 판독값</string>
+    <string name="btn_refresh_optics">휴대폰에서 다시 읽기</string>
+    <string name="label_distance">물체 거리 (미터)</string>
+    <string name="distance_desc">카메라까지 거리 (예: 도로 10 m)</string>
+    <string name="label_fov_h">수평 화각 (도)</string>
+    <string name="label_fov_v">수직 화각 (도)</string>
+    <string name="btn_calc_preview">계산 및 미리보기</string>
+    <string name="label_ref_fine">기준 미세 조정</string>
+    <string name="ref_desc">알려진 길이를 비추세요. 표시값과 실제값을 입력 (예: 실제 0.6 m, 표시 0.9 m).</string>
+    <string name="label_real">실제 길이 (미터)</string>
+    <string name="label_shown">표시된 길이 (미터)</string>
+    <string name="btn_apply_corr">보정 적용</string>
+    <string name="msg_corr_applied">보정이 적용되었습니다</string>
+    <string name="msg_invalid">올바른 숫자를 입력하세요</string>
+    <string name="corr_value">보정 계수: %1$.3f (1.000 = 없음)</string>
+    <string name="dlg_ruler_title">자 설정</string>
+    <string name="dlg_distance">거리: %1$s</string>
+    <string name="dlg_reference">기준: %1$s</string>
+    <string name="ok">확인</string>
+    <string name="cancel">취소</string>
+    <string name="label_language">언어</string>
+    <string name="system_default">시스템 기본값</string>
+    <string name="example_template">%1$.0f m 거리 (줌 %2$.1f배) 1 px = %3$.1f cm\n예: 100px / 0.2초 = %4$.1f km/h</string>
+    <string name="msg_optics_fail">광학값을 읽을 수 없어 직접 입력하세요</string>
+    <string name="msg_optics_ok">읽음: %1$s</string>
+    <string name="msg_optics_err">읽기 오류</string>
+    <string name="optics_cam">카메라: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">센서: 너비 %1$.2f mm</string>
+    <string name="optics_pixel">픽셀 크기: %1$.2f µm</string>
+    <string name="optics_focal">초점 거리: %1$.2f mm</string>
+    <string name="optics_none">아직 읽지 않음 — 새로고침을 누르세요</string>
+    <string name="dlg_fine">미세 조정 (손가락이 미끄러질 때)</string>
+    <string name="scale_value">스케일: %1$.4f</string>
+    <string name="ruler_dist">거리: %1$s</string>
+    <string name="cam_back">후면</string>
+    <string name="cam_front">전면</string>
+    <string name="cam_other">기타</string>
+    <string name="kind_ultra">울트라 와이드</string>
+    <string name="kind_wide">와이드</string>
+    <string name="kind_tele">줌/텔레</string>
+    <string name="kind_cam">카메라</string>
+    <string name="kind_selfie">셀피</string>
+    <string name="kind_logical">논리</string>
+</resources>

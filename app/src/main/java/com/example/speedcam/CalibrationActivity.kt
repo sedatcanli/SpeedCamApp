@@ -42,16 +42,16 @@ class CalibrationActivity : AppCompatActivity() {
                 val info = calib.refreshOptics(this, true)
                 if (info == null) {
                     Toast.makeText(
-                        this, "Optik okunamadı, değerleri elle girin",
+                        this, getString(R.string.msg_optics_fail),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Toast.makeText(
-                        this, "Okundu: %s".format(info.cameraId), Toast.LENGTH_SHORT
+                        this, getString(R.string.msg_optics_ok, info.cameraId), Toast.LENGTH_SHORT
                     ).show()
                 }
             } catch (_: Exception) {
-                Toast.makeText(this, "Okuma hatası", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_optics_err), Toast.LENGTH_SHORT).show()
             }
             fillFields()
             updatePreview()
@@ -68,19 +68,19 @@ class CalibrationActivity : AppCompatActivity() {
             val real = parseDec(binding.etReal.text.toString())
             val shown = parseDec(binding.etShown.text.toString())
             if (real == null || shown == null || real <= 0f || shown <= 0f) {
-                Toast.makeText(this, "Gerçek ve gösterilen uzunluğu girin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_invalid), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val corr = (real / shown).coerceIn(0.3f, 3f)
             calib.scaleCorr = corr
             binding.tvCorr.text = corrText()
             updatePreview()
-            Toast.makeText(this, "Düzeltme uygulandı", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_corr_applied), Toast.LENGTH_SHORT).show()
         }
 
         binding.btnSave.setOnClickListener {
             if (!readInputs()) return@setOnClickListener
-            Toast.makeText(this, "Kaydedildi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_saved), Toast.LENGTH_SHORT).show()
             finish()
         }
     }
@@ -95,24 +95,26 @@ class CalibrationActivity : AppCompatActivity() {
     }
 
     private fun corrText(): String =
-        "İnce ayar katsayısı: %.3f (1.000 = düzeltme yok)".format(calib.scaleCorr)
+        getString(R.string.corr_value, calib.scaleCorr)
 
-    private fun opticsText(): String {        val sb = StringBuilder()
+    private fun opticsText(): String {
+        val sb = StringBuilder()
         if (calib.arrayW > 0) {
-            sb.append("Kamera: %d x %d (%.1f MP)\n".format(
-                calib.arrayW, calib.arrayH, calib.sensorMp))
-        } else sb.append("Kamera çözünürlüğü: okunamadı\n")
+            sb.append(getString(
+                R.string.optics_cam, calib.arrayW, calib.arrayH, calib.sensorMp
+            )).append('\n')
+        } else sb.append(getString(R.string.optics_none)).append('\n')
         if (calib.sensorWmm > 0f) {
-            sb.append("Sensör: %.2f mm genişlik\n".format(calib.sensorWmm))
+            sb.append(getString(R.string.optics_sensor, calib.sensorWmm)).append('\n')
         }
         if (calib.pixelUm > 0f) {
-            sb.append("Piksel boyutu: %.2f µm\n".format(calib.pixelUm))
+            sb.append(getString(R.string.optics_pixel, calib.pixelUm)).append('\n')
         }
         if (calib.focalMm > 0f) {
-            sb.append("Odak uzaklığı: %.2f mm".format(calib.focalMm))
+            sb.append(getString(R.string.optics_focal, calib.focalMm))
         }
-        if (sb.isEmpty()) sb.append("Henüz okunamadı — Yenile'ye basın")
-        return sb.toString()
+        val s = sb.toString().trim()
+        return s.ifEmpty { getString(R.string.optics_none) }
     }
 
     /** Alanları okuyup kaydet; geçersizse false. */
@@ -121,15 +123,15 @@ class CalibrationActivity : AppCompatActivity() {
         val fh = parseDec(binding.etFovH.text.toString())
         val fv = parseDec(binding.etFovV.text.toString())
         if (d == null || d < 0.5f || d > 500f) {
-            Toast.makeText(this, "Uzaklık 0.5 - 500 m olmalı", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_invalid), Toast.LENGTH_SHORT).show()
             return false
         }
         if (fh == null || fh < 5f || fh > 170f) {
-            Toast.makeText(this, "Yatay FOV 5 - 170° olmalı", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_invalid), Toast.LENGTH_SHORT).show()
             return false
         }
         if (fv == null || fv < 5f || fv > 170f) {
-            Toast.makeText(this, "Dikey FOV 5 - 170° olmalı", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_invalid), Toast.LENGTH_SHORT).show()
             return false
         }
         calib.distanceM = d
@@ -159,12 +161,11 @@ class CalibrationActivity : AppCompatActivity() {
             } catch (_: Exception) { }
             val cmPerPx = visW / imgW * 100 * hFrac
             val exMs = (100f / imgW * visW).toFloat() / 0.2f
+            val exKmh = exMs * 3.6f
             binding.tvExample.text =
-                "%.0f m uzakta (%.1fx zoom) 1 px = %.1f cm\nÖrnek: 100px / 0.2sn = %.1f km/h".format(
-                    d, zoom, cmPerPx, exMs * 3.6f
-                )
+                getString(R.string.example_template, d, zoom, cmPerPx, exKmh)
         } else {
-            binding.tvExample.text = "Önce geçerli FOV girin"
+            binding.tvExample.text = getString(R.string.msg_invalid)
         }
     }
 }

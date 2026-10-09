@@ -32,7 +32,7 @@
         android:textColor="#FFF"
         android:textSize="11sp"
         android:padding="4dp"
-        android:text="Kalibrasyon"
+        android:text="@string/menu_calibration"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -44,7 +44,7 @@
         android:textColor="#FFF"
         android:textSize="11sp"
         android:padding="4dp"
-        android:text="0 nesne"
+        android:text="@string/paused"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -58,7 +58,7 @@
         android:textStyle="bold"
         android:padding="4dp"
         android:visibility="gone"
-        android:text="Hareket var - ölçüm duraklatıldı"
+        android:text="@string/motion_warning"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -115,7 +115,7 @@
             android:textSize="11sp"
             android:minHeight="32dp"
             android:padding="2dp"
-            android:text="Kalibrasyon" />
+            android:text="@string/menu_calibration" />
 
         <Button
             android:id="@+id/btnSettings"
@@ -126,7 +126,7 @@
             android:textSize="11sp"
             android:minHeight="32dp"
             android:padding="2dp"
-            android:text="Kamera / Birim" />
+            android:text="@string/menu_camera_unit" />
 
         <Button
             android:id="@+id/btnExit"
@@ -137,6 +137,6 @@
             android:textSize="11sp"
             android:minHeight="32dp"
             android:padding="2dp"
-            android:text="Kapat" />
+            android:text="@string/menu_close" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

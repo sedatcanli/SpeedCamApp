@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) startCamera(force = true) else Toast.makeText(
-            this, "Kamera izni gerekli", Toast.LENGTH_LONG
+            this, getString(R.string.msg_camera_perm), Toast.LENGTH_LONG
         ).show()
     }
 
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                     binding.tvMotion.visibility =
                         if (moving) android.view.View.VISIBLE else android.view.View.GONE
                     binding.overlay.setWarning(moving)
-                    if (moving) binding.tvCount.text = "Duraklatıldı"
+                    if (moving) binding.tvCount.text = getString(R.string.paused)
                 } catch (_: Exception) { }
             }
         }
@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         motion.threshold = calib.motionThreshold
         motion.start()
         try {
-            binding.tvStatus.text = "Kalibrasyon: " + calib.summary()
+            binding.tvStatus.text = getString(R.string.status_calibration, calib.summary(this))
         } catch (_: Exception) { }
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
             PackageManager.PERMISSION_GRANTED
@@ -307,14 +307,14 @@ class MainActivity : AppCompatActivity() {
                     boundCameraKey = null
                     runOnUiThread {
                         Toast.makeText(
-                            this, "Kamera hatası: ${e.message}", Toast.LENGTH_LONG
+                            this, getString(R.string.msg_camera_error, e.message), Toast.LENGTH_LONG
                         ).show()
                     }
                 }
             } catch (e: Exception) {
                 runOnUiThread {
                     Toast.makeText(
-                        this, "Kamera başlatılamadı: ${e.message}", Toast.LENGTH_LONG
+                        this, getString(R.string.msg_camera_error, e.message), Toast.LENGTH_LONG
                     ).show()
                 }
             }
@@ -414,17 +414,17 @@ class MainActivity : AppCompatActivity() {
             fun fmt(d: Float): String =
                 if (d < 10f) "%.1f m".format(d) else "%.0f m".format(d)
             SliderUtils.setSafe(slider, sliderOf(calib.distanceM))
-            tvDist.text = "Uzaklık: " + fmt(distOf(slider.value))
+            tvDist.text = getString(R.string.dlg_distance, fmt(distOf(slider.value)))
             slider.addOnChangeListener { _, v, _ ->
                 val d = distOf(v)
-                tvDist.text = "Uzaklık: " + fmt(d)
+                tvDist.text = getString(R.string.dlg_distance, fmt(d))
                 calib.distanceM = d.coerceIn(0.5f, 500f)
             }
             SliderUtils.setSafe(sliderRef, sliderOfRef(calib.refLenM))
-            tvRef.text = "Referans: " + fmt(refOf(sliderRef.value))
+            tvRef.text = getString(R.string.dlg_reference, fmt(refOf(sliderRef.value)))
             sliderRef.addOnChangeListener { _, v, _ ->
                 val d = refOf(v)
-                tvRef.text = "Referans: " + fmt(d)
+                tvRef.text = getString(R.string.dlg_reference, fmt(d))
                 calib.refLenM = d.coerceIn(0.05f, 100f)
             }
             // İnce ayar: ölçek katsayısını binde 2 adımlarla dürt
@@ -432,7 +432,7 @@ class MainActivity : AppCompatActivity() {
                 textSize = 18f
                 gravity = android.view.Gravity.CENTER
             }
-            fun corrText(): String = "Ölçek: %.4f".format(calib.scaleCorr)
+            fun corrText(): String = getString(R.string.scale_value, calib.scaleCorr)
             tvCorr.text = corrText()
             val btnMinus = android.widget.Button(this).apply { text = "−" }
             val btnPlus = android.widget.Button(this).apply { text = "+" }
@@ -474,21 +474,21 @@ class MainActivity : AppCompatActivity() {
                 val tvFine = android.widget.TextView(this@MainActivity).apply {
                     textSize = 14f
                     gravity = android.view.Gravity.CENTER
-                    text = "İnce ayar (parmakla tutturamayınca)"
+                    text = getString(R.string.dlg_fine)
                 }
                 addView(tvFine, lp)
                 addView(rowCorr, lp)
             }
             androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("Cetvel ayarı")
+                .setTitle(getString(R.string.dlg_ruler_title))
                 .setView(layout)
-                .setPositiveButton("Tamam") { _, _ ->
+                .setPositiveButton(getString(R.string.ok)) { _, _ ->
                     reportedEngine = null
                     try {
-                        binding.tvStatus.text = "Kalibrasyon: " + calib.summary()
+                        binding.tvStatus.text = getString(R.string.status_calibration, calib.summary(this))
                     } catch (_: Exception) { }
                 }
-                .setNegativeButton("Vazgeç", null)
+                .setNegativeButton(getString(R.string.cancel), null)
                 .show()
         } catch (_: Exception) { }
     }
@@ -502,7 +502,7 @@ class MainActivity : AppCompatActivity() {
                 try {
                     binding.overlay.setResults(emptyList(), calib.speedUnit, calib.showLabels)
                     binding.overlay.setWarning(true)
-                    binding.tvCount.text = "Duraklatıldı"
+                    binding.tvCount.text = getString(R.string.paused)
                 } catch (_: Exception) { }
             }
             return
@@ -547,11 +547,11 @@ class MainActivity : AppCompatActivity() {
                     snapshot, calib.speedUnit, calib.showLabels
                 )
                 if (mPerViewPx > 0f) binding.overlay.setScaleBar(mPerViewPx)
-                binding.tvCount.text = "%d nesne".format(snapshot.size)
+                binding.tvCount.text = getString(R.string.objects_count, snapshot.size)
                 if (reportedEngine != engine) {
                     reportedEngine = engine
                     binding.tvStatus.text =
-                        "Kalibrasyon: " + calib.summary() + " • " + engine
+                        getString(R.string.status_calibration, calib.summary(this)) + " • " + engine
                 }
             } catch (_: Exception) { }
         }

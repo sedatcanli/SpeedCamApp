@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Kalibrace</string>
+    <string name="menu_camera_unit">Kamera / Jednotka</string>
+    <string name="menu_close">Zavřít</string>
+    <string name="status_calibration">Kalibrace: %1$s</string>
+    <string name="objects_count">%1$d objektů</string>
+    <string name="paused">Pozastaveno</string>
+    <string name="motion_warning">Telefon se hýbe - měření pozastaveno</string>
+    <string name="title_settings">Nastavení kamery / jednotky</string>
+    <string name="label_camera">Kamera</string>
+    <string name="cam_default_back">Zadní kamera (výchozí)</string>
+    <string name="cam_default_front">Přední kamera (výchozí)</string>
+    <string name="label_unit">Jednotka rychlosti</string>
+    <string name="unit_kmh">Kilometr/hodina</string>
+    <string name="unit_ms">Metr/sekunda</string>
+    <string name="unit_mph">Míle/hodina</string>
+    <string name="label_analysis_res">Rozlišení analýzy</string>
+    <string name="res_fast">Rychlé (640x480)</string>
+    <string name="res_balanced">Vyvážené (1280x720)</string>
+    <string name="res_detailed">Detailní (1920x1080)</string>
+    <string name="res_desc">Rychlé je plynulé, Detailní lépe vidí vzdálené objekty</string>
+    <string name="label_conf">Práh detekce</string>
+    <string name="label_smooth">Vyhlazení (snímky)</string>
+    <string name="label_show_labels">Zobrazit popisky</string>
+    <string name="label_motion">Citlivost na pohyb (nízká = citlivá)</string>
+    <string name="motion_desc">Při otřesu se měření pozastaví s červeným rámečkem</string>
+    <string name="label_min_speed">Filtr minimální rychlosti</string>
+    <string name="min_speed_desc">Objekty pod průměrem 2 s skryty (0 = vyp.)</string>
+    <string name="min_speed_off">Vyp.</string>
+    <string name="label_max_box">Maximální velikost rámečku</string>
+    <string name="max_box_desc">Větší rámečky nejsou objekty</string>
+    <string name="label_ghost">Doba zobrazení ztraceného objektu</string>
+    <string name="ghost_desc">Ztracený objekt viditelný s poslední rychlostí (0 = vyp.)</string>
+    <string name="ghost_off">Vyp.</string>
+    <string name="save">Uložit</string>
+    <string name="msg_saved">Nastavení uloženo</string>
+    <string name="msg_camera_perm">Je vyžadováno oprávnění kamery</string>
+    <string name="msg_camera_error">Chyba kamery: %1$s</string>
+    <string name="title_calibration">Trigonometrická kalibrace</string>
+    <string name="calib_desc">Rychlost = pohyb v pixelech x metr/pixel / čas. metr/pixel = 2 x Vzdálenost x tan(FOV/2) / šířka obrazu. Optika čtena automaticky.</string>
+    <string name="label_optics_auto">Automaticky načtené hodnoty</string>
+    <string name="btn_refresh_optics">Načíst z telefonu znovu</string>
+    <string name="label_distance">Vzdálenost objektů (metry)</string>
+    <string name="distance_desc">Vzdálenost od kamery (např. silnice 10 m)</string>
+    <string name="label_fov_h">Horizontální FOV (stupně)</string>
+    <string name="label_fov_v">Vertikální FOV (stupně)</string>
+    <string name="btn_calc_preview">Spočítat a ukázat</string>
+    <string name="label_ref_fine">Jemné doladění referencí</string>
+    <string name="ref_desc">Ukažte známou délku. Zadejte zobrazenou a skutečnou hodnotu (např. skut. 0,6 m, zobr. 0,9 m).</string>
+    <string name="label_real">Skutečná délka (metry)</string>
+    <string name="label_shown">Zobrazená délka (metry)</string>
+    <string name="btn_apply_corr">Použít korekci</string>
+    <string name="msg_corr_applied">Korekce použita</string>
+    <string name="msg_invalid">Zadejte platná čísla</string>
+    <string name="corr_value">Koeficient: %1$.3f (1,000 = žádný)</string>
+    <string name="dlg_ruler_title">Nastavení pravítka</string>
+    <string name="dlg_distance">Vzdálenost: %1$s</string>
+    <string name="dlg_reference">Reference: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Zrušit</string>
+    <string name="label_language">Jazyk</string>
+    <string name="system_default">Výchozí systému</string>
+    <string name="example_template">Ze %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nPříklad: 100px / 0,2s = %4$.1f km/h</string>
+    <string name="msg_optics_fail">Optiku nelze číst, zadejte ručně</string>
+    <string name="msg_optics_ok">Načteno: %1$s</string>
+    <string name="msg_optics_err">Chyba čtení</string>
+    <string name="optics_cam">Kamera: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Senzor: %1$.2f mm šířka</string>
+    <string name="optics_pixel">Velikost pixelu: %1$.2f µm</string>
+    <string name="optics_focal">Ohnisková vzdálenost: %1$.2f mm</string>
+    <string name="optics_none">Zatím nenačteno — stiskněte Obnovit</string>
+    <string name="dlg_fine">Jemné doladění (když kloužou prsty)</string>
+    <string name="scale_value">Měřítko: %1$.4f</string>
+    <string name="ruler_dist">Vzdál.: %1$s</string>
+    <string name="cam_back">Zadní</string>
+    <string name="cam_front">Přední</string>
+    <string name="cam_other">Jiná</string>
+    <string name="kind_ultra">ultraširoká</string>
+    <string name="kind_wide">široká</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">kamera</string>
+    <string name="kind_selfie">selfie</string>
+    <string name="kind_logical">logická</string>
+</resources>

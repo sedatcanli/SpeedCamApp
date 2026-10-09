@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">การสอบเทียบ</string>
+    <string name="menu_camera_unit">กล้อง / หน่วย</string>
+    <string name="menu_close">ปิด</string>
+    <string name="status_calibration">การสอบเทียบ: %1$s</string>
+    <string name="objects_count">%1$d วัตถุ</string>
+    <string name="paused">หยุดชั่วคราว</string>
+    <string name="motion_warning">โทรศัพท์เคลื่อนไหว - หยุดวัดชั่วคราว</string>
+    <string name="title_settings">ตั้งค่ากล้อง / หน่วย</string>
+    <string name="label_camera">กล้อง</string>
+    <string name="cam_default_back">กล้องหลัง (ค่าเริ่มต้น)</string>
+    <string name="cam_default_front">กล้องหน้า (ค่าเริ่มต้น)</string>
+    <string name="label_unit">หน่วยความเร็ว</string>
+    <string name="unit_kmh">กิโลเมตร/ชั่วโมง</string>
+    <string name="unit_ms">เมตร/วินาที</string>
+    <string name="unit_mph">ไมล์/ชั่วโมง</string>
+    <string name="label_analysis_res">ความละเอียดวิเคราะห์</string>
+    <string name="res_fast">เร็ว (640x480)</string>
+    <string name="res_balanced">สมดุล (1280x720)</string>
+    <string name="res_detailed">ละเอียด (1920x1080)</string>
+    <string name="res_desc">เร็วจะลื่นไหล ละเอียดจะจับวัตถุไกลได้ดีกว่า</string>
+    <string name="label_conf">เกณฑ์ตรวจจับ</string>
+    <string name="label_smooth">ปรับเรียบ (เฟรม)</string>
+    <string name="label_show_labels">แสดงป้าย</string>
+    <string name="label_motion">ความไวการเคลื่อนไหว (ต่ำ = ไว)</string>
+    <string name="motion_desc">เมื่อสั่น การวัดจะหยุดพร้อมกรอบแดง</string>
+    <string name="label_min_speed">ตัวกรองความเร็วขั้นต่ำ</string>
+    <string name="min_speed_desc">วัตถุช้ากว่าค่าเฉลี่ย 2 วินาทีจะถูกซ่อน (0 = ปิด)</string>
+    <string name="min_speed_off">ปิด</string>
+    <string name="label_max_box">ขนาดกรอบสูงสุด</string>
+    <string name="max_box_desc">กรอบที่ใหญ่กว่าไม่ใช่วัตถุ</string>
+    <string name="label_ghost">เวลแสดงวัตถุที่หายไป</string>
+    <string name="ghost_desc">วัตถุที่หายไปยังแสดงด้วยความเร็วสุดท้าย (0 = ปิด)</string>
+    <string name="ghost_off">ปิด</string>
+    <string name="save">บันทึก</string>
+    <string name="msg_saved">บันทึกการตั้งค่าแล้ว</string>
+    <string name="msg_camera_perm">ต้องการสิทธิ์กล้อง</string>
+    <string name="msg_camera_error">กล้องผิดพลาด: %1$s</string>
+    <string name="title_calibration">การสอบเทียบตรีโกณ</string>
+    <string name="calib_desc">ความเร็ว = การเคลื่อนพิกเซล × เมตร/พิกเซล / เวลา เมตร/พิกเซล = 2 × ระยะ × tan(FOV/2) / ความกว้างภาพ ค่าออปติกอ่านอัตโนมัติ</string>
+    <string name="label_optics_auto">ค่าที่อ่านอัตโนมัติ</string>
+    <string name="btn_refresh_optics">อ่านจากโทรศัพท์อีกครั้ง</string>
+    <string name="label_distance">ระยะวัตถุ (เมตร)</string>
+    <string name="distance_desc">ระยะถึงกล้อง (เช่น ถนน 10 ม.)</string>
+    <string name="label_fov_h">มุมมองแนวนอน (องศา)</string>
+    <string name="label_fov_v">มุมมองแนวตั้ง (องศา)</string>
+    <string name="btn_calc_preview">คำนวณและดูตัวอย่าง</string>
+    <string name="label_ref_fine">ปรับละเอียดด้วยค่าอ้างอิง</string>
+    <string name="ref_desc">แสดงความยาวที่ทราบ ป้อนค่าที่แสดงและค่าจริง (เช่น จริง 0.6 ม. แสดง 0.9 ม.)</string>
+    <string name="label_real">ความยาวจริง (เมตร)</string>
+    <string name="label_shown">ความยาวที่แสดง (เมตร)</string>
+    <string name="btn_apply_corr">ใช้ค่าปรับ</string>
+    <string name="msg_corr_applied">ใช้ค่าปรับแล้ว</string>
+    <string name="msg_invalid">ป้อนตัวเลขที่ถูกต้อง</string>
+    <string name="corr_value">ตัวคูณ: %1$.3f (1.000 = ไม่มี)</string>
+    <string name="dlg_ruler_title">ตั้งค่าไม้บรรทัด</string>
+    <string name="dlg_distance">ระยะ: %1$s</string>
+    <string name="dlg_reference">อ้างอิง: %1$s</string>
+    <string name="ok">ตกลง</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="label_language">ภาษา</string>
+    <string name="system_default">ค่าเริ่มต้นระบบ</string>
+    <string name="example_template">ระยะ %1$.0f ม. (ซูม %2$.1fx) 1 px = %3$.1f ซม.\nตัวอย่าง: 100px / 0.2วิ = %4$.1f กม./ชม.</string>
+    <string name="msg_optics_fail">อ่านค่าออปติกไม่ได้ กรอกเอง</string>
+    <string name="msg_optics_ok">อ่านแล้ว: %1$s</string>
+    <string name="msg_optics_err">อ่านผิดพลาด</string>
+    <string name="optics_cam">กล้อง: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">เซ็นเซอร์: กว้าง %1$.2f มม.</string>
+    <string name="optics_pixel">ขนาดพิกเซล: %1$.2f µm</string>
+    <string name="optics_focal">ทางยาวโฟกัส: %1$.2f มม.</string>
+    <string name="optics_none">ยังไม่ได้อ่าน — กดรีเฟรช</string>
+    <string name="dlg_fine">ปรับละเอียด (เมื่อนิ้วลื่น)</string>
+    <string name="scale_value">สเกล: %1$.4f</string>
+    <string name="ruler_dist">ระยะ: %1$s</string>
+    <string name="cam_back">หลัง</string>
+    <string name="cam_front">หน้า</string>
+    <string name="cam_other">อื่น</string>
+    <string name="kind_ultra">มุมกว้างพิเศษ</string>
+    <string name="kind_wide">มุมกว้าง</string>
+    <string name="kind_tele">ซูม/เทเล</string>
+    <string name="kind_cam">กล้อง</string>
+    <string name="kind_selfie">เซลฟี่</string>
+    <string name="kind_logical">ลอจิคัล</string>
+</resources>

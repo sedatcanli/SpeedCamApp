@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Калібрування</string>
+    <string name="menu_camera_unit">Камера / Одиниця</string>
+    <string name="menu_close">Закрити</string>
+    <string name="status_calibration">Калібрування: %1$s</string>
+    <string name="objects_count">Об\'єктів: %1$d</string>
+    <string name="paused">Пауза</string>
+    <string name="motion_warning">Телефон рухається - вимірювання на паузі</string>
+    <string name="title_settings">Налаштування камери / одиниць</string>
+    <string name="label_camera">Камера</string>
+    <string name="cam_default_back">Задня камера (за замовч.)</string>
+    <string name="cam_default_front">Передня камера (за замовч.)</string>
+    <string name="label_unit">Одиниця швидкості</string>
+    <string name="unit_kmh">Кілометр/година</string>
+    <string name="unit_ms">Метр/секунда</string>
+    <string name="unit_mph">Миль/година</string>
+    <string name="label_analysis_res">Роздільність аналізу</string>
+    <string name="res_fast">Швидка (640x480)</string>
+    <string name="res_balanced">Збалансована (1280x720)</string>
+    <string name="res_detailed">Детальна (1920x1080)</string>
+    <string name="res_desc">Швидка - плавно, Детальна краще бачить далекі об\'єкти</string>
+    <string name="label_conf">Поріг виявлення</string>
+    <string name="label_smooth">Згладжування (кадри)</string>
+    <string name="label_show_labels">Показувати підписи</string>
+    <string name="label_motion">Чутливість до руху (менше = чутл.)</string>
+    <string name="motion_desc">При трясці вимірювання стане на паузу з червоною рамкою</string>
+    <string name="label_min_speed">Фільтр мінімальної швидкості</string>
+    <string name="min_speed_desc">Об\'єкти повільніші за середнє за 2 с приховано (0 = вимк)</string>
+    <string name="min_speed_off">Вимк</string>
+    <string name="label_max_box">Максимальний розмір рамки</string>
+    <string name="max_box_desc">Більші рамки - не об\'єкти</string>
+    <string name="label_ghost">Час показу втраченого об\'єкта</string>
+    <string name="ghost_desc">Втрачений об\'єкт видно з останньою швидкістю (0 = вимк)</string>
+    <string name="ghost_off">Вимк</string>
+    <string name="save">Зберегти</string>
+    <string name="msg_saved">Налаштування збережено</string>
+    <string name="msg_camera_perm">Потрібен дозвіл камери</string>
+    <string name="msg_camera_error">Помилка камери: %1$s</string>
+    <string name="title_calibration">Тригонометричне калібрування</string>
+    <string name="calib_desc">Швидкість = рух у пікселях x метр/піксель / час. метр/піксель = 2 x Відстань x tan(FOV/2) / ширина кадру. Оптика читається автоматично.</string>
+    <string name="label_optics_auto">Прочитані значення</string>
+    <string name="btn_refresh_optics">Прочитати з телефона знову</string>
+    <string name="label_distance">Відстань до об\'єктів (метри)</string>
+    <string name="distance_desc">Відстань до камери (напр. дорога 10 м)</string>
+    <string name="label_fov_h">Горизонтальний FOV (градуси)</string>
+    <string name="label_fov_v">Вертикальний FOV (градуси)</string>
+    <string name="btn_calc_preview">Порахувати і показати</string>
+    <string name="label_ref_fine">Точне підстроювання за еталоном</string>
+    <string name="ref_desc">Покажіть відому довжину. Введіть показане і реальне значення (напр. реально 0,6 м, показано 0,9 м).</string>
+    <string name="label_real">Реальна довжина (метри)</string>
+    <string name="label_shown">Показана довжина (метри)</string>
+    <string name="btn_apply_corr">Застосувати поправку</string>
+    <string name="msg_corr_applied">Поправку застосовано</string>
+    <string name="msg_invalid">Введіть коректні числа</string>
+    <string name="corr_value">Коефіцієнт: %1$.3f (1,000 = немає)</string>
+    <string name="dlg_ruler_title">Налаштування лінійки</string>
+    <string name="dlg_distance">Відстань: %1$s</string>
+    <string name="dlg_reference">Еталон: %1$s</string>
+    <string name="ok">ОК</string>
+    <string name="cancel">Скасувати</string>
+    <string name="label_language">Мова</string>
+    <string name="system_default">Системна</string>
+    <string name="example_template">З %1$.0f м (зум %2$.1fx) 1 px = %3$.1f см\nПриклад: 100px / 0,2с = %4$.1f км/год</string>
+    <string name="msg_optics_fail">Оптика не читається, введіть вручну</string>
+    <string name="msg_optics_ok">Прочитано: %1$s</string>
+    <string name="msg_optics_err">Помилка читання</string>
+    <string name="optics_cam">Камера: %1$d x %2$d (%3$.1f МП)</string>
+    <string name="optics_sensor">Сенсор: %1$.2f мм ширина</string>
+    <string name="optics_pixel">Розмір пікселя: %1$.2f мкм</string>
+    <string name="optics_focal">Фокусна відстань: %1$.2f мм</string>
+    <string name="optics_none">Поки не прочитано — натисніть Оновити</string>
+    <string name="dlg_fine">Точне підстроювання (якщо пальці ковзають)</string>
+    <string name="scale_value">Масштаб: %1$.4f</string>
+    <string name="ruler_dist">Дист.: %1$s</string>
+    <string name="cam_back">Задня</string>
+    <string name="cam_front">Передня</string>
+    <string name="cam_other">Інша</string>
+    <string name="kind_ultra">ультраширока</string>
+    <string name="kind_wide">широка</string>
+    <string name="kind_tele">зум/теле</string>
+    <string name="kind_cam">камера</string>
+    <string name="kind_selfie">селфі</string>
+    <string name="kind_logical">логічна</string>
+</resources>

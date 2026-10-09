@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Kalibratie</string>
+    <string name="menu_camera_unit">Camera / Eenheid</string>
+    <string name="menu_close">Sluiten</string>
+    <string name="status_calibration">Kalibratie: %1$s</string>
+    <string name="objects_count">%1$d objecten</string>
+    <string name="paused">Gepauzeerd</string>
+    <string name="motion_warning">Telefoon beweegt - meting gepauzeerd</string>
+    <string name="title_settings">Camera- / eenheidsinstellingen</string>
+    <string name="label_camera">Camera</string>
+    <string name="cam_default_back">Camera achter (standaard)</string>
+    <string name="cam_default_front">Camera voor (standaard)</string>
+    <string name="label_unit">Snelheidseenheid</string>
+    <string name="unit_kmh">Kilometer/uur</string>
+    <string name="unit_ms">Meter/seconde</string>
+    <string name="unit_mph">Mijl/uur</string>
+    <string name="label_analysis_res">Analyseresolutie</string>
+    <string name="res_fast">Snel (640x480)</string>
+    <string name="res_balanced">Gebalanceerd (1280x720)</string>
+    <string name="res_detailed">Gedetailleerd (1920x1080)</string>
+    <string name="res_desc">Snel is vloeiend, Gedetailleerd ziet verre objecten beter</string>
+    <string name="label_conf">Detectiedrempel</string>
+    <string name="label_smooth">Vloeiend maken (frames)</string>
+    <string name="label_show_labels">Labels tonen</string>
+    <string name="label_motion">Bewegingsgevoeligheid (laag = gevoelig)</string>
+    <string name="motion_desc">Bij schudden pauzeert de meting met rood kader</string>
+    <string name="label_min_speed">Minimumsnelheidsfilter</string>
+    <string name="min_speed_desc">Objecten onder 2s-gemiddelde verborgen (0 = uit)</string>
+    <string name="min_speed_off">Uit</string>
+    <string name="label_max_box">Maximale kadergrootte</string>
+    <string name="max_box_desc">Grotere kaders zijn geen objecten</string>
+    <string name="label_ghost">Weergavetijd verloren object</string>
+    <string name="ghost_desc">Verloren object blijft met laatste snelheid (0 = uit)</string>
+    <string name="ghost_off">Uit</string>
+    <string name="save">Opslaan</string>
+    <string name="msg_saved">Instellingen opgeslagen</string>
+    <string name="msg_camera_perm">Cameratoestemming vereist</string>
+    <string name="msg_camera_error">Camerafout: %1$s</string>
+    <string name="title_calibration">Trigonometrische kalibratie</string>
+    <string name="calib_desc">Snelheid = pixelbeweging x meter/pixel / tijd. meter/pixel = 2 x Afstand x tan(FOV/2) / beeldbreedte. Optiek automatisch gelezen.</string>
+    <string name="label_optics_auto">Automatisch gelezen waarden</string>
+    <string name="btn_refresh_optics">Opnieuw lezen van telefoon</string>
+    <string name="label_distance">Objectafstand (meters)</string>
+    <string name="distance_desc">Afstand tot camera (bijv. weg 10 m)</string>
+    <string name="label_fov_h">Horizontale FOV (graden)</string>
+    <string name="label_fov_v">Verticale FOV (graden)</string>
+    <string name="btn_calc_preview">Berekenen en voorbeeld</string>
+    <string name="label_ref_fine">Fijnafstelling met referentie</string>
+    <string name="ref_desc">Toon een bekende lengte. Voer getoonde en echte waarde in (bijv. echt 0,6 m, getoond 0,9 m).</string>
+    <string name="label_real">Echte lengte (meters)</string>
+    <string name="label_shown">Getoonde lengte (meters)</string>
+    <string name="btn_apply_corr">Correctie toepassen</string>
+    <string name="msg_corr_applied">Correctie toegepast</string>
+    <string name="msg_invalid">Geldige getallen invoeren</string>
+    <string name="corr_value">Factor: %1$.3f (1,000 = geen)</string>
+    <string name="dlg_ruler_title">Liniaalinstelling</string>
+    <string name="dlg_distance">Afstand: %1$s</string>
+    <string name="dlg_reference">Referentie: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Annuleren</string>
+    <string name="label_language">Taal</string>
+    <string name="system_default">Systeemstandaard</string>
+    <string name="example_template">Op %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nVoorbeeld: 100px / 0,2s = %4$.1f km/u</string>
+    <string name="msg_optics_fail">Optiek onleesbaar, handmatig invoeren</string>
+    <string name="msg_optics_ok">Gelezen: %1$s</string>
+    <string name="msg_optics_err">Leesfout</string>
+    <string name="optics_cam">Camera: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Sensor: %1$.2f mm breed</string>
+    <string name="optics_pixel">Pixelgrootte: %1$.2f µm</string>
+    <string name="optics_focal">Brandpuntsafstand: %1$.2f mm</string>
+    <string name="optics_none">Nog niet gelezen — druk Vernieuwen</string>
+    <string name="dlg_fine">Fijnafstelling (als vingers glijden)</string>
+    <string name="scale_value">Schaal: %1$.4f</string>
+    <string name="ruler_dist">Afst.: %1$s</string>
+    <string name="cam_back">Achter</string>
+    <string name="cam_front">Voor</string>
+    <string name="cam_other">Andere</string>
+    <string name="kind_ultra">ultragroothoek</string>
+    <string name="kind_wide">groothoek</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">camera</string>
+    <string name="kind_selfie">selfie</string>
+    <string name="kind_logical">logisch</string>
+</resources>

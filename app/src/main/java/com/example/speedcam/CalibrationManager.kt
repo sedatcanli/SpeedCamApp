@@ -88,6 +88,11 @@ class CalibrationManager(context: Context) {
         get() = prefs.getFloat("rulerTarget", 0.55f).coerceIn(0.15f, 0.9f)
         set(v) = prefs.edit().putFloat("rulerTarget", v).apply()
 
+    /** Uygulama dili ("" = sistem). Varsayılan İngilizce strings.xml */
+    var langTag: String
+        get() = prefs.getString("langTag", "en") ?: "en"
+        set(v) = prefs.edit().putString("langTag", v).apply()
+
     /** Cetvelin temsil ettiği referans uzunluk (m). Uçlar buna göre kalibre eder */
     var refLenM: Float
         get() = prefs.getFloat("refLen", 2f).coerceIn(0.05f, 100f)
@@ -209,9 +214,11 @@ class CalibrationManager(context: Context) {
         return ppm
     }
 
-    fun summary(): String {
+    fun summary(context: Context): String {
         val cam = if (!cameraId.isNullOrEmpty()) "ID $cameraId"
-        else if (cameraFacing == CameraSelector.LENS_FACING_BACK) "Arka" else "Ön"
+        else if (cameraFacing == CameraSelector.LENS_FACING_BACK)
+            context.getString(R.string.cam_back)
+        else context.getString(R.string.cam_front)
         return if (fovHdeg > 0f) "%.0fm • %.0f° • %s • %s".format(
             distanceM, fovHdeg, speedUnit, cam
         )

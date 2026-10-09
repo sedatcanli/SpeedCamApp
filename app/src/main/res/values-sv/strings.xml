@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Kalibrering</string>
+    <string name="menu_camera_unit">Kamera / Enhet</string>
+    <string name="menu_close">Stäng</string>
+    <string name="status_calibration">Kalibrering: %1$s</string>
+    <string name="objects_count">%1$d objekt</string>
+    <string name="paused">Pausad</string>
+    <string name="motion_warning">Telefonen rör sig - mätning pausad</string>
+    <string name="title_settings">Kamera- / enhetsinställningar</string>
+    <string name="label_camera">Kamera</string>
+    <string name="cam_default_back">Bakre kamera (standard)</string>
+    <string name="cam_default_front">Främre kamera (standard)</string>
+    <string name="label_unit">Hastighetsenhet</string>
+    <string name="unit_kmh">Kilometer/timme</string>
+    <string name="unit_ms">Meter/sekund</string>
+    <string name="unit_mph">Miles/timme</string>
+    <string name="label_analysis_res">Analysupplösning</string>
+    <string name="res_fast">Snabb (640x480)</string>
+    <string name="res_balanced">Balanserad (1280x720)</string>
+    <string name="res_detailed">Detaljerad (1920x1080)</string>
+    <string name="res_desc">Snabb är mjuk, Detaljerad ser avlägsna objekt bättre</string>
+    <string name="label_conf">Detektionströskel</string>
+    <string name="label_smooth">Utjämning (rutor)</string>
+    <string name="label_show_labels">Visa etiketter</string>
+    <string name="label_motion">Rörelsekänslighet (låg = känslig)</string>
+    <string name="motion_desc">Vid skakning pausas mätningen med röd ram</string>
+    <string name="label_min_speed">Minimihastighetsfilter</string>
+    <string name="min_speed_desc">Objekt under 2s-snitt dolda (0 = av)</string>
+    <string name="min_speed_off">Av</string>
+    <string name="label_max_box">Max ramstorlek</string>
+    <string name="max_box_desc">Större ramar är inte objekt</string>
+    <string name="label_ghost">Visningstid för tappat objekt</string>
+    <string name="ghost_desc">Tappat objekt syns med sista fart (0 = av)</string>
+    <string name="ghost_off">Av</string>
+    <string name="save">Spara</string>
+    <string name="msg_saved">Inställningar sparade</string>
+    <string name="msg_camera_perm">Kamerabehörighet krävs</string>
+    <string name="msg_camera_error">Kamerafel: %1$s</string>
+    <string name="title_calibration">Trigonometrisk kalibrering</string>
+    <string name="calib_desc">Fart = pixelrörelse x meter/pixel / tid. meter/pixel = 2 x Avstånd x tan(FOV/2) / bildbredd. Optik läses automatiskt.</string>
+    <string name="label_optics_auto">Automatiskt lästa värden</string>
+    <string name="btn_refresh_optics">Läs om från telefonen</string>
+    <string name="label_distance">Objektavstånd (meter)</string>
+    <string name="distance_desc">Avstånd till kameran (t.ex. väg 10 m)</string>
+    <string name="label_fov_h">Horisontell FOV (grader)</string>
+    <string name="label_fov_v">Vertikal FOV (grader)</string>
+    <string name="btn_calc_preview">Beräkna och förhandsvisa</string>
+    <string name="label_ref_fine">Finjustering med referens</string>
+    <string name="ref_desc">Visa en känd längd. Ange visat och verkligt värde (t.ex. verkl. 0,6 m, visad 0,9 m).</string>
+    <string name="label_real">Verklig längd (meter)</string>
+    <string name="label_shown">Visad längd (meter)</string>
+    <string name="btn_apply_corr">Tillämpa korrigering</string>
+    <string name="msg_corr_applied">Korrigering tillämpad</string>
+    <string name="msg_invalid">Ange giltiga tal</string>
+    <string name="corr_value">Faktor: %1$.3f (1,000 = ingen)</string>
+    <string name="dlg_ruler_title">Linjalinställning</string>
+    <string name="dlg_distance">Avstånd: %1$s</string>
+    <string name="dlg_reference">Referens: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Avbryt</string>
+    <string name="label_language">Språk</string>
+    <string name="system_default">Systemstandard</string>
+    <string name="example_template">%1$.0f m bort (zoom %2$.1fx) 1 px = %3$.1f cm\nExempel: 100px / 0,2s = %4$.1f km/h</string>
+    <string name="msg_optics_fail">Optik oläslig, ange manuellt</string>
+    <string name="msg_optics_ok">Läst: %1$s</string>
+    <string name="msg_optics_err">Läsfel</string>
+    <string name="optics_cam">Kamera: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Sensor: %1$.2f mm bred</string>
+    <string name="optics_pixel">Pixelstorlek: %1$.2f µm</string>
+    <string name="optics_focal">Brännvidd: %1$.2f mm</string>
+    <string name="optics_none">Inte läst ännu — tryck Uppdatera</string>
+    <string name="dlg_fine">Finjustering (om fingrarna glider)</string>
+    <string name="scale_value">Skala: %1$.4f</string>
+    <string name="ruler_dist">Avst.: %1$s</string>
+    <string name="cam_back">Bakre</string>
+    <string name="cam_front">Främre</string>
+    <string name="cam_other">Annan</string>
+    <string name="kind_ultra">ultravidvinkel</string>
+    <string name="kind_wide">vidvinkel</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">kamera</string>
+    <string name="kind_selfie">selfie</string>
+    <string name="kind_logical">logisk</string>
+</resources>

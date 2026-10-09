@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Calibrare</string>
+    <string name="menu_camera_unit">Cameră / Unitate</string>
+    <string name="menu_close">Închide</string>
+    <string name="status_calibration">Calibrare: %1$s</string>
+    <string name="objects_count">%1$d obiecte</string>
+    <string name="paused">Pauză</string>
+    <string name="motion_warning">Telefonul se mișcă - măsurare în pauză</string>
+    <string name="title_settings">Setări cameră / unitate</string>
+    <string name="label_camera">Cameră</string>
+    <string name="cam_default_back">Cameră spate (implicit)</string>
+    <string name="cam_default_front">Cameră față (implicit)</string>
+    <string name="label_unit">Unitate de viteză</string>
+    <string name="unit_kmh">Kilometru/oră</string>
+    <string name="unit_ms">Metru/secundă</string>
+    <string name="unit_mph">Mile/oră</string>
+    <string name="label_analysis_res">Rezoluție analiză</string>
+    <string name="res_fast">Rapidă (640x480)</string>
+    <string name="res_balanced">Echilibrată (1280x720)</string>
+    <string name="res_detailed">Detaliată (1920x1080)</string>
+    <string name="res_desc">Rapida e fluidă, Detaliata vede mai bine obiectele depărtate</string>
+    <string name="label_conf">Prag de detecție</string>
+    <string name="label_smooth">Netezire (cadre)</string>
+    <string name="label_show_labels">Arată etichete</string>
+    <string name="label_motion">Sensibilitate la mișcare (mic = sensibil)</string>
+    <string name="motion_desc">La scuturare măsurarea pauzează cu chenar roșu</string>
+    <string name="label_min_speed">Filtru viteză minimă</string>
+    <string name="min_speed_desc">Obiectele sub media de 2 s ascunse (0 = off)</string>
+    <string name="min_speed_off">Off</string>
+    <string name="label_max_box">Dimensiune maximă chenar</string>
+    <string name="max_box_desc">Chenarele mai mari nu sunt obiecte</string>
+    <string name="label_ghost">Durată obiect pierdut</string>
+    <string name="ghost_desc">Obiectul pierdut rămâne cu ultima viteză (0 = off)</string>
+    <string name="ghost_off">Off</string>
+    <string name="save">Salvează</string>
+    <string name="msg_saved">Setări salvate</string>
+    <string name="msg_camera_perm">Permisiune cameră necesară</string>
+    <string name="msg_camera_error">Eroare cameră: %1$s</string>
+    <string name="title_calibration">Calibrare trigonometrică</string>
+    <string name="calib_desc">Viteza = mișcare pixeli x metru/pixel / timp. metru/pixel = 2 x Distanța x tan(FOV/2) / lățime imagine. Optica citită automat.</string>
+    <string name="label_optics_auto">Valori citite automat</string>
+    <string name="btn_refresh_optics">Recitește de pe telefon</string>
+    <string name="label_distance">Distanța obiecte (metri)</string>
+    <string name="distance_desc">Distanța față de cameră (ex. drum 10 m)</string>
+    <string name="label_fov_h">FOV orizontal (grade)</string>
+    <string name="label_fov_v">FOV vertical (grade)</string>
+    <string name="btn_calc_preview">Calculează și previzualizează</string>
+    <string name="label_ref_fine">Reglaj fin cu referință</string>
+    <string name="ref_desc">Arată o lungime cunoscută. Introduceți valoarea afișată și cea reală (ex. real 0,6 m, afișat 0,9 m).</string>
+    <string name="label_real">Lungime reală (metri)</string>
+    <string name="label_shown">Lungime afișată (metri)</string>
+    <string name="btn_apply_corr">Aplică corecția</string>
+    <string name="msg_corr_applied">Corecție aplicată</string>
+    <string name="msg_invalid">Introduceți numere valide</string>
+    <string name="corr_value">Factor: %1$.3f (1,000 = niciunul)</string>
+    <string name="dlg_ruler_title">Setare riglă</string>
+    <string name="dlg_distance">Distanța: %1$s</string>
+    <string name="dlg_reference">Referința: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Anulează</string>
+    <string name="label_language">Limbă</string>
+    <string name="system_default">Implicit sistem</string>
+    <string name="example_template">De la %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nExemplu: 100px / 0,2s = %4$.1f km/h</string>
+    <string name="msg_optics_fail">Optica ilizibilă, introduceți manual</string>
+    <string name="msg_optics_ok">Citit: %1$s</string>
+    <string name="msg_optics_err">Eroare citire</string>
+    <string name="optics_cam">Cameră: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Senzor: %1$.2f mm lățime</string>
+    <string name="optics_pixel">Dimensiune pixel: %1$.2f µm</string>
+    <string name="optics_focal">Distanță focală: %1$.2f mm</string>
+    <string name="optics_none">Necitit încă — apăsați Actualizare</string>
+    <string name="dlg_fine">Reglaj fin (dacă alunecă degetele)</string>
+    <string name="scale_value">Scară: %1$.4f</string>
+    <string name="ruler_dist">Distanța: %1$s</string>
+    <string name="cam_back">Spate</string>
+    <string name="cam_front">Față</string>
+    <string name="cam_other">Alta</string>
+    <string name="kind_ultra">ultra-larg</string>
+    <string name="kind_wide">larg</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">cameră</string>
+    <string name="kind_selfie">selfie</string>
+    <string name="kind_logical">logic</string>
+</resources>

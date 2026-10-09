@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Kalibrálás</string>
+    <string name="menu_camera_unit">Kamera / Egység</string>
+    <string name="menu_close">Bezárás</string>
+    <string name="status_calibration">Kalibrálás: %1$s</string>
+    <string name="objects_count">%1$d objektum</string>
+    <string name="paused">Szünetel</string>
+    <string name="motion_warning">Telefon mozog - mérés szünetel</string>
+    <string name="title_settings">Kamera / egység beállítások</string>
+    <string name="label_camera">Kamera</string>
+    <string name="cam_default_back">Hátsó kamera (alap)</string>
+    <string name="cam_default_front">Elülső kamera (alap)</string>
+    <string name="label_unit">Sebesség mértékegység</string>
+    <string name="unit_kmh">Kilométer/óra</string>
+    <string name="unit_ms">Méter/másodperc</string>
+    <string name="unit_mph">Mérföld/óra</string>
+    <string name="label_analysis_res">Elemzési felbontás</string>
+    <string name="res_fast">Gyors (640x480)</string>
+    <string name="res_balanced">Kiegyensúlyozott (1280x720)</string>
+    <string name="res_detailed">Részletes (1920x1080)</string>
+    <string name="res_desc">A gyors akadozásmentes, a részletes jobban látja a távoli tárgyakat</string>
+    <string name="label_conf">Érzékelési küszöb</string>
+    <string name="label_smooth">Simítás (kocka)</string>
+    <string name="label_show_labels">Címkék mutatása</string>
+    <string name="label_motion">Mozgásérzékenység (alacsony = érzékeny)</string>
+    <string name="motion_desc">Rázkódáskor piros kerettel szünetel a mérés</string>
+    <string name="label_min_speed">Minimális sebesség szűrő</string>
+    <string name="min_speed_desc">2 mp-es átlag alatti tárgyak rejtve (0 = ki)</string>
+    <string name="min_speed_off">Ki</string>
+    <string name="label_max_box">Maximális keretméret</string>
+    <string name="max_box_desc">A nagyobb keretek nem tárgyak</string>
+    <string name="label_ghost">Elveszett tárgy mutatási idő</string>
+    <string name="ghost_desc">Elveszett tárgy utolsó sebességgel látszik (0 = ki)</string>
+    <string name="ghost_off">Ki</string>
+    <string name="save">Mentés</string>
+    <string name="msg_saved">Beállítások mentve</string>
+    <string name="msg_camera_perm">Kameraengedély szükséges</string>
+    <string name="msg_camera_error">Kamerahiba: %1$s</string>
+    <string name="title_calibration">Trigonometrikus kalibrálás</string>
+    <string name="calib_desc">Sebesség = pixelmozgás x méter/pixel / idő. méter/pixel = 2 x Távolság x tan(FOV/2) / képszélesség. Optika automatikusan olvasva.</string>
+    <string name="label_optics_auto">Automatikusan olvasott értékek</string>
+    <string name="btn_refresh_optics">Újraolvasás telefonról</string>
+    <string name="label_distance">Tárgytávolság (méter)</string>
+    <string name="distance_desc">Távolság a kamerától (pl. út 10 m)</string>
+    <string name="label_fov_h">Vízszintes FOV (fok)</string>
+    <string name="label_fov_v">Függőleges FOV (fok)</string>
+    <string name="btn_calc_preview">Számítás és előnézet</string>
+    <string name="label_ref_fine">Finomhangolás referenciával</string>
+    <string name="ref_desc">Mutasson ismert hosszt. Adja meg a mutatott és valódi értéket (pl. valódi 0,6 m, mutatott 0,9 m).</string>
+    <string name="label_real">Valódi hossz (méter)</string>
+    <string name="label_shown">Mutatott hossz (méter)</string>
+    <string name="btn_apply_corr">Korrekció alkalmazása</string>
+    <string name="msg_corr_applied">Korrekció alkalmazva</string>
+    <string name="msg_invalid">Érvényes számokat adjon meg</string>
+    <string name="corr_value">Tényező: %1$.3f (1,000 = nincs)</string>
+    <string name="dlg_ruler_title">Vonalzó beállítása</string>
+    <string name="dlg_distance">Távolság: %1$s</string>
+    <string name="dlg_reference">Referencia: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Mégse</string>
+    <string name="label_language">Nyelv</string>
+    <string name="system_default">Rendszer alapértelmezett</string>
+    <string name="example_template">%1$.0f m-ről (%2$.1fx zoom) 1 px = %3$.1f cm\nPélda: 100px / 0,2s = %4$.1f km/h</string>
+    <string name="msg_optics_fail">Optika nem olvasható, kézzel vigye be</string>
+    <string name="msg_optics_ok">Olvasva: %1$s</string>
+    <string name="msg_optics_err">Olvasási hiba</string>
+    <string name="optics_cam">Kamera: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Szenzor: %1$.2f mm széles</string>
+    <string name="optics_pixel">Pixelméret: %1$.2f µm</string>
+    <string name="optics_focal">Fókusztáv: %1$.2f mm</string>
+    <string name="optics_none">Még nem olvasva — nyomja meg a Frissítést</string>
+    <string name="dlg_fine">Finomhangolás (ha csúszik az ujj)</string>
+    <string name="scale_value">Skála: %1$.4f</string>
+    <string name="ruler_dist">Táv.: %1$s</string>
+    <string name="cam_back">Hátsó</string>
+    <string name="cam_front">Elülső</string>
+    <string name="cam_other">Egyéb</string>
+    <string name="kind_ultra">ultraszéles</string>
+    <string name="kind_wide">széles</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">kamera</string>
+    <string name="kind_selfie">szelfi</string>
+    <string name="kind_logical">logikai</string>
+</resources>

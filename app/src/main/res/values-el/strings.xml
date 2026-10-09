@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Βαθμονόμηση</string>
+    <string name="menu_camera_unit">Κάμερα / Μονάδα</string>
+    <string name="menu_close">Κλείσιμο</string>
+    <string name="status_calibration">Βαθμονόμηση: %1$s</string>
+    <string name="objects_count">%1$d αντικείμενα</string>
+    <string name="paused">Παύση</string>
+    <string name="motion_warning">Το τηλέφωνο κινείται - παύση μέτρησης</string>
+    <string name="title_settings">Ρυθμίσεις κάμερας / μονάδας</string>
+    <string name="label_camera">Κάμερα</string>
+    <string name="cam_default_back">Πίσω κάμερα (προεπιλογή)</string>
+    <string name="cam_default_front">Μπροστινή κάμερα (προεπιλογή)</string>
+    <string name="label_unit">Μονάδα ταχύτητας</string>
+    <string name="unit_kmh">Χιλιόμετρο/ώρα</string>
+    <string name="unit_ms">Μέτρο/δευτερόλεπτο</string>
+    <string name="unit_mph">Μίλια/ώρα</string>
+    <string name="label_analysis_res">Ανάλυση ανάλυσης</string>
+    <string name="res_fast">Γρήγορη (640x480)</string>
+    <string name="res_balanced">Ισορροπημένη (1280x720)</string>
+    <string name="res_detailed">Λεπτομερής (1920x1080)</string>
+    <string name="res_desc">Η γρήγορη είναι ομαλή, η λεπτομερής βλέπει καλύτερα τα μακρινά</string>
+    <string name="label_conf">Όριο ανίχνευσης</string>
+    <string name="label_smooth">Εξομάλυνση (καρέ)</string>
+    <string name="label_show_labels">Εμφάνιση ετικετών</string>
+    <string name="label_motion">Ευαισθησία κίνησης (χαμηλή = ευαίσθητη)</string>
+    <string name="motion_desc">Σε κραδασμό η μέτρηση παύει με κόκκινο πλαίσιο</string>
+    <string name="label_min_speed">Φίλτρο ελάχιστης ταχύτητας</string>
+    <string name="min_speed_desc">Αντικείμενα κάτω από μέσο όρο 2 δευτ. κρύβονται (0 = off)</string>
+    <string name="min_speed_off">Off</string>
+    <string name="label_max_box">Μέγιστο μέγεθος πλαισίου</string>
+    <string name="max_box_desc">Μεγαλύτερα πλαίσια δεν είναι αντικείμενα</string>
+    <string name="label_ghost">Χρόνος χαμένου αντικειμένου</string>
+    <string name="ghost_desc">Το χαμένο φαίνεται με την τελευταία ταχύτητα (0 = off)</string>
+    <string name="ghost_off">Off</string>
+    <string name="save">Αποθήκευση</string>
+    <string name="msg_saved">Οι ρυθμίσεις αποθηκεύτηκαν</string>
+    <string name="msg_camera_perm">Απαιτείται άδεια κάμερας</string>
+    <string name="msg_camera_error">Σφάλμα κάμερας: %1$s</string>
+    <string name="title_calibration">Τριγωνομετρική βαθμονόμηση</string>
+    <string name="calib_desc">Ταχύτητα = κίνηση pixel × μέτρο/pixel / χρόνος. μέτρο/pixel = 2 × Απόσταση × tan(FOV/2) / πλάτος εικόνας. Τα οπτικά διαβάζονται αυτόματα.</string>
+    <string name="label_optics_auto">Αυτόματα αναγνωσμένες τιμές</string>
+    <string name="btn_refresh_optics">Ανάγνωση ξανά από το τηλέφωνο</string>
+    <string name="label_distance">Απόσταση αντικειμένων (μέτρα)</string>
+    <string name="distance_desc">Απόσταση από την κάμερα (π.χ. δρόμος 10 μ.)</string>
+    <string name="label_fov_h">Οριζόντιο FOV (μοίρες)</string>
+    <string name="label_fov_v">Κάθετο FOV (μοίρες)</string>
+    <string name="btn_calc_preview">Υπολογισμός και προεπισκόπηση</string>
+    <string name="label_ref_fine">Λεπτή ρύθμιση με αναφορά</string>
+    <string name="ref_desc">Δείξτε γνωστό μήκος. Εισάγετε εμφανιζόμενη και πραγματική τιμή (π.χ. πραγμ. 0,6 μ., εμφ. 0,9 μ.).</string>
+    <string name="label_real">Πραγματικό μήκος (μέτρα)</string>
+    <string name="label_shown">Εμφανιζόμενο μήκος (μέτρα)</string>
+    <string name="btn_apply_corr">Εφαρμογή διόρθωσης</string>
+    <string name="msg_corr_applied">Η διόρθωση εφαρμόστηκε</string>
+    <string name="msg_invalid">Εισάγετε έγκυρους αριθμούς</string>
+    <string name="corr_value">Συντελεστής: %1$.3f (1,000 = κανένας)</string>
+    <string name="dlg_ruler_title">Ρύθμιση χάρακα</string>
+    <string name="dlg_distance">Απόσταση: %1$s</string>
+    <string name="dlg_reference">Αναφορά: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Άκυρο</string>
+    <string name="label_language">Γλώσσα</string>
+    <string name="system_default">Προεπιλογή συστήματος</string>
+    <string name="example_template">Στα %1$.0f μ. (ζουμ %2$.1fx) 1 px = %3$.1f εκ.\nΠαράδειγμα: 100px / 0,2δ = %4$.1f χλμ/ώρα</string>
+    <string name="msg_optics_fail">Τα οπτικά δεν διαβάζονται, εισάγετε χειροκίνητα</string>
+    <string name="msg_optics_ok">Διαβάστηκε: %1$s</string>
+    <string name="msg_optics_err">Σφάλμα ανάγνωσης</string>
+    <string name="optics_cam">Κάμερα: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Αισθητήρας: %1$.2f χιλ. πλάτος</string>
+    <string name="optics_pixel">Μέγεθος pixel: %1$.2f µm</string>
+    <string name="optics_focal">Εστιακή απόσταση: %1$.2f χιλ.</string>
+    <string name="optics_none">Δεν διαβάστηκε ακόμα — πατήστε Ανανέωση</string>
+    <string name="dlg_fine">Λεπτή ρύθμιση (αν γλιστρούν τα δάχτυλα)</string>
+    <string name="scale_value">Κλίμακα: %1$.4f</string>
+    <string name="ruler_dist">Απόστ.: %1$s</string>
+    <string name="cam_back">Πίσω</string>
+    <string name="cam_front">Μπροστά</string>
+    <string name="cam_other">Άλλη</string>
+    <string name="kind_ultra">υπερευρυγώνια</string>
+    <string name="kind_wide">ευρυγώνια</string>
+    <string name="kind_tele">ζουμ/τηλε</string>
+    <string name="kind_cam">κάμερα</string>
+    <string name="kind_selfie">σέλφι</string>
+    <string name="kind_logical">λογική</string>
+</resources>

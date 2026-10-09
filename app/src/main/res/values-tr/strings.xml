@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Kalibrasyon</string>
+    <string name="menu_camera_unit">Kamera / Birim</string>
+    <string name="menu_close">Kapat</string>
+    <string name="status_calibration">Kalibrasyon: %1$s</string>
+    <string name="objects_count">%1$d nesne</string>
+    <string name="paused">Duraklatıldı</string>
+    <string name="motion_warning">Telefon hareket ediyor - ölçüm duraklatıldı</string>
+    <string name="title_settings">Kamera / Birim Ayarları</string>
+    <string name="label_camera">Kamera</string>
+    <string name="cam_default_back">Arka kamera (varsayılan)</string>
+    <string name="cam_default_front">Ön kamera (varsayılan)</string>
+    <string name="label_unit">Hız birimi</string>
+    <string name="unit_kmh">Kilometre/saat</string>
+    <string name="unit_ms">Metre/saniye</string>
+    <string name="unit_mph">Mil/saat</string>
+    <string name="label_analysis_res">Analiz çözünürlüğü</string>
+    <string name="res_fast">Hızlı (640x480)</string>
+    <string name="res_balanced">Dengeli (1280x720)</string>
+    <string name="res_detailed">Detaylı (1920x1080)</string>
+    <string name="res_desc">Hızlı akıcıdır, Detaylı uzak cisimleri daha iyi yakalar</string>
+    <string name="label_conf">Algılama eşiği</string>
+    <string name="label_smooth">Yumuşatma (kare sayısı)</string>
+    <string name="label_show_labels">Etiketleri göster</string>
+    <string name="label_motion">Hareket hassasiyeti (düşük = hassas)</string>
+    <string name="motion_desc">Telefon sarsılınca ölçüm durur ve kırmızı çerçeve çıkar</string>
+    <string name="label_min_speed">Minimum hız filtresi</string>
+    <string name="min_speed_desc">2 sn ortalaması altında kalan nesne gösterilmez (0 = kapalı)</string>
+    <string name="min_speed_off">Kapalı</string>
+    <string name="label_max_box">Maksimum kutu boyutu</string>
+    <string name="max_box_desc">Ekranın bu kadarını kaplayan kutu cisim sayılmaz</string>
+    <string name="label_ghost">Kayıp cismi gösterme süresi</string>
+    <string name="ghost_desc">Kaybolan cisim son hızıyla bu süre görünür (0 = kapalı)</string>
+    <string name="ghost_off">Kapalı</string>
+    <string name="save">Kaydet</string>
+    <string name="msg_saved">Ayarlar kaydedildi</string>
+    <string name="msg_camera_perm">Kamera izni gerekli</string>
+    <string name="msg_camera_error">Kamera hatası: %1$s</string>
+    <string name="title_calibration">Trigonometrik Kalibrasyon</string>
+    <string name="calib_desc">Hız = piksel hareketi x metre/piksel / süre. metre/piksel = 2 x Uzaklık x tan(FOV/2) / görüntü genişliği. Optik değerler telefondan otomatik okunur.</string>
+    <string name="label_optics_auto">Telefondan okunanlar</string>
+    <string name="btn_refresh_optics">Telefondan tekrar oku</string>
+    <string name="label_distance">Cisim uzaklığı (metre)</string>
+    <string name="distance_desc">Ölçülen nesnelerin kameraya uzaklığı (örn. yol 10 m)</string>
+    <string name="label_fov_h">Yatay görüş açısı (derece)</string>
+    <string name="label_fov_v">Dikey görüş açısı (derece)</string>
+    <string name="btn_calc_preview">Hesapla ve önizle</string>
+    <string name="label_ref_fine">Referansla ince ayar</string>
+    <string name="ref_desc">Bilinen bir uzunluğu kameraya tutun. Cetvelin gösterdiğini ve gerçeğini girin (örn. gerçek 0,6 m, gösterilen 0,9 m).</string>
+    <string name="label_real">Gerçek uzunluk (metre)</string>
+    <string name="label_shown">Cetvelin gösterdiği (metre)</string>
+    <string name="btn_apply_corr">Düzeltmeyi uygula</string>
+    <string name="msg_corr_applied">Düzeltme uygulandı</string>
+    <string name="msg_invalid">Geçerli sayılar girin</string>
+    <string name="corr_value">İnce ayar katsayısı: %1$.3f (1,000 = düzeltme yok)</string>
+    <string name="dlg_ruler_title">Cetvel ayarı</string>
+    <string name="dlg_distance">Uzaklık: %1$s</string>
+    <string name="dlg_reference">Referans: %1$s</string>
+    <string name="ok">Tamam</string>
+    <string name="cancel">Vazgeç</string>
+    <string name="label_language">Dil</string>
+    <string name="system_default">Sistem varsayılanı</string>
+    <string name="example_template">%1$.0f m uzakta (%2$.1fx zoom) 1 px = %3$.1f cm\nÖrnek: 100px / 0,2sn = %4$.1f km/h</string>
+    <string name="msg_optics_fail">Optik okunamadı, elle girin</string>
+    <string name="msg_optics_ok">Okundu: %1$s</string>
+    <string name="msg_optics_err">Okuma hatası</string>
+    <string name="optics_cam">Kamera: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Sensör: %1$.2f mm genişlik</string>
+    <string name="optics_pixel">Piksel boyutu: %1$.2f µm</string>
+    <string name="optics_focal">Odak uzaklığı: %1$.2f mm</string>
+    <string name="optics_none">Henüz okunamadı — Yenile\'ye basın</string>
+    <string name="dlg_fine">İnce ayar (parmakla tutturamayınca)</string>
+    <string name="scale_value">Ölçek: %1$.4f</string>
+    <string name="ruler_dist">Uzak: %1$s</string>
+    <string name="cam_back">Arka</string>
+    <string name="cam_front">Ön</string>
+    <string name="cam_other">Diğer</string>
+    <string name="kind_ultra">ultra-geniş</string>
+    <string name="kind_wide">geniş</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">kamera</string>
+    <string name="kind_selfie">selfie</string>
+    <string name="kind_logical">mantıksal</string>
+</resources>

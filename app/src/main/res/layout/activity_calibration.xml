@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trigonometrik Kalibrasyon"
+            android:text="@string/title_calibration"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -20,69 +20,69 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Hız = piksel hareketi x metre/piksel / süre. metre/piksel = 2 x Uzaklık x tan(FOV/2) / görüntü genişliği. Optik değerler telefondan otomatik okunur." />
+            android:text="@string/calib_desc" />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" android:text="Telefondan okunanlar" android:textStyle="bold" />
+            android:layout_marginTop="16dp" android:text="@string/label_optics_auto" android:textStyle="bold" />
         <TextView android:id="@+id/tvOptics"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="4dp" android:text="Okunuyor..." />
+            android:layout_marginTop="4dp" android:text="..." />
 
         <Button android:id="@+id/btnRefreshOptics"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:text="Telefondan tekrar oku" />
+            android:layout_marginTop="8dp" android:text="@string/btn_refresh_optics" />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" android:text="Cisim uzaklığı (metre)" android:textStyle="bold" />
+            android:layout_marginTop="16dp" android:text="@string/label_distance" android:textStyle="bold" />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Ölçüm yapılan nesnelerin kameraya uzaklığı (örn. yol 10 m)" />
+            android:text="@string/distance_desc" />
         <EditText android:id="@+id/etDistance"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:text="Yatay görüş açısı FOV (derece)" />
+            android:layout_marginTop="8dp" android:text="@string/label_fov_h" />
         <EditText android:id="@+id/etFovH"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:text="Dikey görüş açısı FOV (derece)" />
+            android:layout_marginTop="8dp" android:text="@string/label_fov_v" />
         <EditText android:id="@+id/etFovV"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
 
         <Button android:id="@+id/btnCalc"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:text="Hesapla ve önizle" />
+            android:layout_marginTop="8dp" android:text="@string/btn_calc_preview" />
 
         <TextView android:id="@+id/tvExample"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:text="Örnek" />
+            android:layout_marginTop="8dp" android:text="..." />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" android:text="Referansla ince ayar" android:textStyle="bold" />
+            android:layout_marginTop="16dp" android:text="@string/label_ref_fine" android:textStyle="bold" />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Bilinen bir uzunluğu kameraya tutun. Cetvelin gösterdiğini ve gerçeğini girin (örn. gerçek 0.6 m, gösterilen 0.9 m)." />
+            android:text="@string/ref_desc" />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:text="Gerçek uzunluk (metre)" />
+            android:layout_marginTop="8dp" android:text="@string/label_real" />
         <EditText android:id="@+id/etReal"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:text="Cetvelin gösterdiği (metre)" />
+            android:layout_marginTop="8dp" android:text="@string/label_shown" />
         <EditText android:id="@+id/etShown"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
         <Button android:id="@+id/btnCorrect"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:text="Düzeltmeyi uygula" />
+            android:layout_marginTop="8dp" android:text="@string/btn_apply_corr" />
         <TextView android:id="@+id/tvCorr"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:text="İnce ayar katsayısı" />
+            android:layout_marginTop="8dp" android:text="..." />
 
         <Button android:id="@+id/btnSave"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" android:text="Kaydet" />
+            android:layout_marginTop="16dp" android:text="@string/save" />
     </LinearLayout>
 </ScrollView>

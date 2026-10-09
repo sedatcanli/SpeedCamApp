@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Calibración</string>
+    <string name="menu_camera_unit">Cámara / Unidad</string>
+    <string name="menu_close">Cerrar</string>
+    <string name="status_calibration">Calibración: %1$s</string>
+    <string name="objects_count">%1$d objetos</string>
+    <string name="paused">Pausado</string>
+    <string name="motion_warning">Teléfono en movimiento - medición pausada</string>
+    <string name="title_settings">Ajustes de cámara / unidad</string>
+    <string name="label_camera">Cámara</string>
+    <string name="cam_default_back">Cámara trasera (defecto)</string>
+    <string name="cam_default_front">Cámara frontal (defecto)</string>
+    <string name="label_unit">Unidad de velocidad</string>
+    <string name="unit_kmh">Kilómetro/hora</string>
+    <string name="unit_ms">Metro/segundo</string>
+    <string name="unit_mph">Millas/hora</string>
+    <string name="label_analysis_res">Resolución de análisis</string>
+    <string name="res_fast">Rápida (640x480)</string>
+    <string name="res_balanced">Equilibrada (1280x720)</string>
+    <string name="res_detailed">Detallada (1920x1080)</string>
+    <string name="res_desc">Rápida es fluida, Detallada detecta mejor objetos lejanos</string>
+    <string name="label_conf">Umbral de detección</string>
+    <string name="label_smooth">Suavizado (fotogramas)</string>
+    <string name="label_show_labels">Mostrar etiquetas</string>
+    <string name="label_motion">Sensibilidad al movimiento (bajo = sensible)</string>
+    <string name="motion_desc">Si se agita, la medición pausa con marco rojo</string>
+    <string name="label_min_speed">Filtro de velocidad mínima</string>
+    <string name="min_speed_desc">Objetos bajo el promedio de 2 s se ocultan (0 = off)</string>
+    <string name="min_speed_off">Off</string>
+    <string name="label_max_box">Tamaño máximo de recuadro</string>
+    <string name="max_box_desc">Los recuadros mayores no son objetos</string>
+    <string name="label_ghost">Tiempo de objeto perdido</string>
+    <string name="ghost_desc">Objeto perdido visible con última velocidad (0 = off)</string>
+    <string name="ghost_off">Off</string>
+    <string name="save">Guardar</string>
+    <string name="msg_saved">Ajustes guardados</string>
+    <string name="msg_camera_perm">Permiso de cámara requerido</string>
+    <string name="msg_camera_error">Error de cámara: %1$s</string>
+    <string name="title_calibration">Calibración trigonométrica</string>
+    <string name="calib_desc">Velocidad = movimiento píxel x metro/píxel / tiempo. metro/píxel = 2 x Distancia x tan(FOV/2) / ancho imagen. Óptica leída automáticamente.</string>
+    <string name="label_optics_auto">Valores leídos automáticamente</string>
+    <string name="btn_refresh_optics">Leer del teléfono de nuevo</string>
+    <string name="label_distance">Distancia de objetos (metros)</string>
+    <string name="distance_desc">Distancia a la cámara (ej. calle 10 m)</string>
+    <string name="label_fov_h">FOV horizontal (grados)</string>
+    <string name="label_fov_v">FOV vertical (grados)</string>
+    <string name="btn_calc_preview">Calcular y previsualizar</string>
+    <string name="label_ref_fine">Ajuste fino por referencia</string>
+    <string name="ref_desc">Muestre una longitud conocida. Ingrese valor mostrado y real (ej. real 0,6 m, mostrado 0,9 m).</string>
+    <string name="label_real">Longitud real (metros)</string>
+    <string name="label_shown">Longitud mostrada (metros)</string>
+    <string name="btn_apply_corr">Aplicar corrección</string>
+    <string name="msg_corr_applied">Corrección aplicada</string>
+    <string name="msg_invalid">Ingrese números válidos</string>
+    <string name="corr_value">Factor: %1$.3f (1,000 = ninguno)</string>
+    <string name="dlg_ruler_title">Ajuste de regla</string>
+    <string name="dlg_distance">Distancia: %1$s</string>
+    <string name="dlg_reference">Referencia: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="label_language">Idioma</string>
+    <string name="system_default">Predeterminado del sistema</string>
+    <string name="example_template">A %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nEjemplo: 100px / 0,2s = %4$.1f km/h</string>
+    <string name="msg_optics_fail">Óptica ilegible, ingrese manual</string>
+    <string name="msg_optics_ok">Leído: %1$s</string>
+    <string name="msg_optics_err">Error de lectura</string>
+    <string name="optics_cam">Cámara: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Sensor: %1$.2f mm de ancho</string>
+    <string name="optics_pixel">Tamaño de píxel: %1$.2f µm</string>
+    <string name="optics_focal">Distancia focal: %1$.2f mm</string>
+    <string name="optics_none">Aún no leído — pulse Actualizar</string>
+    <string name="dlg_fine">Ajuste fino (si los dedos resbalan)</string>
+    <string name="scale_value">Escala: %1$.4f</string>
+    <string name="ruler_dist">Dist.: %1$s</string>
+    <string name="cam_back">Trasera</string>
+    <string name="cam_front">Frontal</string>
+    <string name="cam_other">Otra</string>
+    <string name="kind_ultra">ultra gran angular</string>
+    <string name="kind_wide">gran angular</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">cámara</string>
+    <string name="kind_selfie">selfie</string>
+    <string name="kind_logical">lógica</string>
+</resources>

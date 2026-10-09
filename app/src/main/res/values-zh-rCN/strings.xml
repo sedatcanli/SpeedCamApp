@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">校准</string>
+    <string name="menu_camera_unit">相机 / 单位</string>
+    <string name="menu_close">关闭</string>
+    <string name="status_calibration">校准：%1$s</string>
+    <string name="objects_count">%1$d 个目标</string>
+    <string name="paused">已暂停</string>
+    <string name="motion_warning">手机移动中 - 测量已暂停</string>
+    <string name="title_settings">相机 / 单位设置</string>
+    <string name="label_camera">相机</string>
+    <string name="cam_default_back">后置相机（默认）</string>
+    <string name="cam_default_front">前置相机（默认）</string>
+    <string name="label_unit">速度单位</string>
+    <string name="unit_kmh">千米/小时</string>
+    <string name="unit_ms">米/秒</string>
+    <string name="unit_mph">英里/小时</string>
+    <string name="label_analysis_res">分析分辨率</string>
+    <string name="res_fast">快速 (640x480)</string>
+    <string name="res_balanced">均衡 (1280x720)</string>
+    <string name="res_detailed">精细 (1920x1080)</string>
+    <string name="res_desc">快速更流畅，精细更容易发现远处目标</string>
+    <string name="label_conf">检测阈值</string>
+    <string name="label_smooth">平滑（帧数）</string>
+    <string name="label_show_labels">显示标签</string>
+    <string name="label_motion">运动灵敏度（低 = 灵敏）</string>
+    <string name="motion_desc">抖动时测量暂停并显示红色边框</string>
+    <string name="label_min_speed">最低速度过滤</string>
+    <string name="min_speed_desc">2 秒平均低于此值的目标被隐藏（0 = 关闭）</string>
+    <string name="min_speed_off">关闭</string>
+    <string name="label_max_box">最大框尺寸</string>
+    <string name="max_box_desc">更大的框不是目标</string>
+    <string name="label_ghost">丢失目标显示时间</string>
+    <string name="ghost_desc">丢失目标以最后速度继续显示（0 = 关闭）</string>
+    <string name="ghost_off">关闭</string>
+    <string name="save">保存</string>
+    <string name="msg_saved">设置已保存</string>
+    <string name="msg_camera_perm">需要相机权限</string>
+    <string name="msg_camera_error">相机错误：%1$s</string>
+    <string name="title_calibration">三角校准</string>
+    <string name="calib_desc">速度 = 像素位移 × 米/像素 / 时间。米/像素 = 2 × 距离 × tan(视场角/2) / 图像宽度。光学参数自动读取。</string>
+    <string name="label_optics_auto">自动读取的值</string>
+    <string name="btn_refresh_optics">从手机重新读取</string>
+    <string name="label_distance">目标距离（米）</string>
+    <string name="distance_desc">目标到相机的距离（例如道路 10 米）</string>
+    <string name="label_fov_h">水平视场角（度）</string>
+    <string name="label_fov_v">垂直视场角（度）</string>
+    <string name="btn_calc_preview">计算并预览</string>
+    <string name="label_ref_fine">参考微调</string>
+    <string name="ref_desc">对准已知长度。输入标尺显示值和真实值（例如真实 0.6 米，显示 0.9 米）。</string>
+    <string name="label_real">真实长度（米）</string>
+    <string name="label_shown">标尺显示（米）</string>
+    <string name="btn_apply_corr">应用修正</string>
+    <string name="msg_corr_applied">修正已应用</string>
+    <string name="msg_invalid">请输入有效数字</string>
+    <string name="corr_value">修正系数：%1$.3f（1.000 = 无）</string>
+    <string name="dlg_ruler_title">标尺设置</string>
+    <string name="dlg_distance">距离：%1$s</string>
+    <string name="dlg_reference">参考：%1$s</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="label_language">语言</string>
+    <string name="system_default">系统默认</string>
+    <string name="example_template">%1$.0f 米处（变焦 %2$.1fx）1 像素 = %3$.1f 厘米\n示例：100 像素 / 0.2 秒 = %4$.1f 千米/时</string>
+    <string name="msg_optics_fail">光学参数读取失败，请手动输入</string>
+    <string name="msg_optics_ok">已读取：%1$s</string>
+    <string name="msg_optics_err">读取错误</string>
+    <string name="optics_cam">相机：%1$d x %2$d（%3$.1f MP）</string>
+    <string name="optics_sensor">传感器：宽 %1$.2f 毫米</string>
+    <string name="optics_pixel">像素尺寸：%1$.2f 微米</string>
+    <string name="optics_focal">焦距：%1$.2f 毫米</string>
+    <string name="optics_none">尚未读取 — 请按刷新</string>
+    <string name="dlg_fine">微调（手指打滑时）</string>
+    <string name="scale_value">比例尺：%1$.4f</string>
+    <string name="ruler_dist">距离：%1$s</string>
+    <string name="cam_back">后置</string>
+    <string name="cam_front">前置</string>
+    <string name="cam_other">其他</string>
+    <string name="kind_ultra">超广角</string>
+    <string name="kind_wide">广角</string>
+    <string name="kind_tele">变焦/长焦</string>
+    <string name="kind_cam">相机</string>
+    <string name="kind_selfie">自拍</string>
+    <string name="kind_logical">逻辑</string>
+</resources>

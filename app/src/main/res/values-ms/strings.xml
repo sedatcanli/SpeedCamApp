@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Penentukuran</string>
+    <string name="menu_camera_unit">Kamera / Unit</string>
+    <string name="menu_close">Tutup</string>
+    <string name="status_calibration">Penentukuran: %1$s</string>
+    <string name="objects_count">%1$d objek</string>
+    <string name="paused">Dijeda</string>
+    <string name="motion_warning">Telefon bergerak - ukuran dijeda</string>
+    <string name="title_settings">Tetapan Kamera / Unit</string>
+    <string name="label_camera">Kamera</string>
+    <string name="cam_default_back">Kamera belakang (lalai)</string>
+    <string name="cam_default_front">Kamera depan (lalai)</string>
+    <string name="label_unit">Unit kelajuan</string>
+    <string name="unit_kmh">Kilometer/jam</string>
+    <string name="unit_ms">Meter/saat</string>
+    <string name="unit_mph">Batu/jam</string>
+    <string name="label_analysis_res">Resolusi analisis</string>
+    <string name="res_fast">Pantas (640x480)</string>
+    <string name="res_balanced">Seimbang (1280x720)</string>
+    <string name="res_detailed">Terperinci (1920x1080)</string>
+    <string name="res_desc">Pantas itu lancar, Terperinci mengesan objek jauh lebih baik</string>
+    <string name="label_conf">Ambang pengesanan</string>
+    <string name="label_smooth">Pelancaran (bingkai)</string>
+    <string name="label_show_labels">Tunjuk label</string>
+    <string name="label_motion">Sensitiviti gerakan (rendah = sensitif)</string>
+    <string name="motion_desc">Jika digoncang, ukuran jeda dengan bingkai merah</string>
+    <string name="label_min_speed">Penapis kelajuan minimum</string>
+    <string name="min_speed_desc">Objek di bawah purata 2 s disembunyikan (0 = mati)</string>
+    <string name="min_speed_off">Mati</string>
+    <string name="label_max_box">Saiz kotak maksimum</string>
+    <string name="max_box_desc">Kotak yang lebih besar bukan objek</string>
+    <string name="label_ghost">Tempoh objek hilang</string>
+    <string name="ghost_desc">Objek hilang kekal dengan kelajuan terakhir (0 = mati)</string>
+    <string name="ghost_off">Mati</string>
+    <string name="save">Simpan</string>
+    <string name="msg_saved">Tetapan disimpan</string>
+    <string name="msg_camera_perm">Kebenaran kamera diperlukan</string>
+    <string name="msg_camera_error">Ralat kamera: %1$s</string>
+    <string name="title_calibration">Penentukuran trigonometri</string>
+    <string name="calib_desc">Kelajuan = gerakan piksel x meter/piksel / masa. meter/piksel = 2 x Jarak x tan(FOV/2) / lebar imej. Optik dibaca automatik.</string>
+    <string name="label_optics_auto">Nilai bacaan automatik</string>
+    <string name="btn_refresh_optics">Baca semula dari telefon</string>
+    <string name="label_distance">Jarak objek (meter)</string>
+    <string name="distance_desc">Jarak ke kamera (cth. jalan 10 m)</string>
+    <string name="label_fov_h">FOV mengufuk (darjah)</string>
+    <string name="label_fov_v">FOV menegak (darjah)</string>
+    <string name="btn_calc_preview">Kira dan pratonton</string>
+    <string name="label_ref_fine">Pelarian halus rujukan</string>
+    <string name="ref_desc">Tunjuk panjang yang diketahui. Masukkan nilai papar dan sebenar (cth. sebenar 0,6 m, papar 0,9 m).</string>
+    <string name="label_real">Panjang sebenar (meter)</string>
+    <string name="label_shown">Panjang papar (meter)</string>
+    <string name="btn_apply_corr">Guna pembetulan</string>
+    <string name="msg_corr_applied">Pembetulan digunakan</string>
+    <string name="msg_invalid">Masukkan nombor yang sah</string>
+    <string name="corr_value">Faktor: %1$.3f (1,000 = tiada)</string>
+    <string name="dlg_ruler_title">Tetapan pembaris</string>
+    <string name="dlg_distance">Jarak: %1$s</string>
+    <string name="dlg_reference">Rujukan: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Batal</string>
+    <string name="label_language">Bahasa</string>
+    <string name="system_default">Lalai sistem</string>
+    <string name="example_template">Jarak %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nContoh: 100px / 0,2s = %4$.1f km/j</string>
+    <string name="msg_optics_fail">Optik tidak dibaca, isi manual</string>
+    <string name="msg_optics_ok">Dibaca: %1$s</string>
+    <string name="msg_optics_err">Ralat bacaan</string>
+    <string name="optics_cam">Kamera: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Sensor: lebar %1$.2f mm</string>
+    <string name="optics_pixel">Saiz piksel: %1$.2f µm</string>
+    <string name="optics_focal">Jarak fokus: %1$.2f mm</string>
+    <string name="optics_none">Belum dibaca — tekan Segarkan</string>
+    <string name="dlg_fine">Pelarian halus (jika jari tergelincir)</string>
+    <string name="scale_value">Skala: %1$.4f</string>
+    <string name="ruler_dist">Jarak: %1$s</string>
+    <string name="cam_back">Belakang</string>
+    <string name="cam_front">Depan</string>
+    <string name="cam_other">Lain</string>
+    <string name="kind_ultra">ultra-lebar</string>
+    <string name="kind_wide">lebar</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">kamera</string>
+    <string name="kind_selfie">selfie</string>
+    <string name="kind_logical">logik</string>
+</resources>

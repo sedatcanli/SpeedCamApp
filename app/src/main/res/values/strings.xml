@@ -1,3 +1,85 @@
 <resources>
     <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Calibration</string>
+    <string name="menu_camera_unit">Camera / Unit</string>
+    <string name="menu_close">Close</string>
+    <string name="status_calibration">Calibration: %1$s</string>
+    <string name="objects_count">%1$d objects</string>
+    <string name="paused">Paused</string>
+    <string name="motion_warning">Phone moving - measurement paused</string>
+    <string name="title_settings">Camera / Unit Settings</string>
+    <string name="label_camera">Camera</string>
+    <string name="cam_default_back">Back camera (default)</string>
+    <string name="cam_default_front">Front camera (default)</string>
+    <string name="label_unit">Speed unit</string>
+    <string name="unit_kmh">Kilometer/hour</string>
+    <string name="unit_ms">Meter/second</string>
+    <string name="unit_mph">Miles/hour</string>
+    <string name="label_analysis_res">Analysis resolution</string>
+    <string name="res_fast">Fast (640x480)</string>
+    <string name="res_balanced">Balanced (1280x720)</string>
+    <string name="res_detailed">Detailed (1920x1080)</string>
+    <string name="res_desc">Fast is smooth, Detailed catches distant objects better</string>
+    <string name="label_conf">Detection threshold</string>
+    <string name="label_smooth">Smoothing (frames)</string>
+    <string name="label_show_labels">Show labels</string>
+    <string name="label_motion">Motion sensitivity (low = sensitive)</string>
+    <string name="motion_desc">Phone shake pauses measurement with red frame</string>
+    <string name="label_min_speed">Minimum speed filter</string>
+    <string name="min_speed_desc">Objects below 2s average are hidden (0 = off)</string>
+    <string name="min_speed_off">Off</string>
+    <string name="label_max_box">Maximum box size</string>
+    <string name="max_box_desc">Boxes covering more of the screen are not objects</string>
+    <string name="label_ghost">Lost object display time</string>
+    <string name="ghost_desc">Lost object stays visible with last speed (0 = off)</string>
+    <string name="ghost_off">Off</string>
+    <string name="save">Save</string>
+    <string name="msg_saved">Settings saved</string>
+    <string name="msg_camera_perm">Camera permission required</string>
+    <string name="msg_camera_error">Camera error: %1$s</string>
+    <string name="title_calibration">Trigonometric Calibration</string>
+    <string name="calib_desc">Speed = pixel motion x meter/pixel / time. meter/pixel = 2 x Distance x tan(FOV/2) / image width. Optics are read from the phone automatically.</string>
+    <string name="label_optics_auto">Auto-read values</string>
+    <string name="btn_refresh_optics">Read from phone again</string>
+    <string name="label_distance">Object distance (meters)</string>
+    <string name="distance_desc">Distance of measured objects from camera (e.g. road 10 m)</string>
+    <string name="label_fov_h">Horizontal FOV (degrees)</string>
+    <string name="label_fov_v">Vertical FOV (degrees)</string>
+    <string name="btn_calc_preview">Calculate and preview</string>
+    <string name="label_ref_fine">Reference fine-tuning</string>
+    <string name="ref_desc">Hold a known length to the camera. Enter what the ruler shows and the real value (e.g. real 0.6 m, shown 0.9 m).</string>
+    <string name="label_real">Real length (meters)</string>
+    <string name="label_shown">Shown by ruler (meters)</string>
+    <string name="btn_apply_corr">Apply correction</string>
+    <string name="msg_corr_applied">Correction applied</string>
+    <string name="msg_invalid">Enter valid numbers</string>
+    <string name="corr_value">Correction factor: %1$.3f (1.000 = none)</string>
+    <string name="dlg_ruler_title">Ruler settings</string>
+    <string name="dlg_distance">Distance: %1$s</string>
+    <string name="dlg_reference">Reference: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="label_language">Language</string>
+    <string name="system_default">System default</string>
+    <string name="example_template">%1$.0f m away (%2$.1fx zoom) 1 px = %3$.1f cm\nExample: 100px / 0.2s = %4$.1f km/h</string>
+    <string name="msg_optics_fail">Could not read optics, enter manually</string>
+    <string name="msg_optics_ok">Read: %1$s</string>
+    <string name="msg_optics_err">Read error</string>
+    <string name="optics_cam">Camera: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Sensor: %1$.2f mm wide</string>
+    <string name="optics_pixel">Pixel size: %1$.2f µm</string>
+    <string name="optics_focal">Focal length: %1$.2f mm</string>
+    <string name="optics_none">Not read yet — press Refresh</string>
+    <string name="dlg_fine">Fine-tuning (when fingers slip)</string>
+    <string name="scale_value">Scale: %1$.4f</string>
+    <string name="ruler_dist">Dist: %1$s</string>
+    <string name="cam_back">Rear</string>
+    <string name="cam_front">Front</string>
+    <string name="cam_other">Other</string>
+    <string name="kind_ultra">ultra-wide</string>
+    <string name="kind_wide">wide</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">camera</string>
+    <string name="kind_selfie">selfie</string>
+    <string name="kind_logical">logical</string>
 </resources>

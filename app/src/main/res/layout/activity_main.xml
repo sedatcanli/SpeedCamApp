@@ -30,7 +30,7 @@
         android:background="#AA000000"
         android:textColor="#FFF"
         android:padding="8dp"
-        android:text="Kalibrasyon"
+        android:text="@string/menu_calibration"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -42,7 +42,7 @@
         android:background="#AA000000"
         android:textColor="#FFF"
         android:padding="8dp"
-        android:text="0 nesne"
+        android:text="@string/paused"
         app:layout_constraintTop_toBottomOf="@id/tvStatus"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -56,7 +56,7 @@
         android:gravity="center"
         android:padding="8dp"
         android:visibility="gone"
-        android:text="Telefon hareket ediyor - ölçüm duraklatıldı"
+        android:text="@string/motion_warning"
         app:layout_constraintTop_toBottomOf="@id/tvStatus"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tvCount" />
@@ -109,7 +109,7 @@
             android:alpha="0.7"
             android:textSize="12sp"
             android:minHeight="36dp"
-            android:text="Kalibrasyon" />
+            android:text="@string/menu_calibration" />
 
         <Button
             android:id="@+id/btnSettings"
@@ -119,7 +119,7 @@
             android:alpha="0.7"
             android:textSize="12sp"
             android:minHeight="36dp"
-            android:text="Kamera / Birim" />
+            android:text="@string/menu_camera_unit" />
 
         <Button
             android:id="@+id/btnExit"
@@ -129,6 +129,6 @@
             android:alpha="0.7"
             android:textSize="12sp"
             android:minHeight="36dp"
-            android:text="Kapat" />
+            android:text="@string/menu_close" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

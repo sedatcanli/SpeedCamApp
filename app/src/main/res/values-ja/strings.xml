@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">キャリブレーション</string>
+    <string name="menu_camera_unit">カメラ / 単位</string>
+    <string name="menu_close">閉じる</string>
+    <string name="status_calibration">校正： %1$s</string>
+    <string name="objects_count">%1$d 個の物体</string>
+    <string name="paused">一時停止中</string>
+    <string name="motion_warning">端末が動いています - 計測を一時停止</string>
+    <string name="title_settings">カメラ / 単位設定</string>
+    <string name="label_camera">カメラ</string>
+    <string name="cam_default_back">背面カメラ（既定）</string>
+    <string name="cam_default_front">前面カメラ（既定）</string>
+    <string name="label_unit">速度単位</string>
+    <string name="unit_kmh">キロメートル/時</string>
+    <string name="unit_ms">メートル/秒</string>
+    <string name="unit_mph">マイル/時</string>
+    <string name="label_analysis_res">解析解像度</string>
+    <string name="res_fast">高速 (640x480)</string>
+    <string name="res_balanced">標準 (1280x720)</string>
+    <string name="res_detailed">詳細 (1920x1080)</string>
+    <string name="res_desc">高速は滑らか、詳細は遠くの物体を捉えやすい</string>
+    <string name="label_conf">検出しきい値</string>
+    <string name="label_smooth">平滑化（フレーム数）</string>
+    <string name="label_show_labels">ラベルを表示</string>
+    <string name="label_motion">動き感度（低 = 敏感）</string>
+    <string name="motion_desc">振動時は赤枠で計測を一時停止</string>
+    <string name="label_min_speed">最低速度フィルター</string>
+    <string name="min_speed_desc">2秒平均が下回る物体は非表示（0 = オフ）</string>
+    <string name="min_speed_off">オフ</string>
+    <string name="label_max_box">最大枠サイズ</string>
+    <string name="max_box_desc">これより大きい枠は物体ではない</string>
+    <string name="label_ghost">消失物の表示時間</string>
+    <string name="ghost_desc">消失物は最終速度で表示継続（0 = オフ）</string>
+    <string name="ghost_off">オフ</string>
+    <string name="save">保存</string>
+    <string name="msg_saved">設定を保存しました</string>
+    <string name="msg_camera_perm">カメラ権限が必要です</string>
+    <string name="msg_camera_error">カメラエラー： %1$s</string>
+    <string name="title_calibration">三角測量キャリブレーション</string>
+    <string name="calib_desc">速度 = 画素移動 × m/画素 / 時間。m/画素 = 2 × 距離 × tan(FOV/2) / 画像幅。光学値は自動読取。</string>
+    <string name="label_optics_auto">自動取得値</string>
+    <string name="btn_refresh_optics">端末から再読取</string>
+    <string name="label_distance">物体までの距離（m）</string>
+    <string name="distance_desc">カメラからの距離（例：道路 10 m）</string>
+    <string name="label_fov_h">水平画角（度）</string>
+    <string name="label_fov_v">垂直画角（度）</string>
+    <string name="btn_calc_preview">計算とプレビュー</string>
+    <string name="label_ref_fine">基準による微調整</string>
+    <string name="ref_desc">既知の長さをかざす。表示値と実測値を入力（例：実際 0.6 m、表示 0.9 m）。</string>
+    <string name="label_real">実際の長さ（m）</string>
+    <string name="label_shown">表示された長さ（m）</string>
+    <string name="btn_apply_corr">補正を適用</string>
+    <string name="msg_corr_applied">補正を適用しました</string>
+    <string name="msg_invalid">有効な数値を入力</string>
+    <string name="corr_value">補正係数： %1$.3f（1.000 = なし）</string>
+    <string name="dlg_ruler_title">定規設定</string>
+    <string name="dlg_distance">距離： %1$s</string>
+    <string name="dlg_reference">基準： %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">キャンセル</string>
+    <string name="label_language">言語</string>
+    <string name="system_default">システム既定</string>
+    <string name="example_template">%1$.0f m先（ズーム %2$.1f倍）1 px = %3$.1f cm\n例：100px / 0.2秒 = %4$.1f km/h</string>
+    <string name="msg_optics_fail">光学値が読めません、手動入力</string>
+    <string name="msg_optics_ok">読取完了： %1$s</string>
+    <string name="msg_optics_err">読取エラー</string>
+    <string name="optics_cam">カメラ： %1$d x %2$d（%3$.1f MP）</string>
+    <string name="optics_sensor">センサー：幅 %1$.2f mm</string>
+    <string name="optics_pixel">画素サイズ： %1$.2f µm</string>
+    <string name="optics_focal">焦点距離： %1$.2f mm</string>
+    <string name="optics_none">未読取 — 更新を押してください</string>
+    <string name="dlg_fine">微調整（指が滑るとき）</string>
+    <string name="scale_value">スケール： %1$.4f</string>
+    <string name="ruler_dist">距離： %1$s</string>
+    <string name="cam_back">背面</string>
+    <string name="cam_front">前面</string>
+    <string name="cam_other">その他</string>
+    <string name="kind_ultra">超広角</string>
+    <string name="kind_wide">広角</string>
+    <string name="kind_tele">ズーム/望遠</string>
+    <string name="kind_cam">カメラ</string>
+    <string name="kind_selfie">自撮り</string>
+    <string name="kind_logical">論理</string>
+</resources>

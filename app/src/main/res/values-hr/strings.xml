@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Kalibracija</string>
+    <string name="menu_camera_unit">Kamera / Jedinica</string>
+    <string name="menu_close">Zatvori</string>
+    <string name="status_calibration">Kalibracija: %1$s</string>
+    <string name="objects_count">%1$d objekata</string>
+    <string name="paused">Pauzirano</string>
+    <string name="motion_warning">Telefon se miče - mjerenje pauzirano</string>
+    <string name="title_settings">Postavke kamere / jedinice</string>
+    <string name="label_camera">Kamera</string>
+    <string name="cam_default_back">Stražnja kamera (zadano)</string>
+    <string name="cam_default_front">Prednja kamera (zadano)</string>
+    <string name="label_unit">Jedinica brzine</string>
+    <string name="unit_kmh">Kilometar/sat</string>
+    <string name="unit_ms">Metar/sekunda</string>
+    <string name="unit_mph">Milja/sat</string>
+    <string name="label_analysis_res">Rezolucija analize</string>
+    <string name="res_fast">Brza (640x480)</string>
+    <string name="res_balanced">Uravnotežena (1280x720)</string>
+    <string name="res_detailed">Detaljna (1920x1080)</string>
+    <string name="res_desc">Brza je glatka, Detaljna bolje vidi udaljene objekte</string>
+    <string name="label_conf">Prag detekcije</string>
+    <string name="label_smooth">Glađenje (kadrovi)</string>
+    <string name="label_show_labels">Prikaži oznake</string>
+    <string name="label_motion">Osjetljivost na pokret (niska = osjetljiva)</string>
+    <string name="motion_desc">Pri trešnji mjerenje pauzira s crvenim okvirom</string>
+    <string name="label_min_speed">Filter minimalne brzine</string>
+    <string name="min_speed_desc">Objekti ispod prosjeka 2 s skriveni (0 = isklj.)</string>
+    <string name="min_speed_off">Isklj.</string>
+    <string name="label_max_box">Maks. veličina okvira</string>
+    <string name="max_box_desc">Veći okviri nisu objekti</string>
+    <string name="label_ghost">Trajanje izgubljenog objekta</string>
+    <string name="ghost_desc">Izgubljeni objekt vidljiv zadnjom brzinom (0 = isklj.)</string>
+    <string name="ghost_off">Isklj.</string>
+    <string name="save">Spremi</string>
+    <string name="msg_saved">Postavke spremljene</string>
+    <string name="msg_camera_perm">Potrebna dozvola kamere</string>
+    <string name="msg_camera_error">Greška kamere: %1$s</string>
+    <string name="title_calibration">Trigonometrijska kalibracija</string>
+    <string name="calib_desc">Brzina = pomak piksela x metar/piksel / vrijeme. metar/piksel = 2 x Udaljenost x tan(FOV/2) / širina slike. Optika se čita automatski.</string>
+    <string name="label_optics_auto">Automatski pročitane vrijednosti</string>
+    <string name="btn_refresh_optics">Ponovno čitaj s telefona</string>
+    <string name="label_distance">Udaljenost objekata (metri)</string>
+    <string name="distance_desc">Udaljenost od kamere (npr. cesta 10 m)</string>
+    <string name="label_fov_h">Horizontalni FOV (stupnjevi)</string>
+    <string name="label_fov_v">Vertikalni FOV (stupnjevi)</string>
+    <string name="btn_calc_preview">Izračunaj i prikaži</string>
+    <string name="label_ref_fine">Fino podešavanje referencom</string>
+    <string name="ref_desc">Pokažite poznatu duljinu. Unesite prikazanu i stvarnu vrijednost (npr. stvar. 0,6 m, prikaz. 0,9 m).</string>
+    <string name="label_real">Stvarna duljina (metri)</string>
+    <string name="label_shown">Prikazana duljina (metri)</string>
+    <string name="btn_apply_corr">Primijeni korekciju</string>
+    <string name="msg_corr_applied">Korekcija primijenjena</string>
+    <string name="msg_invalid">Unesite valjane brojeve</string>
+    <string name="corr_value">Koeficijent: %1$.3f (1,000 = nema)</string>
+    <string name="dlg_ruler_title">Postavka ravnala</string>
+    <string name="dlg_distance">Udaljenost: %1$s</string>
+    <string name="dlg_reference">Referenca: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Odustani</string>
+    <string name="label_language">Jezik</string>
+    <string name="system_default">Zadano sustava</string>
+    <string name="example_template">S %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nPrimjer: 100px / 0,2s = %4$.1f km/h</string>
+    <string name="msg_optics_fail">Optika nečitljiva, unesite ručno</string>
+    <string name="msg_optics_ok">Pročitano: %1$s</string>
+    <string name="msg_optics_err">Greška čitanja</string>
+    <string name="optics_cam">Kamera: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Senzor: %1$.2f mm širine</string>
+    <string name="optics_pixel">Veličina piksela: %1$.2f µm</string>
+    <string name="optics_focal">Žarišna duljina: %1$.2f mm</string>
+    <string name="optics_none">Još nije pročitano — pritisnite Osvježi</string>
+    <string name="dlg_fine">Fino podešavanje (ako prsti klize)</string>
+    <string name="scale_value">Mjerilo: %1$.4f</string>
+    <string name="ruler_dist">Udalj.: %1$s</string>
+    <string name="cam_back">Stražnja</string>
+    <string name="cam_front">Prednja</string>
+    <string name="cam_other">Druga</string>
+    <string name="kind_ultra">ultraširoka</string>
+    <string name="kind_wide">široka</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">kamera</string>
+    <string name="kind_selfie">selfie</string>
+    <string name="kind_logical">logička</string>
+</resources>

@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Калибрација</string>
+    <string name="menu_camera_unit">Камера / Јединица</string>
+    <string name="menu_close">Затвори</string>
+    <string name="status_calibration">Калибрација: %1$s</string>
+    <string name="objects_count">%1$d објеката</string>
+    <string name="paused">Паузирано</string>
+    <string name="motion_warning">Телефон се помера - мерење паузирано</string>
+    <string name="title_settings">Подешавања камере / јединице</string>
+    <string name="label_camera">Камера</string>
+    <string name="cam_default_back">Задња камера (подраз.)</string>
+    <string name="cam_default_front">Предња камера (подраз.)</string>
+    <string name="label_unit">Јединица брзине</string>
+    <string name="unit_kmh">Километар/сат</string>
+    <string name="unit_ms">Метар/секунда</string>
+    <string name="unit_mph">Миља/сат</string>
+    <string name="label_analysis_res">Резолуција анализе</string>
+    <string name="res_fast">Брза (640x480)</string>
+    <string name="res_balanced">Уравнотежена (1280x720)</string>
+    <string name="res_detailed">Детаљна (1920x1080)</string>
+    <string name="res_desc">Брза је глатка, Детаљна боље види удаљене објекте</string>
+    <string name="label_conf">Праг детекције</string>
+    <string name="label_smooth">Ублажавање (кадрови)</string>
+    <string name="label_show_labels">Прикажи ознаке</string>
+    <string name="label_motion">Осетљивост на покрет (ниска = осетљива)</string>
+    <string name="motion_desc">При трешњи мерење паузира са црвеним оквиром</string>
+    <string name="label_min_speed">Филтер минималне брзине</string>
+    <string name="min_speed_desc">Објекти испод просека 2 с скривени (0 = искљ.)</string>
+    <string name="min_speed_off">Искљ.</string>
+    <string name="label_max_box">Макс. величина оквира</string>
+    <string name="max_box_desc">Већи оквири нису објекти</string>
+    <string name="label_ghost">Трајање изгубљеног објекта</string>
+    <string name="ghost_desc">Изгубљени објекат видљив задњом брзином (0 = искљ.)</string>
+    <string name="ghost_off">Искљ.</string>
+    <string name="save">Сачувај</string>
+    <string name="msg_saved">Подешавања сачувана</string>
+    <string name="msg_camera_perm">Потребна дозвола камере</string>
+    <string name="msg_camera_error">Грешка камере: %1$s</string>
+    <string name="title_calibration">Тригонометријска калибрација</string>
+    <string name="calib_desc">Брзина = помак пиксела x метар/пиксел / време. метар/пиксел = 2 x Удаљеност x tan(FOV/2) / ширина слике. Оптика се чита аутоматски.</string>
+    <string name="label_optics_auto">Аутоматски прочитане вредности</string>
+    <string name="btn_refresh_optics">Поново читај са телефона</string>
+    <string name="label_distance">Удаљеност објеката (метри)</string>
+    <string name="distance_desc">Удаљеност од камере (нпр. улица 10 м)</string>
+    <string name="label_fov_h">Хоризонтални FOV (степени)</string>
+    <string name="label_fov_v">Вертикални FOV (степени)</string>
+    <string name="btn_calc_preview">Израчунај и прикажи</string>
+    <string name="label_ref_fine">Фино подешавање референцом</string>
+    <string name="ref_desc">Покажите познату дужину. Унесите приказану и стварну вредност (нпр. ствар. 0,6 м, приказ. 0,9 м).</string>
+    <string name="label_real">Стварна дужина (метри)</string>
+    <string name="label_shown">Приказана дужина (метри)</string>
+    <string name="btn_apply_corr">Примени корекцију</string>
+    <string name="msg_corr_applied">Корекција примењена</string>
+    <string name="msg_invalid">Унесите исправне бројеве</string>
+    <string name="corr_value">Коефицијент: %1$.3f (1,000 = нема)</string>
+    <string name="dlg_ruler_title">Подешавање лењира</string>
+    <string name="dlg_distance">Удаљеност: %1$s</string>
+    <string name="dlg_reference">Референца: %1$s</string>
+    <string name="ok">ОК</string>
+    <string name="cancel">Одустани</string>
+    <string name="label_language">Језик</string>
+    <string name="system_default">Системски подраз.</string>
+    <string name="example_template">Са %1$.0f м (зум %2$.1fx) 1 px = %3$.1f цм\nПример: 100px / 0,2с = %4$.1f км/ч</string>
+    <string name="msg_optics_fail">Оптика нечитљива, унесите ручно</string>
+    <string name="msg_optics_ok">Прочитано: %1$s</string>
+    <string name="msg_optics_err">Грешка читања</string>
+    <string name="optics_cam">Камера: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Сензор: %1$.2f мм ширина</string>
+    <string name="optics_pixel">Величина пиксела: %1$.2f µm</string>
+    <string name="optics_focal">Жижна даљина: %1$.2f мм</string>
+    <string name="optics_none">Још није прочитано — притисните Освежи</string>
+    <string name="dlg_fine">Фино подешавање (ако прсти клизе)</string>
+    <string name="scale_value">Размера: %1$.4f</string>
+    <string name="ruler_dist">Удаљ.: %1$s</string>
+    <string name="cam_back">Задња</string>
+    <string name="cam_front">Предња</string>
+    <string name="cam_other">Друга</string>
+    <string name="kind_ultra">ултраширока</string>
+    <string name="kind_wide">широка</string>
+    <string name="kind_tele">зум/теле</string>
+    <string name="kind_cam">камера</string>
+    <string name="kind_selfie">селфи</string>
+    <string name="kind_logical">логичка</string>
+</resources>

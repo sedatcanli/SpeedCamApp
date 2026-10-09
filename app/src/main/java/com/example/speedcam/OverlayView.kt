@@ -239,8 +239,10 @@ class OverlayView @JvmOverloads constructor(
                 else "%.1f m".format(refL)
             }
             val dist = try { calibRef.distanceM } catch (_: Exception) { 0f }
-            val distLabel = if (dist < 10f) "Uzak: %.1f m".format(dist)
-            else "Uzak: %.0f m".format(dist)
+            val distVal = if (dist < 10f) "%.1f m".format(dist) else "%.0f m".format(dist)
+            val distLabel = try {
+                context.getString(R.string.ruler_dist, distVal)
+            } catch (_: Exception) { distVal }
             val twScale = textPaint.measureText(scaleLabel)
             val twDist = textPaint.measureText(distLabel)
             val pad = 14f

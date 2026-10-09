@@ -19,15 +19,32 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
         calib = CalibrationManager(this)
 
-        // Birim seçimi
+        // Dil seçimi
+        val langTags = LocaleHelper.LANGS.map { it.first }
+        binding.spLang.adapter = ArrayAdapter(
+            this, android.R.layout.simple_spinner_dropdown_item,
+            LocaleHelper.LANGS.map { it.second }
+        )
+        binding.spLang.setSelection(
+            langTags.indexOf(calib.langTag).coerceAtLeast(0)
+        )
+
+        // Birim seçimi (yerelleştirilmiş adlar, sabit değerler)
+        val unitNames = listOf(
+            getString(R.string.unit_kmh),
+            getString(R.string.unit_ms),
+            getString(R.string.unit_mph)
+        )
         val units = listOf(SpeedUnit.KMH, SpeedUnit.MS, SpeedUnit.MPH)
         binding.spUnit.adapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, units)
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, unitNames)
         binding.spUnit.setSelection(units.indexOf(calib.speedUnit).coerceAtLeast(0))
 
         // Analiz çözünürlüğü
         val resNames = listOf(
-            "Hızlı (640x480)", "Dengeli (1280x720)", "Detaylı (1920x1080)"
+            getString(R.string.res_fast),
+            getString(R.string.res_balanced),
+            getString(R.string.res_detailed)
         )
         binding.spRes.adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resNames)
@@ -60,8 +77,8 @@ class SettingsActivity : AppCompatActivity() {
         // Önce eski basit liste (kamera izni yoksa bile ekran açılsın)
         setCameraSpinner(
             listOf(
-                CamEntry("", "Arka Kamera (varsayılan)", CameraSelector.LENS_FACING_BACK),
-                CamEntry("", "Ön Kamera (varsayılan)", CameraSelector.LENS_FACING_FRONT)
+                CamEntry("", getString(R.string.cam_default_back), CameraSelector.LENS_FACING_BACK),
+                CamEntry("", getString(R.string.cam_default_front), CameraSelector.LENS_FACING_FRONT)
             )
         )
 
@@ -89,6 +106,9 @@ class SettingsActivity : AppCompatActivity() {
             }
             calib.speedUnit = units[binding.spUnit.selectedItemPosition]
             calib.analysisRes = binding.spRes.selectedItemPosition.coerceIn(0, 2)
+            val newLang = langTags[binding.spLang.selectedItemPosition.coerceIn(0, langTags.size - 1)]
+            val langChanged = newLang != calib.langTag
+            calib.langTag = newLang
             calib.detectionConfidence =
                 SliderUtils.snap(binding.sliderConf, binding.sliderConf.value)
             calib.smoothingWindow = binding.sliderSmooth.value.toInt()
@@ -101,7 +121,10 @@ class SettingsActivity : AppCompatActivity() {
                 SliderUtils.snap(binding.sliderMaxBox, binding.sliderMaxBox.value) / 100f
             calib.ghostSec =
                 SliderUtils.snap(binding.sliderGhost, binding.sliderGhost.value)
-            Toast.makeText(this, "Ayarlar kaydedildi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_saved), Toast.LENGTH_SHORT).show()
+            if (langChanged) {
+                try { LocaleHelper.apply(newLang) } catch (_: Exception) { }
+            }
             finish()
         }
     }
@@ -110,7 +133,7 @@ class SettingsActivity : AppCompatActivity() {
         val ms = if (v < 0) {
             try { binding.sliderMinSpeed.value } catch (_: Exception) { 0f }
         } else v
-        binding.tvMinSpeed.text = if (ms <= 0f) "Kapalı"
+        binding.tvMinSpeed.text = if (ms <= 0f) getString(R.string.min_speed_off)
         else "%.1f m/s (%.0f %s)".format(
             ms, SpeedUnit.toDisplay(ms, calib.speedUnit), calib.speedUnit
         )
@@ -127,7 +150,7 @@ class SettingsActivity : AppCompatActivity() {
         val x = if (v < 0) {
             try { binding.sliderGhost.value } catch (_: Exception) { 1.5f }
         } else v
-        binding.tvGhost.text = if (x <= 0f) "Kapalı" else "%.1f sn".format(x)
+        binding.tvGhost.text = if (x <= 0f) getString(R.string.ghost_off) else "%.1f s".format(x)
     }
 
     private fun setCameraSpinner(list: List<CamEntry>) {

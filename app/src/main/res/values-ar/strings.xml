@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">المعايرة</string>
+    <string name="menu_camera_unit">الكاميرا / الوحدة</string>
+    <string name="menu_close">إغلاق</string>
+    <string name="status_calibration">المعايرة: %1$s</string>
+    <string name="objects_count">%1$d أجسام</string>
+    <string name="paused">متوقف مؤقتا</string>
+    <string name="motion_warning">الهاتف يتحرك - القياس متوقف</string>
+    <string name="title_settings">إعدادات الكاميرا / الوحدة</string>
+    <string name="label_camera">الكاميرا</string>
+    <string name="cam_default_back">الكاميرا الخلفية (افتراضي)</string>
+    <string name="cam_default_front">الكاميرا الأمامية (افتراضي)</string>
+    <string name="label_unit">وحدة السرعة</string>
+    <string name="unit_kmh">كيلومتر/ساعة</string>
+    <string name="unit_ms">متر/ثانية</string>
+    <string name="unit_mph">ميل/ساعة</string>
+    <string name="label_analysis_res">دقة التحليل</string>
+    <string name="res_fast">سريعة (640x480)</string>
+    <string name="res_balanced">متوازنة (1280x720)</string>
+    <string name="res_detailed">مفصلة (1920x1080)</string>
+    <string name="res_desc">السريعة سلسة، والمفصلة تكتشف الأجسام البعيدة أفضل</string>
+    <string name="label_conf">عتبة الكشف</string>
+    <string name="label_smooth">التنعيم (إطارات)</string>
+    <string name="label_show_labels">إظهار التسميات</string>
+    <string name="label_motion">حساسية الحركة (منخفض = حساس)</string>
+    <string name="motion_desc">عند الاهتزاز يتوقف القياس مع إطار أحمر</string>
+    <string name="label_min_speed">مرشح السرعة الدنيا</string>
+    <string name="min_speed_desc">الأجسام تحت متوسط ثانيتين مخفية (0 = مغلق)</string>
+    <string name="min_speed_off">مغلق</string>
+    <string name="label_max_box">أقصى حجم للإطار</string>
+    <string name="max_box_desc">الإطارات الأكبر ليست أجساما</string>
+    <string name="label_ghost">مدة عرض الجسم المفقود</string>
+    <string name="ghost_desc">الجسم المفقود يبقى ظاهرا بآخر سرعة (0 = مغلق)</string>
+    <string name="ghost_off">مغلق</string>
+    <string name="save">حفظ</string>
+    <string name="msg_saved">تم حفظ الإعدادات</string>
+    <string name="msg_camera_perm">إذن الكاميرا مطلوب</string>
+    <string name="msg_camera_error">خطأ الكاميرا: %1$s</string>
+    <string name="title_calibration">معايرة مثلثية</string>
+    <string name="calib_desc">السرعة = حركة البكسل × متر/بكسل / الزمن. متر/بكسل = 2 × المسافة × ظل(FOV/2) / عرض الصورة. تُقرأ البصريات تلقائيا.</string>
+    <string name="label_optics_auto">القيم المقروءة تلقائيا</string>
+    <string name="btn_refresh_optics">إعادة القراءة من الهاتف</string>
+    <string name="label_distance">مسافة الأجسام (متر)</string>
+    <string name="distance_desc">المسافة إلى الكاميرا (مثال: طريق 10 م)</string>
+    <string name="label_fov_h">مجال الرؤية الأفقي (درجات)</string>
+    <string name="label_fov_v">مجال الرؤية العمودي (درجات)</string>
+    <string name="btn_calc_preview">احسب واستعرض</string>
+    <string name="label_ref_fine">ضبط دقيق بالمرجع</string>
+    <string name="ref_desc">اعرض طولا معروفا. أدخل القيمة المعروضة والحقيقية (مثال: حقيقي 0.6 م، معروض 0.9 م).</string>
+    <string name="label_real">الطول الحقيقي (متر)</string>
+    <string name="label_shown">الطول المعروض (متر)</string>
+    <string name="btn_apply_corr">تطبيق التصحيح</string>
+    <string name="msg_corr_applied">تم تطبيق التصحيح</string>
+    <string name="msg_invalid">أدخل أرقاما صالحة</string>
+    <string name="corr_value">المعامل: %1$.3f (1.000 = لا شيء)</string>
+    <string name="dlg_ruler_title">إعداد المسطرة</string>
+    <string name="dlg_distance">المسافة: %1$s</string>
+    <string name="dlg_reference">المرجع: %1$s</string>
+    <string name="ok">موافق</string>
+    <string name="cancel">إلغاء</string>
+    <string name="label_language">اللغة</string>
+    <string name="system_default">افتراضي النظام</string>
+    <string name="example_template">على بعد %1$.0f م (تقريب %2$.1fx) 1 بكسل = %3$.1f سم\nمثال: 100 بكسل / 0.2 ث = %4$.1f كم/س</string>
+    <string name="msg_optics_fail">تعذر قراءة البصريات، أدخل يدويا</string>
+    <string name="msg_optics_ok">تمت القراءة: %1$s</string>
+    <string name="msg_optics_err">خطأ في القراءة</string>
+    <string name="optics_cam">الكاميرا: %1$d × %2$d (%3$.1f ميغا)</string>
+    <string name="optics_sensor">المستشعر: %1$.2f مم عرضا</string>
+    <string name="optics_pixel">حجم البكسل: %1$.2f ميكرومتر</string>
+    <string name="optics_focal">البعد البؤري: %1$.2f مم</string>
+    <string name="optics_none">لم يُقرأ بعد — اضغط تحديث</string>
+    <string name="dlg_fine">ضبط دقيق (إذا انزلقت الأصابع)</string>
+    <string name="scale_value">المقياس: %1$.4f</string>
+    <string name="ruler_dist">المسافة: %1$s</string>
+    <string name="cam_back">خلفية</string>
+    <string name="cam_front">أمامية</string>
+    <string name="cam_other">أخرى</string>
+    <string name="kind_ultra">واسعة جدا</string>
+    <string name="kind_wide">واسعة</string>
+    <string name="kind_tele">تقريب/تيلي</string>
+    <string name="kind_cam">كاميرا</string>
+    <string name="kind_selfie">سيلفي</string>
+    <string name="kind_logical">منطقية</string>
+</resources>

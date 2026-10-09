@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">Hiệu chuẩn</string>
+    <string name="menu_camera_unit">Máy ảnh / Đơn vị</string>
+    <string name="menu_close">Đóng</string>
+    <string name="status_calibration">Hiệu chuẩn: %1$s</string>
+    <string name="objects_count">%1$d vật thể</string>
+    <string name="paused">Tạm dừng</string>
+    <string name="motion_warning">Điện thoại đang rung - đo tạm dừng</string>
+    <string name="title_settings">Cài đặt máy ảnh / đơn vị</string>
+    <string name="label_camera">Máy ảnh</string>
+    <string name="cam_default_back">Máy ảnh sau (mặc định)</string>
+    <string name="cam_default_front">Máy ảnh trước (mặc định)</string>
+    <string name="label_unit">Đơn vị tốc độ</string>
+    <string name="unit_kmh">Kilômét/giờ</string>
+    <string name="unit_ms">Mét/giây</string>
+    <string name="unit_mph">Dặm/giờ</string>
+    <string name="label_analysis_res">Độ phân giải phân tích</string>
+    <string name="res_fast">Nhanh (640x480)</string>
+    <string name="res_balanced">Cân bằng (1280x720)</string>
+    <string name="res_detailed">Chi tiết (1920x1080)</string>
+    <string name="res_desc">Nhanh thì mượt, Chi tiết bắt vật xa tốt hơn</string>
+    <string name="label_conf">Ngưỡng phát hiện</string>
+    <string name="label_smooth">Làm mượt (khung hình)</string>
+    <string name="label_show_labels">Hiện nhãn</string>
+    <string name="label_motion">Độ nhạy chuyển động (thấp = nhạy)</string>
+    <string name="motion_desc">Khi rung, phép đo dừng với khung đỏ</string>
+    <string name="label_min_speed">Lọc tốc độ tối thiểu</string>
+    <string name="min_speed_desc">Vật dưới trung bình 2 giây bị ẩn (0 = tắt)</string>
+    <string name="min_speed_off">Tắt</string>
+    <string name="label_max_box">Kích thước khung tối đa</string>
+    <string name="max_box_desc">Khung lớn hơn không phải vật thể</string>
+    <string name="label_ghost">Thời gian hiện vật đã mất</string>
+    <string name="ghost_desc">Vật đã mất hiện với tốc độ cuối (0 = tắt)</string>
+    <string name="ghost_off">Tắt</string>
+    <string name="save">Lưu</string>
+    <string name="msg_saved">Đã lưu cài đặt</string>
+    <string name="msg_camera_perm">Cần quyền máy ảnh</string>
+    <string name="msg_camera_error">Lỗi máy ảnh: %1$s</string>
+    <string name="title_calibration">Hiệu chuẩn lượng giác</string>
+    <string name="calib_desc">Tốc độ = chuyển động pixel × mét/pixel / thời gian. mét/pixel = 2 × Khoảng cách × tan(FOV/2) / rộng ảnh. Quang học đọc tự động.</string>
+    <string name="label_optics_auto">Giá trị đọc tự động</string>
+    <string name="btn_refresh_optics">Đọc lại từ điện thoại</string>
+    <string name="label_distance">Khoảng cách vật (mét)</string>
+    <string name="distance_desc">Khoảng cách tới máy ảnh (vd. đường 10 m)</string>
+    <string name="label_fov_h">FOV ngang (độ)</string>
+    <string name="label_fov_v">FOV dọc (độ)</string>
+    <string name="btn_calc_preview">Tính và xem trước</string>
+    <string name="label_ref_fine">Tinh chỉnh theo mẫu</string>
+    <string name="ref_desc">Đưa chiều dài đã biết vào. Nhập giá trị hiển thị và thực (vd. thực 0,6 m, hiển thị 0,9 m).</string>
+    <string name="label_real">Chiều dài thực (mét)</string>
+    <string name="label_shown">Chiều dài hiển thị (mét)</string>
+    <string name="btn_apply_corr">Áp dụng hiệu chỉnh</string>
+    <string name="msg_corr_applied">Đã áp dụng hiệu chỉnh</string>
+    <string name="msg_invalid">Nhập số hợp lệ</string>
+    <string name="corr_value">Hệ số: %1$.3f (1,000 = không)</string>
+    <string name="dlg_ruler_title">Chỉnh thước</string>
+    <string name="dlg_distance">Khoảng cách: %1$s</string>
+    <string name="dlg_reference">Mẫu: %1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Hủy</string>
+    <string name="label_language">Ngôn ngữ</string>
+    <string name="system_default">Mặc định hệ thống</string>
+    <string name="example_template">Cách %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nVí dụ: 100px / 0,2s = %4$.1f km/h</string>
+    <string name="msg_optics_fail">Không đọc được quang học, nhập tay</string>
+    <string name="msg_optics_ok">Đã đọc: %1$s</string>
+    <string name="msg_optics_err">Lỗi đọc</string>
+    <string name="optics_cam">Máy ảnh: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">Cảm biến: rộng %1$.2f mm</string>
+    <string name="optics_pixel">Cỡ điểm ảnh: %1$.2f µm</string>
+    <string name="optics_focal">Tiêu cự: %1$.2f mm</string>
+    <string name="optics_none">Chưa đọc — nhấn Làm mới</string>
+    <string name="dlg_fine">Tinh chỉnh (khi tay trượt)</string>
+    <string name="scale_value">Tỉ lệ: %1$.4f</string>
+    <string name="ruler_dist">K.cách: %1$s</string>
+    <string name="cam_back">Sau</string>
+    <string name="cam_front">Trước</string>
+    <string name="cam_other">Khác</string>
+    <string name="kind_ultra">siêu rộng</string>
+    <string name="kind_wide">rộng</string>
+    <string name="kind_tele">zoom/tele</string>
+    <string name="kind_cam">máy ảnh</string>
+    <string name="kind_selfie">selfie</string>
+    <string name="kind_logical">logic</string>
+</resources>

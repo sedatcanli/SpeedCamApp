@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">כיול</string>
+    <string name="menu_camera_unit">מצלמה / יחידה</string>
+    <string name="menu_close">סגור</string>
+    <string name="status_calibration">כיול: %1$s</string>
+    <string name="objects_count">%1$d עצמים</string>
+    <string name="paused">מושהה</string>
+    <string name="motion_warning">הטלפון זז - המדידה מושהית</string>
+    <string name="title_settings">הגדרות מצלמה / יחידה</string>
+    <string name="label_camera">מצלמה</string>
+    <string name="cam_default_back">מצלמה אחורית (ברירת מחדל)</string>
+    <string name="cam_default_front">מצלמה קדמית (ברירת מחדל)</string>
+    <string name="label_unit">יחידת מהירות</string>
+    <string name="unit_kmh">קילומטר/שעה</string>
+    <string name="unit_ms">מטר/שנייה</string>
+    <string name="unit_mph">מייל/שעה</string>
+    <string name="label_analysis_res">רזולוציית ניתוח</string>
+    <string name="res_fast">מהירה (640x480)</string>
+    <string name="res_balanced">מאוזנת (1280x720)</string>
+    <string name="res_detailed">מפורטת (1920x1080)</string>
+    <string name="res_desc">מהירה חלקה, מפורטת קולטת עצמים רחוקים טוב יותר</string>
+    <string name="label_conf">סף זיהוי</string>
+    <string name="label_smooth">החלקה (פריימים)</string>
+    <string name="label_show_labels">הצג תוויות</string>
+    <string name="label_motion">רגישות לתנועה (נמוך = רגיש)</string>
+    <string name="motion_desc">ברעידה המדידה מושהית עם מסגרת אדומה</string>
+    <string name="label_min_speed">מסנן מהירות מינימלית</string>
+    <string name="min_speed_desc">עצמים מתחת לממוצע 2 שניות מוסתרים (0 = כבוי)</string>
+    <string name="min_speed_off">כבוי</string>
+    <string name="label_max_box">גודל מסגרת מרבי</string>
+    <string name="max_box_desc">מסגרות גדולות יותר אינן עצמים</string>
+    <string name="label_ghost">זמן עצם אבוד</string>
+    <string name="ghost_desc">עצם אבוד נשאר עם המהירות האחרונה (0 = כבוי)</string>
+    <string name="ghost_off">כבוי</string>
+    <string name="save">שמור</string>
+    <string name="msg_saved">ההגדרות נשמרו</string>
+    <string name="msg_camera_perm">נדרשת הרשאת מצלמה</string>
+    <string name="msg_camera_error">שגיאת מצלמה: %1$s</string>
+    <string name="title_calibration">כיול טריגונומטרי</string>
+    <string name="calib_desc">מהירות = תנועת פיקסלים × מטר/פיקסל / זמן. מטר/פיקסל = 2 × מרחק × tan(FOV/2) / רוחב תמונה. האופטיקה נקראת אוטומטית.</string>
+    <string name="label_optics_auto">ערכים שנקראו אוטומטית</string>
+    <string name="btn_refresh_optics">קרא שוב מהטלפון</string>
+    <string name="label_distance">מרחק עצמים (מטרים)</string>
+    <string name="distance_desc">מרחק מהמצלמה (למשל כביש 10 מ׳)</string>
+    <string name="label_fov_h">FOV אופקי (מעלות)</string>
+    <string name="label_fov_v">FOV אנכי (מעלות)</string>
+    <string name="btn_calc_preview">חשב והצג</string>
+    <string name="label_ref_fine">כיונון עדין לפי ייחוס</string>
+    <string name="ref_desc">הצג אורך ידוע. הזן ערך מוצג ואמיתי (למשל אמיתי 0.6 מ׳, מוצג 0.9 מ׳).</string>
+    <string name="label_real">אורך אמיתי (מטרים)</string>
+    <string name="label_shown">אורך מוצג (מטרים)</string>
+    <string name="btn_apply_corr">החל תיקון</string>
+    <string name="msg_corr_applied">התיקון הוחל</string>
+    <string name="msg_invalid">הזן מספרים תקינים</string>
+    <string name="corr_value">מקדם: %1$.3f (1.000 = אין)</string>
+    <string name="dlg_ruler_title">הגדרת סרגל</string>
+    <string name="dlg_distance">מרחק: %1$s</string>
+    <string name="dlg_reference">ייחוס: %1$s</string>
+    <string name="ok">אישור</string>
+    <string name="cancel">ביטול</string>
+    <string name="label_language">שפה</string>
+    <string name="system_default">ברירת מחדל מערכת</string>
+    <string name="example_template">ממרחק %1$.0f מ׳ (זום %2$.1fx) פיקסל = %3$.1f ס״מ\nדוגמה: 100px / 0.2שנ = %4$.1f קמ״ש</string>
+    <string name="msg_optics_fail">לא ניתן לקרוא אופטיקה, הזן ידנית</string>
+    <string name="msg_optics_ok">נקרא: %1$s</string>
+    <string name="msg_optics_err">שגיאת קריאה</string>
+    <string name="optics_cam">מצלמה: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">חיישן: %1$.2f מ״מ רוחב</string>
+    <string name="optics_pixel">גודל פיקסל: %1$.2f µm</string>
+    <string name="optics_focal">מרחק מוקד: %1$.2f מ״מ</string>
+    <string name="optics_none">טרם נקרא — לחץ רענן</string>
+    <string name="dlg_fine">כיונון עדין (אם האצבעות מחליקות)</string>
+    <string name="scale_value">סקאלה: %1$.4f</string>
+    <string name="ruler_dist">מרחק: %1$s</string>
+    <string name="cam_back">אחורית</string>
+    <string name="cam_front">קדמית</string>
+    <string name="cam_other">אחרת</string>
+    <string name="kind_ultra">אולטרה-רחבה</string>
+    <string name="kind_wide">רחבה</string>
+    <string name="kind_tele">זום/טלה</string>
+    <string name="kind_cam">מצלמה</string>
+    <string name="kind_selfie">סלפי</string>
+    <string name="kind_logical">לוגית</string>
+</resources>

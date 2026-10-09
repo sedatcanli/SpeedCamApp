@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">SpeedCam</string>
+    <string name="menu_calibration">अंशांकन</string>
+    <string name="menu_camera_unit">कैमरा / इकाई</string>
+    <string name="menu_close">बंद करें</string>
+    <string name="status_calibration">अंशांकन: %1$s</string>
+    <string name="objects_count">%1$d वस्तुएं</string>
+    <string name="paused">रोका गया</string>
+    <string name="motion_warning">फोन हिल रहा है - मापन रोका गया</string>
+    <string name="title_settings">कैमरा / इकाई सेटिंग</string>
+    <string name="label_camera">कैमरा</string>
+    <string name="cam_default_back">पिछला कैमरा (डिफ़ॉल्ट)</string>
+    <string name="cam_default_front">सामने वाला कैमरा (डिफ़ॉल्ट)</string>
+    <string name="label_unit">गति इकाई</string>
+    <string name="unit_kmh">किलोमीटर/घंटा</string>
+    <string name="unit_ms">मीटर/सेकंड</string>
+    <string name="unit_mph">मील/घंटा</string>
+    <string name="label_analysis_res">विश्लेषण रिज़ॉल्यूशन</string>
+    <string name="res_fast">तेज़ (640x480)</string>
+    <string name="res_balanced">संतुलित (1280x720)</string>
+    <string name="res_detailed">विस्तृत (1920x1080)</string>
+    <string name="res_desc">तेज़ स्मूथ है, विस्तृत दूर की वस्तुएं बेहतर पकड़ता है</string>
+    <string name="label_conf">पहचान सीमा</string>
+    <string name="label_smooth">स्मूदिंग (फ्रेम)</string>
+    <string name="label_show_labels">लेबल दिखाएं</string>
+    <string name="label_motion">हिलन संवेदनशीलता (कम = संवेदनशील)</string>
+    <string name="motion_desc">हिलने पर लाल फ्रेम के साथ मापन रुकता है</string>
+    <string name="label_min_speed">न्यूनतम गति फ़िल्टर</string>
+    <string name="min_speed_desc">2 सेकंड औसत से धीमी वस्तुएं छिपती हैं (0 = बंद)</string>
+    <string name="min_speed_off">बंद</string>
+    <string name="label_max_box">अधिकतम बॉक्स आकार</string>
+    <string name="max_box_desc">इससे बड़े बॉक्स वस्तु नहीं हैं</string>
+    <string name="label_ghost">खोई वस्तु दिखाने का समय</string>
+    <string name="ghost_desc">खोई वस्तु अंतिम गति से दिखती है (0 = बंद)</string>
+    <string name="ghost_off">बंद</string>
+    <string name="save">सहेजें</string>
+    <string name="msg_saved">सेटिंग सहेजी गई</string>
+    <string name="msg_camera_perm">कैमरा अनुमति आवश्यक</string>
+    <string name="msg_camera_error">कैमरा त्रुटि: %1$s</string>
+    <string name="title_calibration">त्रिकोणमितीय अंशांकन</string>
+    <string name="calib_desc">गति = पिक्सेल गति × मीटर/पिक्सेल / समय। मीटर/पिक्सेल = 2 × दूरी × tan(FOV/2) / छवि चौड़ाई। ऑप्टिक्स स्वतः पढ़ा जाता है।</string>
+    <string name="label_optics_auto">स्वतः पढ़े गए मान</string>
+    <string name="btn_refresh_optics">फोन से फिर से पढ़ें</string>
+    <string name="label_distance">वस्तु दूरी (मीटर)</string>
+    <string name="distance_desc">कैमरे से दूरी (जैसे सड़क 10 मी)</string>
+    <string name="label_fov_h">क्षैतिज FOV (डिग्री)</string>
+    <string name="label_fov_v">ऊर्ध्वाधर FOV (डिग्री)</string>
+    <string name="btn_calc_preview">गणना और पूर्वावलोकन</string>
+    <string name="label_ref_fine">संदर्भ से सूक्ष्म समायोजन</string>
+    <string name="ref_desc">ज्ञात लंबाई दिखाएं। दिखाया गया और वास्तविक मान डालें (जैसे वास्तविक 0.6 मी, दिखाया 0.9 मी)।</string>
+    <string name="label_real">वास्तविक लंबाई (मीटर)</string>
+    <string name="label_shown">दिखाई लंबाई (मीटर)</string>
+    <string name="btn_apply_corr">सुधार लागू करें</string>
+    <string name="msg_corr_applied">सुधार लागू हुआ</string>
+    <string name="msg_invalid">मान्य संख्याएं डालें</string>
+    <string name="corr_value">सुधार गुणांक: %1$.3f (1.000 = कोई नहीं)</string>
+    <string name="dlg_ruler_title">स्केल सेटिंग</string>
+    <string name="dlg_distance">दूरी: %1$s</string>
+    <string name="dlg_reference">संदर्भ: %1$s</string>
+    <string name="ok">ठीक</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="label_language">भाषा</string>
+    <string name="system_default">सिस्टम डिफ़ॉल्ट</string>
+    <string name="example_template">%1$.0f मी दूरी (ज़ूम %2$.1fx) 1 px = %3$.1f सेमी\nउदाहरण: 100px / 0.2s = %4$.1f किमी/घं</string>
+    <string name="msg_optics_fail">ऑप्टिक्स पढ़ा नहीं गया, हाथ से डालें</string>
+    <string name="msg_optics_ok">पढ़ा गया: %1$s</string>
+    <string name="msg_optics_err">पढ़ने में त्रुटि</string>
+    <string name="optics_cam">कैमरा: %1$d x %2$d (%3$.1f MP)</string>
+    <string name="optics_sensor">सेंसर: %1$.2f मिमी चौड़ाई</string>
+    <string name="optics_pixel">पिक्सेल आकार: %1$.2f µm</string>
+    <string name="optics_focal">फोकल लंबाई: %1$.2f मिमी</string>
+    <string name="optics_none">अभी पढ़ा नहीं — रिफ्रेश दबाएं</string>
+    <string name="dlg_fine">सूक्ष्म समायोजन (उंगली फिसले तो)</string>
+    <string name="scale_value">स्केल: %1$.4f</string>
+    <string name="ruler_dist">दूरी: %1$s</string>
+    <string name="cam_back">पीछे</string>
+    <string name="cam_front">सामने</string>
+    <string name="cam_other">अन्य</string>
+    <string name="kind_ultra">अल्ट्रा-वाइड</string>
+    <string name="kind_wide">वाइड</string>
+    <string name="kind_tele">ज़ूम/टेली</string>
+    <string name="kind_cam">कैमरा</string>
+    <string name="kind_selfie">सेल्फी</string>
+    <string name="kind_logical">लॉजिकल</string>
+</resources>
