@@ -135,7 +135,6 @@ class YoloDetector(private val context: Context) {
                         DetectionLabels.of(COCO80[bc]), bs, COCO80[bc]
                     )
                 )
-                )
             }
             dets
         } catch (_: Exception) { emptyList() }
