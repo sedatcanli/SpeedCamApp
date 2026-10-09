@@ -61,6 +61,11 @@
     <string name="cancel">ยกเลิก</string>
     <string name="label_language">ภาษา</string>
     <string name="system_default">ค่าเริ่มต้นระบบ</string>
+    <string name="label_targets">วัตถุเป้าหมาย</string>
+    <string name="targets_desc">วัดเฉพาะที่เลือก ทั้งหมดวัดทุกอย่าง</string>
+    <string name="target_all">ทั้งหมด</string>
+    <string name="target_escooter">อีสกู๊ตเตอร์</string>
+    <string name="targets_note">หมายเหตุ: โมเดลแยกประเภทย่อยไม่ได้ (เช่น ลูกบอล ซีดาน/SUV) บางส่วนจับด้วยคลาสใกล้เคียง</string>
     <string name="example_template">ระยะ %1$.0f ม. (ซูม %2$.1fx) 1 px = %3$.1f ซม.\nตัวอย่าง: 100px / 0.2วิ = %4$.1f กม./ชม.</string>
     <string name="msg_optics_fail">อ่านค่าออปติกไม่ได้ กรอกเอง</string>
     <string name="msg_optics_ok">อ่านแล้ว: %1$s</string>

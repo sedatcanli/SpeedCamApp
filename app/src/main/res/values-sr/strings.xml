@@ -61,6 +61,11 @@
     <string name="cancel">Одустани</string>
     <string name="label_language">Језик</string>
     <string name="system_default">Системски подраз.</string>
+    <string name="label_targets">Циљани објекти</string>
+    <string name="targets_desc">Мере се само одабрани. Са Све се мери све.</string>
+    <string name="target_all">Све</string>
+    <string name="target_escooter">Е-тротинет</string>
+    <string name="targets_note">Напомена: модел не разликује подтипове (нпр. лопте, седан/SUV); неки сличном класом.</string>
     <string name="example_template">Са %1$.0f м (зум %2$.1fx) 1 px = %3$.1f цм\nПример: 100px / 0,2с = %4$.1f км/ч</string>
     <string name="msg_optics_fail">Оптика нечитљива, унесите ручно</string>
     <string name="msg_optics_ok">Прочитано: %1$s</string>

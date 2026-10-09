@@ -61,6 +61,11 @@
     <string name="cancel">Zrušit</string>
     <string name="label_language">Jazyk</string>
     <string name="system_default">Výchozí systému</string>
+    <string name="label_targets">Cílové objekty</string>
+    <string name="targets_desc">Měří se jen vybrané. Při Vše se měří vše.</string>
+    <string name="target_all">Vše</string>
+    <string name="target_escooter">Elektrokoloběžka</string>
+    <string name="targets_note">Pozn.: model nerozlišuje podtypy (např. míče, sedan/SUV); některé přes podobnou třídu.</string>
     <string name="example_template">Ze %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nPříklad: 100px / 0,2s = %4$.1f km/h</string>
     <string name="msg_optics_fail">Optiku nelze číst, zadejte ručně</string>
     <string name="msg_optics_ok">Načteno: %1$s</string>

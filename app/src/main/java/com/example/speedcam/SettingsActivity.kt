@@ -92,6 +92,14 @@ class SettingsActivity : AppCompatActivity() {
             } catch (_: Throwable) { }
         }
 
+        binding.btnTargets.setOnClickListener {
+            try {
+                startActivity(
+                    android.content.Intent(this, TargetActivity::class.java)
+                )
+            } catch (_: Exception) { }
+        }
+
         binding.btnSaveSettings.setOnClickListener {
             val pos = binding.spCamera.selectedItemPosition
             if (camList.isNotEmpty() && pos in camList.indices) {

@@ -61,6 +61,11 @@
     <string name="cancel">Cancelar</string>
     <string name="label_language">Idioma</string>
     <string name="system_default">Padrão do sistema</string>
+    <string name="label_targets">Objetos-alvo</string>
+    <string name="targets_desc">Só os escolhidos são medidos. Com Tudo, tudo.</string>
+    <string name="target_all">Tudo</string>
+    <string name="target_escooter">E-Scooter</string>
+    <string name="targets_note">Nota: o modelo não distingue subtipos (ex. bolas, sedã/SUV); alguns por classe similar.</string>
     <string name="example_template">A %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nExemplo: 100px / 0,2s = %4$.1f km/h</string>
     <string name="msg_optics_fail">Óptica ilegível, digite manual</string>
     <string name="msg_optics_ok">Lido: %1$s</string>

@@ -61,6 +61,11 @@
     <string name="cancel">ביטול</string>
     <string name="label_language">שפה</string>
     <string name="system_default">ברירת מחדל מערכת</string>
+    <string name="label_targets">עצמי מטרה</string>
+    <string name="targets_desc">נמדדים רק הנבחרים. עם הכל - הכל.</string>
+    <string name="target_all">הכל</string>
+    <string name="target_escooter">קורקינט חשמלי</string>
+    <string name="targets_note">הערה: המודל לא מבחין תת-סוגים (למשל כדורים, סדאן/SUV); חלק דרך מחלקה דומה.</string>
     <string name="example_template">ממרחק %1$.0f מ׳ (זום %2$.1fx) פיקסל = %3$.1f ס״מ\nדוגמה: 100px / 0.2שנ = %4$.1f קמ״ש</string>
     <string name="msg_optics_fail">לא ניתן לקרוא אופטיקה, הזן ידנית</string>
     <string name="msg_optics_ok">נקרא: %1$s</string>

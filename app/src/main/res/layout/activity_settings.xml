@@ -98,6 +98,10 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:valueFrom="0" android:valueTo="3" android:stepSize="0.5" />
 
+        <Button android:id="@+id/btnTargets"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="@string/label_targets" />
+
         <Button android:id="@+id/btnSaveSettings"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="16dp" android:text="@string/save" />

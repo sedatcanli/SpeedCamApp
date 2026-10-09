@@ -61,6 +61,11 @@
     <string name="cancel">Vazgeç</string>
     <string name="label_language">Dil</string>
     <string name="system_default">Sistem varsayılanı</string>
+    <string name="label_targets">Hedef nesneler</string>
+    <string name="targets_desc">Yalnızca seçililer ölçülür. Tümü açıkken her şey ölçülür.</string>
+    <string name="target_all">Tümü</string>
+    <string name="target_escooter">E-Scooter</string>
+    <string name="targets_note">Not: model alt türleri ayırt edemez (örn. top türleri, sedan/SUV); bazıları benzer sınıfla yakalanır.</string>
     <string name="example_template">%1$.0f m uzakta (%2$.1fx zoom) 1 px = %3$.1f cm\nÖrnek: 100px / 0,2sn = %4$.1f km/h</string>
     <string name="msg_optics_fail">Optik okunamadı, elle girin</string>
     <string name="msg_optics_ok">Okundu: %1$s</string>

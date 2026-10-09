@@ -132,8 +132,9 @@ class YoloDetector(private val context: Context) {
                 dets.add(
                     DetectedBox(
                         RectF(x0, y0, x1, y1),
-                        DetectionLabels.of(COCO80[bc]), bs
+                        DetectionLabels.of(COCO80[bc]), bs, COCO80[bc]
                     )
+                )
                 )
             }
             dets

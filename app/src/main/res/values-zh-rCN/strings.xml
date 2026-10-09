@@ -61,6 +61,11 @@
     <string name="cancel">取消</string>
     <string name="label_language">语言</string>
     <string name="system_default">系统默认</string>
+    <string name="label_targets">目标物体</string>
+    <string name="targets_desc">仅测量所选项。选择全部时测量所有。</string>
+    <string name="target_all">全部</string>
+    <string name="target_escooter">电动滑板车</string>
+    <string name="targets_note">注：模型无法区分亚型（如球类、轿车/SUV）；部分通过相似类别捕获。</string>
     <string name="example_template">%1$.0f 米处（变焦 %2$.1fx）1 像素 = %3$.1f 厘米\n示例：100 像素 / 0.2 秒 = %4$.1f 千米/时</string>
     <string name="msg_optics_fail">光学参数读取失败，请手动输入</string>
     <string name="msg_optics_ok">已读取：%1$s</string>

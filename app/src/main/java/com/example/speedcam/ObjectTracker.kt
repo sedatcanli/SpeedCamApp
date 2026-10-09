@@ -7,7 +7,9 @@ import kotlin.math.hypot
 data class DetectedBox(
     val box: RectF,
     val label: String?,
-    val confidence: Float
+    val confidence: Float,
+    /** Filtreleme için İngilizce COCO anahtarı (örn. "car") */
+    val eng: String? = null
 )
 
 data class TrackedObject(

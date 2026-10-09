@@ -61,6 +61,11 @@
     <string name="cancel">Άκυρο</string>
     <string name="label_language">Γλώσσα</string>
     <string name="system_default">Προεπιλογή συστήματος</string>
+    <string name="label_targets">Αντικείμενα-στόχοι</string>
+    <string name="targets_desc">Μετρούνται μόνο τα επιλεγμένα. Με Όλα, όλα.</string>
+    <string name="target_all">Όλα</string>
+    <string name="target_escooter">Ηλεκτρικό πατίνι</string>
+    <string name="targets_note">Σημείωση: το μοντέλο δεν διακρίνει υποτύπους (π.χ. μπάλες, σεντάν/SUV). Κάποια μέσω παρόμοιας κλάσης.</string>
     <string name="example_template">Στα %1$.0f μ. (ζουμ %2$.1fx) 1 px = %3$.1f εκ.\nΠαράδειγμα: 100px / 0,2δ = %4$.1f χλμ/ώρα</string>
     <string name="msg_optics_fail">Τα οπτικά δεν διαβάζονται, εισάγετε χειροκίνητα</string>
     <string name="msg_optics_ok">Διαβάστηκε: %1$s</string>

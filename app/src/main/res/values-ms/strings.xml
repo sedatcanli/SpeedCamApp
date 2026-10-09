@@ -61,6 +61,11 @@
     <string name="cancel">Batal</string>
     <string name="label_language">Bahasa</string>
     <string name="system_default">Lalai sistem</string>
+    <string name="label_targets">Objek sasaran</string>
+    <string name="targets_desc">Hanya yang dipilih diukur. Semua mengukur semua.</string>
+    <string name="target_all">Semua</string>
+    <string name="target_escooter">E-Skuter</string>
+    <string name="targets_note">Nota: model tidak beza subjenis (cth. bola, sedan/SUV); sebahagian via kelas serupa.</string>
     <string name="example_template">Jarak %1$.0f m (zoom %2$.1fx) 1 px = %3$.1f cm\nContoh: 100px / 0,2s = %4$.1f km/j</string>
     <string name="msg_optics_fail">Optik tidak dibaca, isi manual</string>
     <string name="msg_optics_ok">Dibaca: %1$s</string>

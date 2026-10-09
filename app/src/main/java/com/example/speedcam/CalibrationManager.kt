@@ -88,10 +88,40 @@ class CalibrationManager(context: Context) {
         get() = prefs.getFloat("rulerTarget", 0.55f).coerceIn(0.15f, 0.9f)
         set(v) = prefs.edit().putFloat("rulerTarget", v).apply()
 
+    /** Hedef nesneler: true = Tümü, false = seçililer */
+    var targetAll: Boolean
+        get() = prefs.getBoolean("targetAll", true)
+        set(v) = prefs.edit().putBoolean("targetAll", v).apply()
+
     /** Uygulama dili ("" = sistem). Varsayılan İngilizce strings.xml */
     var langTag: String
         get() = prefs.getString("langTag", "en") ?: "en"
         set(v) = prefs.edit().putString("langTag", v).apply()
+
+    /** Seçili hedef seçenek ID'leri */
+    fun targetIds(): Set<String> {
+        return try {
+            prefs.getStringSet("targetIds", null) ?: TargetActivity.OPTIONS.map { it.id }.toSet()
+        } catch (_: Exception) {
+            TargetActivity.OPTIONS.map { it.id }.toSet()
+        }
+    }
+
+    fun setTargetIds(s: Set<String>) {
+        try {
+            prefs.edit().putStringSet("targetIds", s.toSet()).apply()
+        } catch (_: Exception) { }
+    }
+
+    /** Seçililere karşılık gelen COCO sınıf anahtarları */
+    fun targetCoco(): Set<String> {
+        val ids = targetIds()
+        val out = HashSet<String>()
+        for (o in TargetActivity.OPTIONS) {
+            if (ids.contains(o.id)) out.addAll(o.coco)
+        }
+        return out
+    }
 
     /** Cetvelin temsil ettiği referans uzunluk (m). Uçlar buna göre kalibre eder */
     var refLenM: Float

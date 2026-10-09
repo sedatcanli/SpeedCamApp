@@ -235,7 +235,7 @@ class MainActivity : AppCompatActivity() {
                                             d.box.top * fillS + fillOffY,
                                             d.box.right * fillS + fillOffX,
                                             d.box.bottom * fillS + fillOffY
-                                        ).let { DetectedBox(it, d.label, d.confidence) }
+                                        ).let { DetectedBox(it, d.label, d.confidence, d.eng) }
                                     } catch (_: Exception) { null }
                                 }
                                 postDetections(dets, "YOLO", imgW, imgH)
@@ -273,10 +273,11 @@ class MainActivity : AppCompatActivity() {
                                     val rawFb = objects.mapNotNull { obj ->
                                         try {
                                             val b = obj.boundingBox
-                                            val label = DetectionLabels.of(obj.labels.firstOrNull()?.text)
+                                            val engRaw = obj.labels.firstOrNull()?.text
+                                            val label = DetectionLabels.of(engRaw)
                                             val conf = obj.labels.firstOrNull()?.confidence ?: 0f
                                             if (obj.labels.isNotEmpty() && conf < calib.detectionConfidence) null
-                                            else DetectedBox(RectF(b), label, conf)
+                                            else DetectedBox(RectF(b), label, conf, engRaw?.lowercase())
                                         } catch (_: Exception) { null }
                                     }
                                     val maxFb = try { calib.maxBoxAreaPct } catch (_: Exception) { 1f }
@@ -287,7 +288,7 @@ class MainActivity : AppCompatActivity() {
                                                 d.box.top * fillS + fillOffY,
                                                 d.box.right * fillS + fillOffX,
                                                 d.box.bottom * fillS + fillOffY
-                                            ), d.label, d.confidence
+                                            ), d.label, d.confidence, d.eng
                                         )
                                     }
                                     postDetections(dets, "Genel", imgW, imgH)
@@ -527,8 +528,14 @@ class MainActivity : AppCompatActivity() {
             }
         } catch (_: Exception) { }
         val now = System.currentTimeMillis()
+        // Hedef filtresi: seçili değilse takibe bile girmez
+        val useAll = try { calib.targetAll } catch (_: Exception) { true }
+        val useDets = if (useAll) dets else try {
+            val allow = calib.targetCoco()
+            dets.filter { it.eng != null && allow.contains(it.eng) }
+        } catch (_: Exception) { dets }
         val tracked = try {
-            tracker.update(dets, now)
+            tracker.update(useDets, now)
         } catch (_: Exception) { emptyList() }
         // Yavaş nesne filtresi: 2 sn ortalaması eşiğin altındaysa gösterme
         // (takip sürer, hızlanınca yeniden görünür)

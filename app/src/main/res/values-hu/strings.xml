@@ -61,6 +61,11 @@
     <string name="cancel">Mégse</string>
     <string name="label_language">Nyelv</string>
     <string name="system_default">Rendszer alapértelmezett</string>
+    <string name="label_targets">Célobjektumok</string>
+    <string name="targets_desc">Csak a kiválasztottak mérve. Mindennél minden.</string>
+    <string name="target_all">Mind</string>
+    <string name="target_escooter">E-roller</string>
+    <string name="targets_note">Megjegyzés: a modell nem különbözteti meg az altípusokat (pl. labdák, szedán/SUV); néhány hasonló osztállyal.</string>
     <string name="example_template">%1$.0f m-ről (%2$.1fx zoom) 1 px = %3$.1f cm\nPélda: 100px / 0,2s = %4$.1f km/h</string>
     <string name="msg_optics_fail">Optika nem olvasható, kézzel vigye be</string>
     <string name="msg_optics_ok">Olvasva: %1$s</string>
