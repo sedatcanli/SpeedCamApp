@@ -87,6 +87,7 @@
     <string name="dlg_fine">Réglage fin (si les doigts glissent)</string>
     <string name="scale_value">Échelle : %1$.4f</string>
     <string name="ruler_dist">Dist. : %1$s</string>
+    <string name="auto_live">Auto %1$.1fcm/px •%2$d</string>
     <string name="cam_back">Arrière</string>
     <string name="cam_front">Avant</string>
     <string name="cam_other">Autre</string>

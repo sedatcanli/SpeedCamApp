@@ -87,6 +87,7 @@
     <string name="dlg_fine">Jemné doladění (když kloužou prsty)</string>
     <string name="scale_value">Měřítko: %1$.4f</string>
     <string name="ruler_dist">Vzdál.: %1$s</string>
+    <string name="auto_live">Auto %1$.1fcm/px •%2$d</string>
     <string name="cam_back">Zadní</string>
     <string name="cam_front">Přední</string>
     <string name="cam_other">Jiná</string>

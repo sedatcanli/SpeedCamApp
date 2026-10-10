@@ -87,6 +87,7 @@
     <string name="dlg_fine">Feinabstimmung (wenn Finger rutschen)</string>
     <string name="scale_value">Maßstab: %1$.4f</string>
     <string name="ruler_dist">Entf.: %1$s</string>
+    <string name="auto_live">Auto %1$.1fcm/px •%2$d</string>
     <string name="cam_back">Hinten</string>
     <string name="cam_front">Vorne</string>
     <string name="cam_other">Andere</string>

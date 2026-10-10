@@ -87,6 +87,7 @@
     <string name="dlg_fine">Фино подешавање (ако прсти клизе)</string>
     <string name="scale_value">Размера: %1$.4f</string>
     <string name="ruler_dist">Удаљ.: %1$s</string>
+    <string name="auto_live">Ауто %1$.1fcm/px •%2$d</string>
     <string name="cam_back">Задња</string>
     <string name="cam_front">Предња</string>
     <string name="cam_other">Друга</string>

@@ -87,6 +87,7 @@
     <string name="dlg_fine">Pelarian halus (jika jari tergelincir)</string>
     <string name="scale_value">Skala: %1$.4f</string>
     <string name="ruler_dist">Jarak: %1$s</string>
+    <string name="auto_live">Auto %1$.1fcm/px •%2$d</string>
     <string name="cam_back">Belakang</string>
     <string name="cam_front">Depan</string>
     <string name="cam_other">Lain</string>

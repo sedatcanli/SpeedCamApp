@@ -87,6 +87,7 @@
     <string name="dlg_fine">İnce ayar (parmakla tutturamayınca)</string>
     <string name="scale_value">Ölçek: %1$.4f</string>
     <string name="ruler_dist">Uzak: %1$s</string>
+    <string name="auto_live">Oto %1$.1fcm/px •%2$d</string>
     <string name="cam_back">Arka</string>
     <string name="cam_front">Ön</string>
     <string name="cam_other">Diğer</string>

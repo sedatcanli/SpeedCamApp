@@ -87,6 +87,7 @@
     <string name="dlg_fine">सूक्ष्म समायोजन (उंगली फिसले तो)</string>
     <string name="scale_value">स्केल: %1$.4f</string>
     <string name="ruler_dist">दूरी: %1$s</string>
+    <string name="auto_live">ऑटो %1$.1fcm/px •%2$d</string>
     <string name="cam_back">पीछे</string>
     <string name="cam_front">सामने</string>
     <string name="cam_other">अन्य</string>

@@ -87,6 +87,7 @@
     <string name="dlg_fine">미세 조정 (손가락이 미끄러질 때)</string>
     <string name="scale_value">스케일: %1$.4f</string>
     <string name="ruler_dist">거리: %1$s</string>
+    <string name="auto_live">자동 %1$.1fcm/px •%2$d</string>
     <string name="cam_back">후면</string>
     <string name="cam_front">전면</string>
     <string name="cam_other">기타</string>

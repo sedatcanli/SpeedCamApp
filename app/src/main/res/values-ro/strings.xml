@@ -87,6 +87,7 @@
     <string name="dlg_fine">Reglaj fin (dacă alunecă degetele)</string>
     <string name="scale_value">Scară: %1$.4f</string>
     <string name="ruler_dist">Distanța: %1$s</string>
+    <string name="auto_live">Automat %1$.1fcm/px •%2$d</string>
     <string name="cam_back">Spate</string>
     <string name="cam_front">Față</string>
     <string name="cam_other">Alta</string>

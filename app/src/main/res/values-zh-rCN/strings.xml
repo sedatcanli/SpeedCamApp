@@ -87,6 +87,7 @@
     <string name="dlg_fine">微调（手指打滑时）</string>
     <string name="scale_value">比例尺：%1$.4f</string>
     <string name="ruler_dist">距离：%1$s</string>
+    <string name="auto_live">自动 %1$.1fcm/px •%2$d</string>
     <string name="cam_back">后置</string>
     <string name="cam_front">前置</string>
     <string name="cam_other">其他</string>

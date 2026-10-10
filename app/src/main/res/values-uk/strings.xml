@@ -87,6 +87,7 @@
     <string name="dlg_fine">Точне підстроювання (якщо пальці ковзають)</string>
     <string name="scale_value">Масштаб: %1$.4f</string>
     <string name="ruler_dist">Дист.: %1$s</string>
+    <string name="auto_live">Авто %1$.1fсм/пкс •%2$d</string>
     <string name="cam_back">Задня</string>
     <string name="cam_front">Передня</string>
     <string name="cam_other">Інша</string>

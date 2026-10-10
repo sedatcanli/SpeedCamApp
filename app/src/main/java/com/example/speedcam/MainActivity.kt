@@ -116,6 +116,9 @@ class MainActivity : AppCompatActivity() {
             dimCache = m
         } catch (_: Exception) { }
         try {
+            if (calib.calibMode != "auto") autoScale.clear()
+        } catch (_: Exception) { }
+        try {
             calib.refreshOptics(this, false)
             // Kamera değiştiyse FOV'u yeni kameradan tazele
             val curKey = (calib.cameraId ?: "") + "|" + calib.cameraFacing
@@ -517,6 +520,7 @@ class MainActivity : AppCompatActivity() {
                 try {
                     binding.overlay.setResults(emptyList(), calib.speedUnit, calib.showLabels)
                     binding.overlay.setWarning(true)
+                    binding.overlay.setAutoInfo(null)
                     binding.tvCount.text = getString(R.string.paused)
                 } catch (_: Exception) { }
             }
@@ -526,6 +530,7 @@ class MainActivity : AppCompatActivity() {
         // Hepsi GÖRÜNÜM pikseli cinsinden (kutular görünümde).
         var mPerViewPx = 0f
         var effEngine = engine
+        var autoText: String? = null
         try {
             val zoom = try {
                 camera?.cameraInfo?.zoomState?.value?.zoomRatio
@@ -564,6 +569,10 @@ class MainActivity : AppCompatActivity() {
                     ex = med
                     ey = med
                     effEngine = engine + " •OTO"
+                    try {
+                        val n = autoScale.count(nowA)
+                        autoText = getString(R.string.auto_live, med * 100f, n)
+                    } catch (_: Exception) { }
                 } else {
                     effEngine = engine + " •OTO?"
                 }
@@ -604,6 +613,7 @@ class MainActivity : AppCompatActivity() {
                     snapshot, calib.speedUnit, calib.showLabels
                 )
                 if (mPerViewPx > 0f) binding.overlay.setScaleBar(mPerViewPx)
+                binding.overlay.setAutoInfo(autoText)
                 binding.tvCount.text = getString(R.string.objects_count, snapshot.size)
                 if (reportedEngine != effEngine) {
                     reportedEngine = effEngine

@@ -87,6 +87,7 @@
     <string name="dlg_fine">Λεπτή ρύθμιση (αν γλιστρούν τα δάχτυλα)</string>
     <string name="scale_value">Κλίμακα: %1$.4f</string>
     <string name="ruler_dist">Απόστ.: %1$s</string>
+    <string name="auto_live">Αυτόματο %1$.1fcm/px •%2$d</string>
     <string name="cam_back">Πίσω</string>
     <string name="cam_front">Μπροστά</string>
     <string name="cam_other">Άλλη</string>

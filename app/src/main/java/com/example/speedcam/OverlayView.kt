@@ -65,6 +65,16 @@ class OverlayView @JvmOverloads constructor(
         }
     }
 
+    /** Otomatik kalibrasyon canlı bilgisi (boşsa uzaklık satırı gösterilir). */
+    private var autoInfo: String? = null
+
+    fun setAutoInfo(s: String?) {
+        if (autoInfo != s) {
+            autoInfo = s
+            postInvalidate()
+        }
+    }
+
     // ---- Sürüklenebilir + boyutlandırılabilir cetvel birimi ----
     var onRulerTap: (() -> Unit)? = null
     private val calibRef by lazy { CalibrationManager(context.applicationContext) }
@@ -240,7 +250,8 @@ class OverlayView @JvmOverloads constructor(
             }
             val dist = try { calibRef.distanceM } catch (_: Exception) { 0f }
             val distVal = if (dist < 10f) "%.1f m".format(dist) else "%.0f m".format(dist)
-            val distLabel = try {
+            val auto = autoInfo
+            val distLabel = if (auto != null) auto else try {
                 context.getString(R.string.ruler_dist, distVal)
             } catch (_: Exception) { distVal }
             val twScale = textPaint.measureText(scaleLabel)

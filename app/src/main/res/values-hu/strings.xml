@@ -87,6 +87,7 @@
     <string name="dlg_fine">Finomhangolás (ha csúszik az ujj)</string>
     <string name="scale_value">Skála: %1$.4f</string>
     <string name="ruler_dist">Táv.: %1$s</string>
+    <string name="auto_live">Automata %1$.1fcm/px •%2$d</string>
     <string name="cam_back">Hátsó</string>
     <string name="cam_front">Elülső</string>
     <string name="cam_other">Egyéb</string>

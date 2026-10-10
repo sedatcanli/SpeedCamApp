@@ -87,6 +87,7 @@
     <string name="dlg_fine">تنظیم دقیق (اگر انگشت لغزید)</string>
     <string name="scale_value">مقیاس: %1$.4f</string>
     <string name="ruler_dist">فاصله: %1$s</string>
+    <string name="auto_live">خودکار %1$.1fcm/px •%2$d</string>
     <string name="cam_back">پشت</string>
     <string name="cam_front">جلو</string>
     <string name="cam_other">دیگر</string>

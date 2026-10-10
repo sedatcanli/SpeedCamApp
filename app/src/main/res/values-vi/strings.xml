@@ -87,6 +87,7 @@
     <string name="dlg_fine">Tinh chỉnh (khi tay trượt)</string>
     <string name="scale_value">Tỉ lệ: %1$.4f</string>
     <string name="ruler_dist">K.cách: %1$s</string>
+    <string name="auto_live">Tự động %1$.1fcm/px •%2$d</string>
     <string name="cam_back">Sau</string>
     <string name="cam_front">Trước</string>
     <string name="cam_other">Khác</string>
