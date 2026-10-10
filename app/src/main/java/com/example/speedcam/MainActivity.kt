@@ -151,6 +151,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var yolo: YoloDetector
     private lateinit var motion: MotionMonitor
     private var reportedEngine: String? = null
+    private var lastStatusStr: String? = null
+    private var lastStatusMs: Long = 0L
     private val autoScale = AutoScaleEstimator()
     private var dimCache: Map<String, Pair<Float, Float>> = emptyMap()
 
@@ -531,17 +533,22 @@ class MainActivity : AppCompatActivity() {
         var mPerViewPx = 0f
         var effEngine = engine
         var autoText: String? = null
+        var autoDistM = 0f
+        var fillSused = 1f
+        var zoomUsed = 1f
         try {
             val zoom = try {
                 camera?.cameraInfo?.zoomState?.value?.zoomRatio
                     ?: calib.zoomRatio
             } catch (_: Exception) { calib.zoomRatio }.coerceIn(0.5f, 20f)
+            zoomUsed = zoom
             val (mx, my) = calib.metersPerPixel(imgW, imgH)
             val viewW = try { binding.previewView.width.toFloat() } catch (_: Exception) { 0f }
             val viewH = try { binding.previewView.height.toFloat() } catch (_: Exception) { 0f }
             val fillS = if (viewW > 0f && viewH > 0f && imgW > 0f && imgH > 0f) {
                 kotlin.math.max(viewW / imgW, viewH / imgH)
             } else 1f
+            fillSused = fillS
             var ex = mx / zoom / fillS
             var ey = my / zoom / fillS
             tracker.ghostMs = (calib.ghostSec * 1000).toLong()
@@ -572,6 +579,12 @@ class MainActivity : AppCompatActivity() {
                     try {
                         val n = autoScale.count(nowA)
                         autoText = getString(R.string.auto_live, med * 100f, n)
+                        // Efektif uzaklık: bu ölçek hangi düzlem mesafesine denk gelir
+                        val fh = Math.toRadians(calib.fovHdeg.toDouble())
+                        if (fh > 0.01 && imgW > 0f) {
+                            autoDistM = (med * fillSused * zoomUsed * imgW /
+                                (2 * Math.tan(fh / 2))).toFloat()
+                        }
                     } catch (_: Exception) { }
                 } else {
                     effEngine = engine + " •OTO?"
@@ -615,11 +628,24 @@ class MainActivity : AppCompatActivity() {
                 if (mPerViewPx > 0f) binding.overlay.setScaleBar(mPerViewPx)
                 binding.overlay.setAutoInfo(autoText)
                 binding.tvCount.text = getString(R.string.objects_count, snapshot.size)
-                if (reportedEngine != effEngine) {
-                    reportedEngine = effEngine
-                    binding.tvStatus.text =
-                        getString(R.string.status_calibration, calib.summary(this)) + " • " + effEngine
-                }
+                try {
+                    // Üst satır: otoda efektif uzaklık canlı (500ms kısma ile)
+                    val base = if (autoDistM > 0f) {
+                        calib.summaryWith(autoDistM, this@MainActivity)
+                    } else {
+                        calib.summary(this@MainActivity)
+                    }
+                    val want = getString(R.string.status_calibration, base) + " • " + effEngine
+                    val t = System.currentTimeMillis()
+                    if (reportedEngine != effEngine ||
+                        (autoDistM > 0f && t - lastStatusMs > 500 && want != lastStatusStr)
+                    ) {
+                        reportedEngine = effEngine
+                        lastStatusStr = want
+                        lastStatusMs = t
+                        binding.tvStatus.text = want
+                    }
+                } catch (_: Exception) { }
             } catch (_: Exception) { }
         }
     }

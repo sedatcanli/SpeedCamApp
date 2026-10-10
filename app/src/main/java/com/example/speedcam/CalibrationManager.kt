@@ -274,13 +274,15 @@ class CalibrationManager(context: Context) {
         return ppm
     }
 
-    fun summary(context: Context): String {
+    fun summary(context: Context): String = summaryWith(distanceM, context)
+
+    fun summaryWith(dist: Float, context: Context): String {
         val cam = if (!cameraId.isNullOrEmpty()) "ID $cameraId"
         else if (cameraFacing == CameraSelector.LENS_FACING_BACK)
             context.getString(R.string.cam_back)
         else context.getString(R.string.cam_front)
         return if (fovHdeg > 0f) "%.0fm • %.0f° • %s • %s".format(
-            distanceM, fovHdeg, speedUnit, cam
+            dist, fovHdeg, speedUnit, cam
         )
         else "%.1f px/m • %s • %s".format(pixelsPerMeter, speedUnit, cam)
     }
